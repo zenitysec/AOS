@@ -83,4 +83,5 @@ Ideally this shows major agent frameworks and also A2A and MCP -->
 
 ## Read Next
 
-[Agent Observability Standard (AOS)](./topics/aos.md)
+- [Core concepts](./topics/core_concepts.md)
+- [MCP & A2A](./topics/mcp_a2a.md)
