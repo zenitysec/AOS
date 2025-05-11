@@ -17,6 +17,8 @@ AOS provides three benefits for agents:
 <!-- TODO: Change this table to three-sections with a menu. 
 Each section has the security property and an example of what the outcome looks like -->
 
+## Trustworthy agents are
+
 | Trustworthy agents are | Value | Description | Standards |
 |--|--|--|--
 | Inspectable | Dynamic agent-aware bill-of-material | Specifies properties that capture tools, models and capabilities of an AI agent. Extends SBOM standard specs with these properties – AgBOM. Goes further to add dynamic updates to AgBOM to account for dynamic agent capability discovery. | Extends [CycloneDX](./../spec/inspect/extend_cyclonedx.md), [SPDX](./../spec/inspect/extend_spdx.md), [SWID](./../spec/inspect/extend_swid.md) |
