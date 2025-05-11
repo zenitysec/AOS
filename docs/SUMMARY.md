@@ -9,6 +9,14 @@
 - [MCP & A2A](./topics/mcp_a2a.md)
 - [Implementation](./topics/implementation.md)
 
+# Tooling
+
+- [Guardian Agent](./tools/guardian_agent/introduction.md)
+    - [Generate SBOM](./tools/guardian_agent/generate_sbom.md)
+    - [Generate audit log](./tools/guardian_agent/generate_audit_log.md)
+    - [Block data leakage](./tools/guardian_agent/block_data_leakage.md)
+- [Native Support](./tools/native_support/introduction.md)
+
 # Specification
 
 - [Inspect](./spec/inspect/introduction.md)
