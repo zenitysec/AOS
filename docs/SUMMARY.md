@@ -1,14 +1,23 @@
 # Summary
 
-[Introduction](README.md)
+[Trustworthy Agents](introduction.md)
 
 # Topics
 
-- [What is AOS](./topics/what_is_aos.md)
+- [Agent Observability Standard (AOS)](./topics/aos.md)
+- [MCP & A2A](./topics/mcp_a2a.md)
 
 # Specification
 
-- [Introduction](./spec/introduction.md)
+- [Inspect](./spec/inspect/introduction.md)
+    - [Extending CycloneDX](./spec/inspect/extend_cyclonedx.md)
+    - [Extending SPDX](./spec/inspect/extend_spdx.md)
+    - [Extending SWID](./spec/inspect/extend_swid.md)
+- [Observe](./spec/observe/introduction.md)
+    - [Extending OpenTelemetry](./spec/observe/extend_opentelemetry.md)
+    - [Extending OCSF](./spec/observe/extend_ocsf.md)
+- [Instrument](./spec/instrument/introduction.md)
+    - [Agent Observability Standard Specification](./spec/instrument/aos_spec.md)
 
 # About
 
