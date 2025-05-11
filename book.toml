@@ -1,7 +1,7 @@
 [book]
 authors = ["mbrg"]
 language = "en"
-src = "src"
+src = "docs"
 title = "Agent Observability Standard"
 
 [build]
