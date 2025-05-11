@@ -16,16 +16,28 @@ Multi-agent systems, implicit dependencies and remote tools make it worse.
 Inconsistent identity and reliance on [impersonation](https://www.jpmorgan.com/technology/technology-blog/open-letter-to-our-suppliers) adds more fuel to the fire. 
 Lack of standardization makes every agent different.
 
-To enable widescale adoption, agents must become [trustworthy](https://news.microsoft.com/2012/01/11/memo-from-bill-gates/). 
-Whether agents are built in-house or adopted as is, consumed as SaaS, on cloud, on-prem or on endpoints, enterprises should retain clear visibility and controls. 
-For agents to become trustworthy they must be inspectable, observable and instrumentable.
+Agents must become [trustworthy](https://news.microsoft.com/2012/01/11/memo-from-bill-gates/) to enable widescale adoption.
+
+Transparency is the foundation of trust.
+Whether built in-house or adopted as part of a service.
+Consumed on cloud, as SaaS, on-prem or on endpoints.
+Agents must be fully observable by the enterprise that welcomes them in.
+We cannot trust a magic black-box.
+
+Knowing when things go wrong is crucial, but it is not enough.
+Enterprises must have a clear way to steer agents into the right path.
+Correct course when an agent goes astray.
+Agents must be instrumentable, allowing intervention at run-time and preventing bad outcomes.
+Providing hard-controls, not soft-guardrails.
+
+For agents to become trustworthy they must be inspectable, auditable and instrumentable.
 
 **Inspectable**: we don’t have to guess what’s inside. 
 Which tools, models and capabilities are being used. 
 What software version is running and who built it. 
 What are the services behind them, and which data they can access.
 
-**Observable**: we know what the agent did and why. 
+**Auditable**: we know what the agent did and why. 
 We can trace back any action taken to the reasoning behind it and the originating task. 
 Even if the thread goes through multiple agents and software systems. 
 In case of compromise, we can identify and remediate the root cause.
@@ -50,6 +62,6 @@ It is concerned with understanding and controlling agents, independant of advanc
 
 | Trustworthy agents are | Current state | Relevant standards and frameworks | What's missing |
 |--|--|--|--|
-| Inspectable| The industry has made a great progress standardizing around [SBOM](https://www.cisa.gov/sbom) for software. AIBOM represents important progress, but agentic reasoning and capabilities are missing. We need AgBOM for agents.| CycloneDX, SPDX, SWID | [Extend](./spec/inspect/introduction.md) existing standards with AI agent support |
-| Observable | Agent platforms care a lot about observability, but they interpretation and implementation varies widely. [OpenTelemety](https://opentelemetry.io) is an adopted standard for operational logs. In the cybersecurity industry, [OCSF](https://ocsf.io/) has made a big impact. but does not apply to AI agents. | OCSF, OpenTelemtry | [Extend](./spec/observe/introduction.md) existing standards with AI agent support |
+| Inspectable | The industry has made a great progress standardizing around [SBOM](https://www.cisa.gov/sbom) for software. AIBOM represents important progress, but agentic reasoning and capabilities are missing. We need AgBOM for agents.| CycloneDX, SPDX, SWID | [Extend](./spec/inspect/introduction.md) existing standards with AI agent support |
+| Auditable | Agent platforms care a lot about observability, but they interpretation and implementation varies widely. [OpenTelemety](https://opentelemetry.io) is an adopted standard for operational logs. In the cybersecurity industry, [OCSF](https://ocsf.io/) has made a big impact. but does not apply to AI agents. | OCSF, OpenTelemtry | [Extend](./spec/observe/introduction.md) existing standards with AI agent support |
 | Instrumentable| Agent platforms have begun to offer LLM guardrails, with different interfaces. All other agentic capabilities are kept inside the black box. Standard instrumentation mechanisms have been key to unlocking innovation and wide adoption of the instrumented platform. [eBPF](https://ebpf.io/) is a good example of that. | None | [Standard needed](./topics/aos.md) |
