@@ -15,6 +15,7 @@
     - [Generate SBOM](./tools/guardian_agent/generate_sbom.md)
     - [Generate audit log](./tools/guardian_agent/generate_audit_log.md)
     - [Block data leakage](./tools/guardian_agent/block_data_leakage.md)
+    - [Apply corporate policy](./tools/guardian_agent/apply_corporate_policy.md)
 - [Native Support](./tools/native_support/introduction.md)
 
 # Specification
