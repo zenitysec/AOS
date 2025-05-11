@@ -48,7 +48,7 @@ Streamline communication and interoperability.
 Trustworthiness of agents builds upon the foundation of making agents useful. 
 It is concerned with understanding and controlling agents, independant of advancing their capabilities.
 
-| Trustworthy Agents are | Current state | Relevant standards and frameworks | What's missing |
+| Trustworthy agents are | Current state | Relevant standards and frameworks | What's missing |
 |--|--|--|--|
 | Inspectable| The industry has made a great progress standardizing around [SBOM](https://www.cisa.gov/sbom) for software. AIBOM represents important progress, but agentic reasoning and capabilities are missing. We need AgBOM for agents.| CycloneDX, SPDX, SWID | [Extend](./spec/inspect/introduction.md) existing standards with AI agent support |
 | Observable | Agent platforms care a lot about observability, but they interpretation and implementation varies widely. [OpenTelemety](https://opentelemetry.io) is an adopted standard for operational logs. In the cybersecurity industry, [OCSF](https://ocsf.io/) has made a big impact. but does not apply to AI agents. | OCSF, OpenTelemtry | [Extend](./spec/observe/introduction.md) existing standards with AI agent support |
