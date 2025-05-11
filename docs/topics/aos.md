@@ -14,7 +14,7 @@ It is compatible with cybersecurity and obseravbility standards including OpenTe
 
 AOS provides three benefits for agents:
 
-<!-- TODO: Change this table to three-sections with a menu. 
+<!-- TODO: Change this to three-sections with a menu. 
 Each section has the security property and an example of what the outcome looks like.
 Support switching the examples to show a different language or agent framework.
 Ideally this shows major agent frameworks and also A2A and MCP -->
