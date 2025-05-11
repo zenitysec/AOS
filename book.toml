@@ -8,4 +8,6 @@ title = "Agent Observability Standard"
 build-dir = "book"
 
 [output.html]
+edit-url-template = "https://github.com/zenitysec/AOS/edit/main/{path}"
+fold.enable = true
 git-repository-url = "https://github.com/zenitysec/AOS"
