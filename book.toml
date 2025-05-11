@@ -1,0 +1,11 @@
+[book]
+authors = ["mbrg"]
+language = "en"
+src = "src"
+title = "Agent Observability Standard"
+
+[build]
+build-dir = "book"
+
+[output.html]
+git-repository-url = "https://github.com/zenitysec/AOS"
