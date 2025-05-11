@@ -1,5 +1,10 @@
 # Misson statement
 
+<!-- 
+TODO: this page is probably not needed
+Leaving here for now because not all content has found its place elsewhere
+ -->
+
 ## Scope of work
 
 1. Extend CycloneDX, SPDX, SWID to support AI agent components
