@@ -15,15 +15,71 @@ It is compatible with cybersecurity and obseravbility standards including OpenTe
 AOS provides three benefits for agents:
 
 <!-- TODO: Change this table to three-sections with a menu. 
-Each section has the security property and an example of what the outcome looks like -->
+Each section has the security property and an example of what the outcome looks like.
+Support switching the examples to show a different language or agent framework.
+Ideally this shows major agent frameworks and also A2A and MCP -->
 
 ## Trustworthy agents are
 
-| Trustworthy agents are | Value | Description | Standards |
-|--|--|--|--
-| Inspectable | Dynamic agent-aware bill-of-material | Specifies properties that capture tools, models and capabilities of an AI agent. Extends SBOM standard specs with these properties – AgBOM. Goes further to add dynamic updates to AgBOM to account for dynamic agent capability discovery. | Extends [CycloneDX](./../spec/inspect/extend_cyclonedx.md), [SPDX](./../spec/inspect/extend_spdx.md), [SWID](./../spec/inspect/extend_swid.md) |
-| Auditable | Comprehensive audit trace | Specifies events that capture AI agent lifecycle and run-time execution. Extends OpenTelemety and OSCF specs with these properties. | Extends [OpenTelemetry](./../spec/audit/extend_opentelemetry.md), [OCSF](./../spec/audit/extend_ocsf.md) |
-| Instrumentable| Hooks to agent run-time and lifecycle| Specifies run-time hooks that allow intervention at agent's lifecycle and run-time execution. | [AOS](./topics/aos.md) |
+<details>
+    <summary>Reveal agent setup</summary>
+<!-- TODO: Add agent setup.-->
+
+```python
+# example agent setup
+#
+```
+</details>
+
+### Instrumentable
+
+| Value | Description | Standards |
+|--|--|--|
+| Hooks to agent run-time and lifecycle| Specifies run-time hooks that allow intervention at agent's lifecycle and run-time execution. | [AOS](./topics/aos.md) |
+
+<!-- TODO: instrumentation example -->
+
+```python
+# example agent instrumentation
+# Instrument to provide inspection and audit
+#
+```
+
+### Inspectable
+
+| Value | Description | Standards |
+|--|--|--|
+| Dynamic agent-aware bill-of-material | Specifies properties that capture tools, models and capabilities of an AI agent. Extends SBOM standard specs with these properties – AgBOM. Goes further to add dynamic updates to AgBOM to account for dynamic agent capability discovery. | Extends [CycloneDX](./../spec/inspect/extend_cyclonedx.md), [SPDX](./../spec/inspect/extend_spdx.md), [SWID](./../spec/inspect/extend_swid.md) |
+
+<!-- TODO: SBOM generation -->
+
+```python
+# example agent SBOM generation
+# Switch between all three SBOM standards
+#
+```
+
+<!-- TODO: Dynamic SBOM generation on capability discovery -->
+
+```python
+# example agent dynamic SBOM generation
+# Switch between all three SBOM standards
+#
+```
+
+### Auditable
+
+| Value | Description | Standards |
+|--|--|--|
+| Comprehensive audit trace | Specifies events that capture AI agent lifecycle and run-time execution. Extends OpenTelemety and OSCF specs with these properties. | Extends [OpenTelemetry](./../spec/audit/extend_opentelemetry.md), [OCSF](./../spec/audit/extend_ocsf.md) |
+
+<!-- TODO: audit log -->
+
+```python
+# example agent audit log generation
+# Switch between two observability standards
+#
+```
 
 ## Read Next
 
