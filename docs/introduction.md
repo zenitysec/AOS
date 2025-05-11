@@ -1,6 +1,6 @@
 # Trustworthy Agents
 
-We are moving with high urgency to adopt AI agents – capturing advancement in AI to transform our digital spaces.
+Everyone is moving with high urgency to adopt AI agents – capturing advancement in AI to transform our digital spaces.
 Agents can act, plan, write and execute just-in-time apps to achieve their goals.
 The industry is rapidly standardizing around agent tooling and interoperability protocols, with [MCP](https://modelcontextprotocol.io) and [A2A](https://google.github.io/A2A/) respectively.
 We can build more complex agents, in higher quantities, and allow them to easily communicate.
