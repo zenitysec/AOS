@@ -6,6 +6,7 @@
 
 - [Agent Observability Standard (AOS)](./topics/aos.md)
 - [MCP & A2A](./topics/mcp_a2a.md)
+- [Implementation](./topics/implementation.md)
 
 # Specification
 
@@ -18,6 +19,8 @@
     - [Extending OCSF](./spec/observe/extend_ocsf.md)
 - [Instrument](./spec/instrument/introduction.md)
     - [Agent Observability Standard Specification](./spec/instrument/aos_spec.md)
+    - [Extending MCP](./spec/instrument/extend_mcp.md)
+    - [Extending A2A](./spec/instrument/extend_a2a.md)
 
 # About
 
