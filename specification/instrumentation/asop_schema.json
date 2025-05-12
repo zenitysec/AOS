@@ -1,0 +1,2130 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ASOP Schema",
+    "description": "JSON Schema Agent Security & Observability Protocol",
+    "$defs": {
+        "Agent": {
+            "type": "object",
+            "title": "Agent",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "title": "Name",
+                    "description": "Name of the agent"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Description",
+                    "description": "Description of the agent"
+                },
+                "instructions": {
+                    "type": "string",
+                    "title": "Instructions",
+                    "description": "Instructions for the agent"
+                },
+                "tools": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ToolDefinition"
+                    }
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Resource"
+                    }
+                },
+                "model": {
+                    "$ref": "#/$defs/Model"
+                },
+                "version": {
+                    "title": "Version",
+                    "type": "string"
+                },
+                "url": {
+                    "title": "Url",
+                    "type": "string"
+                },
+                "provider": {
+                    "$ref": "#/$defs/AgentProvider"
+                },
+                "organization": {
+                    "$ref": "#/$defs/Organization"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "version",
+                "provider"
+            ]
+        },
+        "AgentProvider": {
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "AgentProvider",
+            "type": "object"
+        },
+        "AgentTrigger": {
+            "type": "object",
+            "title": "AgentTrigger",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "autonomous"
+                    ],
+                    "title": "Type"
+                },
+                "content": {
+                    "$ref": "#/$defs/Content"
+                },
+                "event": {
+                    "type": "object",
+                    "title": "Event",
+                    "description": "Event that triggered the agent",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "title": "Type",
+                            "description": "Type of the event",
+                            "examples": [
+                                "email",
+                                "slackNotification",
+                                "jiraTicket"
+                            ]
+                        },
+                        "id": {
+                            "type": "string",
+                            "title": "Id",
+                            "description": "Id of the event"
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "type",
+                "content",
+                "event"
+            ]
+        },
+        "AgentTriggerStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/agentTrigger",
+                    "default": "steps/agentTrigger",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "trigger": {
+                            "$ref": "#/$defs/AgentTrigger"
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "trigger",
+                        "reasoning"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "AgentTriggerStepRequest",
+            "type": "object",
+            "description": "Trigger of the agent. User message trigger should not go here, but should be included in the MessageStepRequest."
+        },
+        "ASOPRequest": {
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/MessageStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/AgentTriggerStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/MemoryRetrievalStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/MemoryRetrievalResultStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/ToolCallRequestStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/ToolCallResultStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/KnowledgeRetrievalStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/KnowledgeRetrievalResultStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/KnowledgeStoreStepRequest"
+                },
+                {
+                    "$ref": "#/$defs/PingRequest"
+                }
+            ],
+            "title": "ASOPRequest"
+        },
+        "ASOPResponse": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "result": {
+                    "properties": {
+                        "decision": {
+                            "type": "string",
+                            "title": "Decision",
+                            "description": "The decision",
+                            "enum": [
+                                "allow",
+                                "deny",
+                                "transform"
+                            ]
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning",
+                            "description": "The reasoning of the decision"
+                        },
+                        "reasonCode": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "message": {
+                            "type": "string",
+                            "title": "Message",
+                            "description": "The message of the monitoring agent"
+                        },
+                        "data": {
+                            "type": "object",
+                            "title": "Data",
+                            "additionalProperties": {},
+                            "description": "Additional data"
+                        },
+                        "transformedRequest": {
+                            "$ref": "#/$defs/ASOPRequest",
+                            "description": "Transformed request if the decision is transform."
+                        }
+                    },
+                    "type": "object",
+                    "title": "Result",
+                    "required": [
+                        "decision",
+                        "message",
+                        "reasoning"
+                    ]
+                },
+                "error": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/JSONRPCError"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "type": "object",
+            "title": "ASOPResponse"
+        },
+        "PingRequestResponse": {
+            "type": "object",
+            "title": "PingRequestResponse",
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "result": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PingRequestResult"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "error": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/JSONRPCError"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "PingRequestResult": {
+            "type": "object",
+            "title": "PingRequestResult",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "connected",
+                        "error"
+                    ]
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Agent version"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp of the request"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "status",
+                "version",
+                "timestamp"
+            ]
+        },
+        "Content": {
+            "properties": {
+                "parts": {
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "title": "Parts",
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "title": "Content"
+        },
+        "DataPart": {
+            "properties": {
+                "type": {
+                    "const": "data",
+                    "default": "data",
+                    "description": "Type of the part",
+                    "examples": [
+                        "data"
+                    ],
+                    "title": "Type",
+                    "type": "string"
+                },
+                "data": {
+                    "additionalProperties": {},
+                    "title": "Data",
+                    "type": "object"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "data"
+            ],
+            "title": "DataPart",
+            "type": "object"
+        },
+        "FileContent": {
+            "properties": {
+                "name": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Name"
+                },
+                "mimeType": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Mimetype"
+                },
+                "bytes": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Bytes"
+                },
+                "uri": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Uri"
+                }
+            },
+            "title": "FileContent",
+            "type": "object",
+            "description": "Represents the content of a file, either as base64 encoded bytes or a URI.\n\nEnsures that either 'bytes' or 'uri' is provided, but not both."
+        },
+        "FilePart": {
+            "properties": {
+                "type": {
+                    "const": "file",
+                    "default": "file",
+                    "description": "Type of the part",
+                    "examples": [
+                        "file"
+                    ],
+                    "title": "Type",
+                    "type": "string"
+                },
+                "file": {
+                    "$ref": "#/$defs/FileContent"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "file"
+            ],
+            "title": "FilePart",
+            "type": "object"
+        },
+        "InternalError": {
+            "properties": {
+                "code": {
+                    "const": -32603,
+                    "default": -32603,
+                    "description": "Error code",
+                    "examples": [
+                        -32603
+                    ],
+                    "title": "Code",
+                    "type": "integer"
+                },
+                "message": {
+                    "const": "Internal error",
+                    "default": "Internal error",
+                    "description": "A short description of the error",
+                    "examples": [
+                        "Internal error"
+                    ],
+                    "title": "Message",
+                    "type": "string"
+                },
+                "data": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Data"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ],
+            "title": "InternalError",
+            "type": "object"
+        },
+        "InvalidParamsError": {
+            "properties": {
+                "code": {
+                    "const": -32602,
+                    "default": -32602,
+                    "description": "Error code",
+                    "examples": [
+                        -32602
+                    ],
+                    "title": "Code",
+                    "type": "integer"
+                },
+                "message": {
+                    "const": "Invalid parameters",
+                    "default": "Invalid parameters",
+                    "description": "A short description of the error",
+                    "examples": [
+                        "Invalid parameters"
+                    ],
+                    "title": "Message",
+                    "type": "string"
+                },
+                "data": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Data"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ],
+            "title": "InvalidParamsError",
+            "type": "object"
+        },
+        "InvalidRequestError": {
+            "properties": {
+                "code": {
+                    "const": -32600,
+                    "default": -32600,
+                    "description": "Error code",
+                    "examples": [
+                        -32600
+                    ],
+                    "title": "Code",
+                    "type": "integer"
+                },
+                "message": {
+                    "const": "Request payload validation error",
+                    "default": "Request payload validation error",
+                    "description": "A short description of the error",
+                    "examples": [
+                        "Request payload validation error"
+                    ],
+                    "title": "Message",
+                    "type": "string"
+                },
+                "data": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Data"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ],
+            "title": "InvalidRequestError",
+            "type": "object"
+        },
+        "JSONParseError": {
+            "properties": {
+                "code": {
+                    "const": -32700,
+                    "default": -32700,
+                    "description": "Error code",
+                    "examples": [
+                        -32700
+                    ],
+                    "title": "Code",
+                    "type": "integer"
+                },
+                "message": {
+                    "const": "Invalid JSON payload",
+                    "default": "Invalid JSON payload",
+                    "description": "A short description of the error",
+                    "examples": [
+                        "Invalid JSON payload"
+                    ],
+                    "title": "Message",
+                    "type": "string"
+                },
+                "data": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Data"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ],
+            "title": "JSONParseError",
+            "type": "object"
+        },
+        "JSONRPCError": {
+            "properties": {
+                "code": {
+                    "title": "Code",
+                    "type": "integer"
+                },
+                "message": {
+                    "title": "Message",
+                    "type": "string"
+                },
+                "data": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Data"
+                }
+            },
+            "required": [
+                "code",
+                "message"
+            ],
+            "title": "JSONRPCError",
+            "type": "object"
+        },
+        "JSONRPCRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Params"
+                }
+            },
+            "required": [
+                "method"
+            ],
+            "title": "JSONRPCRequest",
+            "type": "object"
+        },
+        "JSONRPCResponse": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "result": {
+                    "anyOf": [
+                        {},
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Result"
+                },
+                "error": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/JSONRPCError"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                }
+            },
+            "title": "JSONRPCResponse",
+            "type": "object"
+        },
+        "KnowledgeRetrievalStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/knowledgeRetrieval",
+                    "default": "steps/knowledgeRetrieval",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "knowledgeRetrieval": {
+                            "type": "object",
+                            "properties": {
+                                "executionId": {
+                                    "type": "string",
+                                    "title": "Execution Id",
+                                    "description": "The execution id of the knowledge retrieval set by the agent"
+                                },
+                                "query": {
+                                    "type": "string",
+                                    "title": "Query",
+                                    "description": "The query to retrieve knowledge"
+                                },
+                                "keywords": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Keywords for knowledge retrieval hints"
+                                }
+                            },
+                            "required": [
+                                "query"
+                            ]
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "knowledgeRetrieval",
+                        "reasoning",
+                        "executionId"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "KnowledgeRetrievalStepRequest",
+            "type": "object"
+        },
+        "KnowledgeRetrievalResultStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/knowledgeRetrievalResult",
+                    "default": "steps/knowledgeRetrievalResult",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "knowledgeRetrievalResult": {
+                            "type": "object",
+                            "properties": {
+                                "executionId": {
+                                    "type": "string",
+                                    "title": "Execution Id",
+                                    "description": "The execution id of the knowledge retrieval set by the agent"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "title": "Id"
+                                            },
+                                            "content": {
+                                                "type": "string",
+                                                "title": "Content"
+                                            },
+                                            "mimeType": {
+                                                "type": "string",
+                                                "title": "Mime Type",
+                                                "description": "The mime type of the content"
+                                            },
+                                            "metadata": {
+                                                "anyOf": [
+                                                    {
+                                                        "additionalProperties": {},
+                                                        "type": "object"
+                                                    },
+                                                    {
+                                                        "type": "null"
+                                                    }
+                                                ],
+                                                "default": null,
+                                                "title": "Metadata"
+                                            }
+                                        },
+                                        "required": [
+                                            "id",
+                                            "content"
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "results"
+                            ]
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "knowledgeRetrievalResult",
+                        "reasoning",
+                        "executionId"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "KnowledgeRetrievalResultStepRequest",
+            "type": "object"
+        },
+        "KnowledgeSource": {
+            "type": "object",
+            "properties": {
+                "source": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/Resource"
+                        }
+                    ]
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                }
+            }
+        },
+        "KnowledgeStoreStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/knowledgeStore",
+                    "default": "steps/knowledgeStore",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "knowledgeStore": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/KnowledgeSource"
+                            }
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "knowledgeStore",
+                        "reasoning"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "KnowledgeStoreStepRequest",
+            "type": "object"
+        },
+        "MemoryRetrievalStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/memoryRetrieval",
+                    "default": "steps/memoryRetrieval",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "memoryRetrieval": {
+                            "type": "object",
+                            "title": "memoryRetrieval",
+                            "properties": {
+                                "executionId": {
+                                    "type": "string",
+                                    "title": "Execution Id",
+                                    "description": "The execution id of the memory retrieval set by the agent"
+                                },
+                                "type": {
+                                    "description": "The type of the memory",
+                                    "title": "Type",
+                                    "type": "string",
+                                    "examples": [
+                                        "chatHistory",
+                                        "vectorDBMemory",
+                                        "chatSummary"
+                                    ]
+                                },
+                                "query": {
+                                    "type": "string",
+                                    "title": "Query",
+                                    "description": "The query to retrieve memory from"
+                                }
+                            }
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "memoryRetrieval",
+                        "reasoning",
+                        "executionId"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "MemoryRetrievalStepRequest",
+            "type": "object"
+        },
+        "MemoryRetrievalResultStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/memoryRetrievalResult",
+                    "default": "steps/memoryRetrievalResult",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "memoryRetrievalResult": {
+                            "type": "object",
+                            "title": "memoryRetrievalResult",
+                            "properties": {
+                                "executionId": {
+                                    "type": "string",
+                                    "title": "Execution Id",
+                                    "description": "The execution id of the memory retrieval set by the agent"
+                                },
+                                "type": {
+                                    "description": "The type of the memory",
+                                    "title": "Type",
+                                    "type": "string",
+                                    "examples": [
+                                        "chatHistory",
+                                        "vectorDBMemory",
+                                        "chatSummary"
+                                    ]
+                                },
+                                "memory": {
+                                    "type": "array",
+                                    "items": {
+                                        "oneOf": [
+                                            {
+                                                "$ref": "#/$defs/Message"
+                                            },
+                                            {
+                                                "type": "string"
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "memoryRetrievalResult",
+                        "reasoning",
+                        "executionId"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "MemoryRetrievalResultStepRequest",
+            "type": "object"
+        },
+        "LlmProvider": {
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "type": "string"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "title": "LlmProvider",
+            "type": "object"
+        },
+        "Message": {
+            "properties": {
+                "role": {
+                    "enum": [
+                        "user",
+                        "agent",
+                        "system"
+                    ],
+                    "title": "Role",
+                    "type": "string"
+                },
+                "content": {
+                    "$ref": "#/$defs/Content"
+                },
+                "id": {
+                    "type": "string",
+                    "title": "Id",
+                    "description": "Id of the message"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "role",
+                "content",
+                "id"
+            ],
+            "title": "Message",
+            "type": "object"
+        },
+        "MessageStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/message",
+                    "default": "steps/message",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "message": {
+                            "$ref": "#/$defs/Message"
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "message",
+                        "reasoning"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "MessageStepRequest",
+            "type": "object"
+        },
+        "MethodNotFoundError": {
+            "properties": {
+                "code": {
+                    "const": -32601,
+                    "default": -32601,
+                    "description": "Error code",
+                    "examples": [
+                        -32601
+                    ],
+                    "title": "Code",
+                    "type": "integer"
+                },
+                "message": {
+                    "const": "Method not found",
+                    "default": "Method not found",
+                    "description": "A short description of the error",
+                    "examples": [
+                        "Method not found"
+                    ],
+                    "title": "Message",
+                    "type": "string"
+                },
+                "data": {
+                    "const": null,
+                    "default": null,
+                    "title": "Data"
+                }
+            },
+            "required": [
+                "code",
+                "message",
+                "data"
+            ],
+            "title": "MethodNotFoundError",
+            "type": "object"
+        },
+        "Organization": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the organization"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the organization"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "Model": {
+            "type": "object",
+            "title": "Model",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the model"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the model"
+                },
+                "provider": {
+                    "$ref": "#/$defs/LlmProvider"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "chat",
+                        "completion",
+                        "embedding"
+                    ]
+                },
+                "maxTokens": {
+                    "type": "integer"
+                },
+                "defaultParams": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "contextWindow": {
+                    "type": "integer"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "provider"
+            ]
+        },
+        "Part": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/TextPart"
+                },
+                {
+                    "$ref": "#/$defs/FilePart"
+                },
+                {
+                    "$ref": "#/$defs/DataPart"
+                }
+            ],
+            "title": "Part"
+        },
+        "PingRequest": {
+            "type": "object",
+            "title": "PingRequest",
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "agent/ping",
+                    "default": "agent/ping",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "timestamp": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "ISO 8601 timestamp of the request"
+                        },
+                        "timeout": {
+                            "type": "integer",
+                            "description": "Timeout in milliseconds",
+                            "default": 5000
+                        },
+                        "metadata": {
+                            "anyOf": [
+                                {
+                                    "additionalProperties": {},
+                                    "type": "object"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "default": null,
+                            "title": "Metadata"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "method",
+                "id",
+                "timestamp"
+            ]
+        },
+        "RequestContext": {
+            "type": "object",
+            "title": "RequestContext",
+            "properties": {
+                "agent": {
+                    "$ref": "#/$defs/Agent"
+                },
+                "session": {
+                    "$ref": "#/$defs/Session"
+                },
+                "turnId": {
+                    "type": "string",
+                    "title": "TurnId",
+                    "description": "Id of the current turn in the session"
+                },
+                "stepId": {
+                    "type": "string",
+                    "title": "StepId",
+                    "description": "Id of the current step in the session"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp of the request"
+                },
+                "user": {
+                    "$ref": "#/$defs/User"
+                }
+            },
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "type": "object"
+                    },
+                    {
+                        "type": "null"
+                    }
+                ],
+                "default": null
+            },
+            "required": [
+                "agent",
+                "session",
+                "turnId",
+                "stepId",
+                "timestamp"
+            ]
+        },
+        "Resource": {
+            "description": "A known resource that the server is capable of reading.",
+            "properties": {
+                "description": {
+                    "description": "A description of what this resource represents.",
+                    "type": "string"
+                },
+                "mimeType": {
+                    "description": "The MIME type of this resource, if known.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for this resource.",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the resource."
+                },
+                "content": {
+                    "type": "string",
+                    "description": "The content of the resource."
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "content"
+            ],
+            "type": "object"
+        },
+        "Session": {
+            "type": "object",
+            "title": "Session",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "title": "Id",
+                    "description": "Id of the session / conversation"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "TextPart": {
+            "properties": {
+                "type": {
+                    "const": "text",
+                    "default": "text",
+                    "description": "Type of the part",
+                    "examples": [
+                        "text"
+                    ],
+                    "title": "Type",
+                    "type": "string"
+                },
+                "text": {
+                    "title": "Text",
+                    "type": "string"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "text"
+            ],
+            "title": "TextPart",
+            "type": "object"
+        },
+        "ToolArgumentDefinition": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the argument",
+                    "title": "Name"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier for the argument",
+                    "title": "Id"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Description",
+                    "description": "Description of the argument"
+                },
+                "type": {
+                    "type": "string",
+                    "title": "Type",
+                    "description": "Type information for the argument",
+                    "enum": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                    ]
+                },
+                "mimeType": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "MIME type of the value if applicable",
+                    "default": null,
+                    "title": "Mimetype",
+                    "examples": [
+                        "application/json",
+                        "text/plain",
+                        "image/png",
+                        "audio/mpeg"
+                    ]
+                },
+                "optional": {
+                    "type": "boolean",
+                    "title": "optional",
+                    "description": "Whether the argument is required"
+                }
+            },
+            "required": [
+                "name",
+                "optional"
+            ]
+        },
+        "ToolArgumentValue": {
+            "type": "object",
+            "title": "ToolArgumentValue",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Name"
+                },
+                "id": {
+                    "type": "string",
+                    "title": "Id"
+                },
+                "value": {
+                    "description": "The argument value",
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "number"
+                        },
+                        {
+                            "type": "boolean"
+                        },
+                        {
+                            "type": "object"
+                        },
+                        {
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "title": "Value"
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "ToolCallRequestStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/toolCallRequest",
+                    "default": "steps/toolCallRequest",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "toolCallRequest": {
+                            "$ref": "#/$defs/ToolCallRequestStep"
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "toolCallRequest",
+                        "reasoning"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "ToolCallRequestStepRequest",
+            "type": "object"
+        },
+        "ToolCallResultStepRequest": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "steps/toolCallResult",
+                    "default": "steps/toolCallResult",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "context": {
+                            "$ref": "#/$defs/RequestContext"
+                        },
+                        "toolCallResult": {
+                            "type": "object",
+                            "properties": {
+                                "executionId": {
+                                    "type": "string",
+                                    "title": "ExecutionId",
+                                    "description": "Id of the execution set by the agent"
+                                },
+                                "result": {
+                                    "type": "object",
+                                    "properties": {
+                                        "content": {
+                                            "$ref": "#/$defs/TextPart"
+                                        },
+                                        "isError": {
+                                            "type": "boolean",
+                                            "description": "Whether the tool invocation resulted in an error",
+                                            "default": false
+                                        }
+                                    },
+                                    "required": [
+                                        "content",
+                                        "isError"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "executionId",
+                                "result"
+                            ]
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        }
+                    },
+                    "required": [
+                        "context",
+                        "toolCallResult",
+                        "reasoning"
+                    ]
+                }
+            },
+            "required": [
+                "method",
+                "params",
+                "id"
+            ],
+            "title": "ToolCallResultStepRequest",
+            "type": "object"
+        },
+        "ToolDefinition": {
+            "type": "object",
+            "title": "ToolDefinition",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "title": "Name"
+                },
+                "id": {
+                    "type": "string",
+                    "title": "Id"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Description"
+                },
+                "kind": {
+                    "type": "string",
+                    "title": "Kind",
+                    "examples": [
+                        "web",
+                        "function"
+                    ]
+                },
+                "arguments": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ToolArgumentDefinition"
+                    },
+                    "title": "Inputs"
+                },
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ToolArgumentDefinition"
+                    },
+                    "title": "Outputs"
+                }
+            },
+            "required": [
+                "name",
+                "id",
+                "kind",
+                "arguments",
+                "outputs"
+            ]
+        },
+        "ToolCallRequestStep": {
+            "type": "object",
+            "title": "ToolCallRequestStep",
+            "properties": {
+                "executionId": {
+                    "type": "string",
+                    "title": "ExecutionId",
+                    "description": "Id of the execution set by the agent"
+                },
+                "toolId": {
+                    "type": "string",
+                    "title": "ToolId",
+                    "description": "Id of the tool to be called"
+                },
+                "inputs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ToolArgumentValue"
+                    }
+                }
+            },
+            "required": [
+                "toolId",
+                "inputs",
+                "executionId"
+            ]
+        },
+        "UnsupportedOperationError": {
+            "properties": {
+                "code": {
+                    "const": -32001,
+                    "default": -32001,
+                    "description": "Error code",
+                    "examples": [
+                        -32001
+                    ],
+                    "title": "Code",
+                    "type": "integer"
+                },
+                "message": {
+                    "const": "This operation is not supported",
+                    "default": "This operation is not supported",
+                    "description": "A short description of the error",
+                    "examples": [
+                        "This operation is not supported"
+                    ],
+                    "title": "Message",
+                    "type": "string"
+                },
+                "data": {
+                    "const": null,
+                    "default": null,
+                    "title": "Data"
+                }
+            },
+            "required": [
+                "code",
+                "message",
+                "data"
+            ],
+            "title": "UnsupportedOperationError",
+            "type": "object"
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The unique identifier of the user"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the user"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The email of the user"
+                },
+                "organization": {
+                    "$ref": "#/$defs/Organization",
+                    "description": "The organization of the user"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "id",
+                "name",
+                "email",
+                "organization"
+            ]
+        }
+    }
+}
