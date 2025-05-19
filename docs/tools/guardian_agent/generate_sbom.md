@@ -1,6 +1,18 @@
-# Generate SBOM
+# Generate AgBOM
 
-1. Emit a new CycloneDX BOM JSON Whenever the agent:
+## AgBOM entities
+
+The AgBOM should cover all components and dependancies supporting the Agent as follows:
+- Everything related to standard (not Agentic) packages: name, description, version
+- Capabilities (A2A protocol, Agent catrd definitions)
+- Knowledge (name, description, type)
+- Memory (name, description, type, size)
+- LLM Model (name, description, endpoint, auth, contextWindow)
+- Tools (name, description, endpoint, auth)
+
+## Procedure
+
+1. Emit a new CycloneDX BOM Update Event Whenever the agent:
 - Use a new tool
 - Switches models
 - Modifies its declared capabilities
