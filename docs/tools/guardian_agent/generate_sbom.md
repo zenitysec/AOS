@@ -1,1 +1,22 @@
 # Generate SBOM
+
+1. Emit a new CycloneDX BOM JSON Whenever the agent:
+- Use a new tool
+- Switches models
+- Modifies its declared capabilities
+
+Regenerate the full BOM using the latest internal state.
+
+2. Update metadata fields
+
+- timestamp: current UTC time
+- version: increment if applicable
+- serialNumber: new UUID (e.g., urn:uuid:…)
+- Optional: previousSerialNumber as a custom property for linkage
+
+3. Push the updated BOM
+
+- Serve at .well-known/agent.bom.json (latest only, recommended option)
+Other options
+- Append to a versioned BOM log (e.g., /bom-history/2025-05-19T12:40:00Z.json)
+- Store in SBOM registry (e.g., GUAC, Sigstore, in-toto)
