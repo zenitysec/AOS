@@ -27,16 +27,14 @@ The Guardian Agent enforces policies and enables tracing through the following:
 - Standardized Tracing: Maintain a consistent trace of all interactions to enhance observability, support a comprehensive view across agents, and enable detailed analysis of interaction history.
 - Provide dynamic AgBOM: Maintain and notify an up to date list of components and dependencies for the agent environment changes such as new or updated tools, models and other components
 
-## AOS Protocol
+## AOS Protocol and Events
 
 The interaction between the Observed Agent and the Guardian Agent AOS APIs follows the Agent-to-Agent (A2A) protocol structure by design. 
 Therefore, our implementation should align with A2A methods and parameters wherever possible. All agent-to-agent and user-to-agent communications will be directly mapped from the A2A protocol to AOS.
 However, we need to extend AOS to abstractly support memory, knowledge, and tool invocation. This extension should accommodate both local and remote access via the MCP.
 
-## AOS Events
-
 We provide here an initial list of Events for better understanding of AOS scope and approach.
-Basically, Events aim to cover all interactions with the surrounding entities (User, Other Agents, Tools, MEmory, Knowledge) 
+Basically, Events aim to cover all interactions with the surrounding entities (User, Other Agents, Tools, Memory, Knowledge) 
 as well as capturing all A2A and MCP protocol messages.
 
 ### Agent to Agent and User to Agent Events
