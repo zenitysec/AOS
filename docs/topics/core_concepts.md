@@ -29,10 +29,11 @@ The Guardian Agent enforces policies and enables tracing through the following:
 
 ## AOS Protocol
 
-The interaction between the Observed Agent and the Guardian Agent AOS APIs follows the Agent-to-Agent (A2A) protocol structure by design. Therefore, our implementation should align with A2A methods and parameters wherever possible. All agent-to-agent and user-to-agent communications will be directly mapped from the A2A protocol to AOS.
+The interaction between the Observed Agent and the Guardian Agent AOS APIs follows the Agent-to-Agent (A2A) protocol structure by design. 
+Therefore, our implementation should align with A2A methods and parameters wherever possible. All agent-to-agent and user-to-agent communications will be directly mapped from the A2A protocol to AOS.
 However, we need to extend AOS to abstractly support memory, knowledge, and tool invocation. This extension should accommodate both local and remote access via the MCP.
 
-## List of Events
+## AOS Events
 
 We provide here an initial list of Events for better understanding of AOS scope and approach.
 Basically, Events aim to cover all interactions with the surrounding entities (User, Other Agents, Tools, MEmory, Knowledge) 
@@ -55,10 +56,10 @@ We propose to add the following for robustness
 - agent/ping
   Ping an agent for continuity check
 
-### Agent to Knowledge, Memory and Tools
+### Agent to Knowledge, Memory and Tools Events
 
 The following Events are used to capture interactions with Knowledge, Memory and Tools
-either locally or remotely via MCP
+either locally or remotely via MCP.
 These are "steps" events since they provide "white-box" visibility into each Agent actions.
 - steps/knowledgeRetrieval
   Knowledge retrieval, locally or remotely via MCP
