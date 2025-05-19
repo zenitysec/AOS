@@ -26,6 +26,11 @@ The Guardian Agent enforces policies and enables tracing through the following:
 - Event Instrumentation Utilization: Leverage standard event hooks to evaluate and enforce policies, responding with permit, deny, or mutate instructions.
 - Standardized Tracing: Maintain a consistent trace of all interactions to enhance observability, support a comprehensive view across agents, and enable detailed analysis of interaction history.
 
+## AOS Protocol
+
+The interaction between the Observed Agent and the Guardian Agent AOS APIs follows the Agent-to-Agent (A2A) protocol structure by design. Therefore, our implementation should align with A2A methods and parameters wherever possible. All agent-to-agent and user-to-agent communications will be directly mapped from the A2A protocol to AOS.
+However, we need to extend AOS to abstractly support memory, knowledge, and tool invocation. This extension should accommodate both local and remote access via the MCP.
+
 ## Read Next
 
 - [Implementation](./topics/implementation.md)
