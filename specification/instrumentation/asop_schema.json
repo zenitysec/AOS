@@ -31,6 +31,12 @@
                         "$ref": "#/$defs/ToolDefinition"
                     }
                 },
+                "mcpServers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/MCPServer"
+                    }
+                },
                 "resources": {
                     "type": "array",
                     "items": {
@@ -1014,6 +1020,22 @@
                 "id"
             ],
             "title": "KnowledgeStoreStepRequest",
+            "type": "object"
+        },
+        "MCPServer": {
+            "description": "Describes the name and version of an MCP server.",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "version": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "version"
+            ],
             "type": "object"
         },
         "MemoryRetrievalStepRequest": {
