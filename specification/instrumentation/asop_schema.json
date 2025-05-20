@@ -278,7 +278,7 @@
                             "enum": [
                                 "allow",
                                 "deny",
-                                "transform"
+                                "modify"
                             ]
                         },
                         "reasoning": {
@@ -303,9 +303,9 @@
                             "additionalProperties": {},
                             "description": "Additional data"
                         },
-                        "transformedRequest": {
+                        "modifiedRequest": {
                             "$ref": "#/$defs/ASOPRequest",
-                            "description": "Transformed request if the decision is transform."
+                            "description": "Modified request if the decision is modify."
                         }
                     },
                     "type": "object",
@@ -333,94 +333,6 @@
             ],
             "type": "object",
             "title": "ASOPResponse"
-        },
-        "PingRequestResponse": {
-            "type": "object",
-            "title": "PingRequestResponse",
-            "properties": {
-                "jsonrpc": {
-                    "const": "2.0",
-                    "default": "2.0",
-                    "title": "Jsonrpc",
-                    "type": "string"
-                },
-                "id": {
-                    "anyOf": [
-                        {
-                            "type": "integer"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "title": "Id"
-                },
-                "result": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/PingRequestResult"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null
-                },
-                "error": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/JSONRPCError"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null
-                }
-            },
-            "required": [
-                "id"
-            ]
-        },
-        "PingRequestResult": {
-            "type": "object",
-            "title": "PingRequestResult",
-            "properties": {
-                "status": {
-                    "type": "string",
-                    "enum": [
-                        "connected",
-                        "error"
-                    ]
-                },
-                "version": {
-                    "type": "string",
-                    "description": "Agent version"
-                },
-                "timestamp": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "ISO 8601 timestamp of the request"
-                },
-                "metadata": {
-                    "anyOf": [
-                        {
-                            "additionalProperties": {},
-                            "type": "object"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Metadata"
-                }
-            },
-            "required": [
-                "status",
-                "version",
-                "timestamp"
-            ]
         },
         "Content": {
             "properties": {
@@ -1582,6 +1494,94 @@
                 "timestamp"
             ]
         },
+        "PingRequestResponse": {
+            "type": "object",
+            "title": "PingRequestResponse",
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "result": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/PingRequestResult"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                },
+                "error": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/JSONRPCError"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "PingRequestResult": {
+            "type": "object",
+            "title": "PingRequestResult",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "enum": [
+                        "connected",
+                        "error"
+                    ]
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Agent version"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp of the request"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "status",
+                "version",
+                "timestamp"
+            ]
+        },
         "RequestContext": {
             "type": "object",
             "title": "RequestContext",
@@ -2013,6 +2013,9 @@
                         "$ref": "#/$defs/ToolArgumentDefinition"
                     },
                     "title": "Outputs"
+                },
+                "implementation": {
+                    "$ref": "#/$defs/ToolImplementation"
                 }
             },
             "required": [
@@ -2048,6 +2051,25 @@
                 "toolId",
                 "inputs",
                 "executionId"
+            ]
+        },
+        "ToolImplementation": {
+            "type": "object",
+            "title": "ToolImplementation",
+            "description": "The implementation of the tool. Used for local function calls.",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "title": "Code"
+                },
+                "language": {
+                    "type": "string",
+                    "title": "Language"
+                }
+            },
+            "required": [
+                "code",
+                "language"
             ]
         },
         "UnsupportedOperationError": {
