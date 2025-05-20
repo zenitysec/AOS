@@ -4,7 +4,7 @@
 
 # Topics
 
-- [Agent Observability Standard (AOS)](./topics/aos.md)
+- [Agent Security & Observability Protocol (ASOP)](./topics/asop.md)
 - [Core concepts](./topics/core_concepts.md)
 - [MCP & A2A](./topics/mcp_a2a.md)
 - [Implementation](./topics/implementation.md)
@@ -30,7 +30,7 @@
     - [Extend OpenTelemetry](./spec/audit/extend_opentelemetry.md)
     - [Extend OCSF](./spec/audit/extend_ocsf.md)
 - [Instrument](./spec/instrument/introduction.md)
-    - [Agent Observability Standard Specification](./spec/instrument/aos_spec.md)
+    - [Agent Security & Observability Protocol Specification](./spec/instrument/asop_spec.md)
     - [Extend MCP](./spec/instrument/extend_mcp.md)
     - [Extend A2A](./spec/instrument/extend_a2a.md)
 

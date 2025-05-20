@@ -1,1 +1,0 @@
-# Agent Observability Standard Specification

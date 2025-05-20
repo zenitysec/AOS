@@ -1,4 +1,4 @@
-# Agent Observability Standard
+# Agent Security & Observability Protocol
 
 ## Build the book locally
 

@@ -1,7 +1,7 @@
-# Agent Observability Standard
+# Agent Security & Observability Protocl
 
-The Agent Observability Standard (AOS) provides specification to buliding [trustworthy agents](./../introduction.md).
-Agents that implement AOS can be deployed with higher trust.
+The Agent Security & Observability Protocl (ASOP) provides specification to buliding [trustworthy agents](./../introduction.md).
+Agents that implement ASOP can be deployed with higher trust.
 They are inspectable, auditable and instrumentable.
 They are an open book 
 
@@ -12,7 +12,7 @@ They have a dynamic bill-of-material, a clear audit trail and hard inline-contro
 Trustworthiness of agents builds upon the foundation of MCP and A2A, but provides value regardless. 
 It is compatible with cybersecurity and obseravbility standards including OpenTelemetry, OCSF, CycloneDX, SPDX and SWID.
 
-AOS provides three benefits for agents:
+ASOP provides three benefits for agents:
 
 <!-- TODO: Change this to three-sections with a menu. 
 Each section has the security property and an example of what the outcome looks like.
@@ -35,7 +35,7 @@ Ideally this shows major agent frameworks and also A2A and MCP -->
 
 | Value | Description | Standards |
 |--|--|--|
-| Hooks to agent run-time and lifecycle| Specifies run-time hooks that allow intervention at agent's lifecycle and run-time execution. | [AOS](./topics/aos.md) |
+| Hooks to agent run-time and lifecycle| Specifies run-time hooks that allow intervention at agent's lifecycle and run-time execution. | [ASOP](./topics/asop.md) |
 
 <!-- TODO: instrumentation example -->
 

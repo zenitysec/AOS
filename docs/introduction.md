@@ -53,4 +53,4 @@ Early standardization provides a unique opportunity to build trustworthiness int
 
 ## Read Next
 
-- [Agent Observability Standard (AOS)](./topics/aos.md)
+- [Agent Security & Observability Protocol (ASOP)](./topics/asop.md)

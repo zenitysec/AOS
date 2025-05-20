@@ -2,7 +2,7 @@
 authors = ["mbrg"]
 language = "en"
 src = "docs"
-title = "Agent Observability Standard"
+title = "Agent Security & Observability Protocol"
 
 [build]
 build-dir = "book"
