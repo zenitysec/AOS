@@ -1,6 +1,6 @@
 # Agent Security & Observability Protocol
 
-The Agent Security & Observability Protocl (ASOP) provides specification to buliding [trustworthy agents](./../introduction.md).
+The Agent Security & Observability Protocol (ASOP) provides specification to buliding [trustworthy agents](./../introduction.md).
 Agents that implement ASOP can be deployed with higher trust.
 They are inspectable, auditable and instrumentable.
 They are an open book 
