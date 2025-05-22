@@ -25,7 +25,7 @@ An Observed Agent should ensure inspectability, traceability, and observability 
 The Guardian Agent enforces policies and enables tracing through the following:
 - Event Instrumentation Utilization: Leverage standard event hooks to evaluate and enforce policies, responding with permit, deny, or mutate instructions.
 - Standardized Tracing: Maintain a consistent trace of all interactions to enhance observability, support a comprehensive view across agents, and enable detailed analysis of interaction history.
-- Provide dynamic AgBOM: Maintain and notify an up to date list of components and dependencies for the agent environment changes such as new or updated tools, models and other components
+- Provide dynamic AG-BOM: Maintain and notify an up to date list of components and dependencies for the agent environment changes such as new or updated tools, models and other components
 
 ## ASOP Protocol and Events
 
@@ -77,5 +77,6 @@ These are "steps" events since they provide "white-box" visibility into each Age
 
 ## Read Next
 
-- [Implementation](./topics/implementation.md)
-- [MCP & A2A](./topics/mcp_a2a.md)
+- [ASOP](./docs/ASOP/introduction.md)
+- [Traceablity](./docs/Traceability/introduction.md)
+- [AG-BOM](./docs/AG-BOM/introduction.md)
