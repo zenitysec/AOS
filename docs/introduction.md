@@ -53,4 +53,4 @@ Early standardization provides a unique opportunity to build trustworthiness int
 
 ## Read Next
 
-- [Core Concepts](./topics/core_concepts.md)
+- [Core Concepts](./core_concepts.md)
