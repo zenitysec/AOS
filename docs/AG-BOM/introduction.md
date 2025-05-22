@@ -23,7 +23,7 @@ To ensure usefulness across diverse workflows and tooling environments, the AG-B
 - Include all necessary metadata fields for Agent, Knowledge, Memory and Tools
 - Provide output in one or more standardized SBOM formats (CycloneDX, SPDX, SWID)
 
-## AG-BOM entities and parameters:
+### AG-BOM entities and parameters:
 
 - Standard Packages: Name, Description, Version
 - Models:	Name, Description, Endpoint, Auth Mechanism, Context Window
@@ -31,3 +31,26 @@ To ensure usefulness across diverse workflows and tooling environments, the AG-B
 - Knowledge: Name, Description, Type
 - Memory: Name, Description, Type, Size
 - Tools: Name, Description, Endpoint, Auth Mechanism
+
+### Dynamic Update Procedure Principles
+
+1. Emit a new AG-BOM Update Event Whenever the agent:
+- Use a new tool
+- Switches models
+- Modifies its declared capabilities
+
+Regenerate the full BOM using the latest internal state.
+
+2. Update metadata fields
+
+- timestamp: current UTC time
+- version: increment if applicable
+- serialNumber: new UUID (e.g., urn:uuid:…)
+- Optional: previousSerialNumber as a custom property for linkage
+
+3. Push the updated BOM
+
+- Serve at .well-known/agent.bom.json (latest only, recommended option)
+Other options
+- Append to a versioned BOM log (e.g., /bom-history/2025-05-19T12:40:00Z.json)
+- Store in SBOM registry (e.g., GUAC, Sigstore, in-toto)
