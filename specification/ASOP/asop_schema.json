@@ -1016,7 +1016,7 @@
             "title": "MemoryStoreStep",
             "type": "object"
         },
-        "LclmProvider": {
+        "LlmProvider": {
             "properties": {
                 "name": {
                     "title": "Name",
