@@ -166,7 +166,7 @@
                 "event"
             ]
         },
-        "AgentTriggerStepRequest": {
+        "AgentTriggerStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -195,7 +195,7 @@
                     "type": "object",
                     "properties": {
                         "context": {
-                            "$ref": "#/$defs/RequestContext"
+                            "$ref": "#/$defs/StepContext"
                         },
                         "trigger": {
                             "$ref": "#/$defs/AgentTrigger"
@@ -217,38 +217,32 @@
                 "params",
                 "id"
             ],
-            "title": "AgentTriggerStepRequest",
+            "title": "AgentTriggerStep",
             "type": "object",
-            "description": "Trigger of the agent. User message trigger should not go here, but should be included in the MessageStepRequest."
+            "description": "Trigger of the agent. User message trigger should not go here, but should be included in the MessageStep."
         },
         "ASOPRequest": {
             "oneOf": [
                 {
-                    "$ref": "#/$defs/MessageStepRequest"
+                    "$ref": "#/$defs/MessageStep"
                 },
                 {
-                    "$ref": "#/$defs/AgentTriggerStepRequest"
+                    "$ref": "#/$defs/AgentTriggerStep"
                 },
                 {
-                    "$ref": "#/$defs/MemoryRetrievalStepRequest"
+                    "$ref": "#/$defs/MemoryContextRetrievalStep"
                 },
                 {
-                    "$ref": "#/$defs/MemoryRetrievalResultStepRequest"
+                    "$ref": "#/$defs/MemoryStoreStep"
                 },
                 {
-                    "$ref": "#/$defs/ToolCallRequestStepRequest"
+                    "$ref": "#/$defs/ToolCallRequestStep"
                 },
                 {
-                    "$ref": "#/$defs/ToolCallResultStepRequest"
+                    "$ref": "#/$defs/ToolCallResultStep"
                 },
                 {
-                    "$ref": "#/$defs/KnowledgeRetrievalStepRequest"
-                },
-                {
-                    "$ref": "#/$defs/KnowledgeRetrievalResultStepRequest"
-                },
-                {
-                    "$ref": "#/$defs/KnowledgeStoreStepRequest"
+                    "$ref": "#/$defs/KnowledgeStep"
                 },
                 {
                     "$ref": "#/$defs/PingRequest"
@@ -479,6 +473,30 @@
             ],
             "title": "FilePart",
             "type": "object"
+        },
+        "FileSource": {
+            "type": "object",
+            "title": "FileSource",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "const": "file"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "id",
+                "name"
+            ]
         },
         "InternalError": {
             "properties": {
@@ -761,84 +779,7 @@
             "title": "JSONRPCResponse",
             "type": "object"
         },
-        "KnowledgeRetrievalStepRequest": {
-            "properties": {
-                "jsonrpc": {
-                    "const": "2.0",
-                    "default": "2.0",
-                    "title": "Jsonrpc",
-                    "type": "string"
-                },
-                "id": {
-                    "anyOf": [
-                        {
-                            "type": "integer"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "title": "Id"
-                },
-                "method": {
-                    "const": "steps/knowledgeRetrieval",
-                    "default": "steps/knowledgeRetrieval",
-                    "title": "Method",
-                    "type": "string"
-                },
-                "params": {
-                    "type": "object",
-                    "properties": {
-                        "context": {
-                            "$ref": "#/$defs/RequestContext"
-                        },
-                        "knowledgeRetrieval": {
-                            "type": "object",
-                            "properties": {
-                                "executionId": {
-                                    "type": "string",
-                                    "title": "Execution Id",
-                                    "description": "The execution id of the knowledge retrieval set by the agent"
-                                },
-                                "query": {
-                                    "type": "string",
-                                    "title": "Query",
-                                    "description": "The query to retrieve knowledge"
-                                },
-                                "keywords": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "description": "Keywords for knowledge retrieval hints"
-                                }
-                            },
-                            "required": [
-                                "query"
-                            ]
-                        },
-                        "reasoning": {
-                            "type": "string",
-                            "title": "Reasoning"
-                        }
-                    },
-                    "required": [
-                        "context",
-                        "knowledgeRetrieval",
-                        "reasoning",
-                        "executionId"
-                    ]
-                }
-            },
-            "required": [
-                "method",
-                "params",
-                "id"
-            ],
-            "title": "KnowledgeRetrievalStepRequest",
-            "type": "object"
-        },
-        "KnowledgeRetrievalResultStepRequest": {
+        "KnowledgeStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -867,15 +808,22 @@
                     "type": "object",
                     "properties": {
                         "context": {
-                            "$ref": "#/$defs/RequestContext"
+                            "$ref": "#/$defs/StepContext"
                         },
                         "knowledgeRetrievalResult": {
                             "type": "object",
                             "properties": {
-                                "executionId": {
+                                "query": {
                                     "type": "string",
-                                    "title": "Execution Id",
-                                    "description": "The execution id of the knowledge retrieval set by the agent"
+                                    "title": "Query",
+                                    "description": "The query to retrieve knowledge"
+                                },
+                                "keywords": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Keywords for knowledge retrieval hints"
                                 },
                                 "results": {
                                     "type": "array",
@@ -917,6 +865,7 @@
                                 }
                             },
                             "required": [
+                                "query",
                                 "results"
                             ]
                         },
@@ -928,88 +877,6 @@
                     "required": [
                         "context",
                         "knowledgeRetrievalResult",
-                        "reasoning",
-                        "executionId"
-                    ]
-                }
-            },
-            "required": [
-                "method",
-                "params",
-                "id"
-            ],
-            "title": "KnowledgeRetrievalResultStepRequest",
-            "type": "object"
-        },
-        "KnowledgeSource": {
-            "type": "object",
-            "properties": {
-                "source": {
-                    "oneOf": [
-                        {
-                            "$ref": "#/$defs/Resource"
-                        }
-                    ]
-                },
-                "metadata": {
-                    "anyOf": [
-                        {
-                            "additionalProperties": {},
-                            "type": "object"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null
-                }
-            }
-        },
-        "KnowledgeStoreStepRequest": {
-            "properties": {
-                "jsonrpc": {
-                    "const": "2.0",
-                    "default": "2.0",
-                    "title": "Jsonrpc",
-                    "type": "string"
-                },
-                "id": {
-                    "anyOf": [
-                        {
-                            "type": "integer"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "title": "Id"
-                },
-                "method": {
-                    "const": "steps/knowledgeStore",
-                    "default": "steps/knowledgeStore",
-                    "title": "Method",
-                    "type": "string"
-                },
-                "params": {
-                    "type": "object",
-                    "properties": {
-                        "context": {
-                            "$ref": "#/$defs/RequestContext"
-                        },
-                        "knowledgeStore": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/$defs/KnowledgeSource"
-                            }
-                        },
-                        "reasoning": {
-                            "type": "string",
-                            "title": "Reasoning"
-                        }
-                    },
-                    "required": [
-                        "context",
-                        "knowledgeStore",
                         "reasoning"
                     ]
                 }
@@ -1019,7 +886,7 @@
                 "params",
                 "id"
             ],
-            "title": "KnowledgeStoreStepRequest",
+            "title": "KnowledgeStep",
             "type": "object"
         },
         "MCPServer": {
@@ -1038,7 +905,7 @@
             ],
             "type": "object"
         },
-        "MemoryRetrievalStepRequest": {
+        "MemoryContextRetrievalStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -1058,8 +925,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "steps/memoryRetrieval",
-                    "default": "steps/memoryRetrieval",
+                    "const": "steps/memoryContextRetrieval",
+                    "default": "steps/memoryContextRetrieval",
                     "title": "Method",
                     "type": "string"
                 },
@@ -1067,32 +934,13 @@
                     "type": "object",
                     "properties": {
                         "context": {
-                            "$ref": "#/$defs/RequestContext"
+                            "$ref": "#/$defs/StepContext"
                         },
-                        "memoryRetrieval": {
-                            "type": "object",
-                            "title": "memoryRetrieval",
-                            "properties": {
-                                "executionId": {
-                                    "type": "string",
-                                    "title": "Execution Id",
-                                    "description": "The execution id of the memory retrieval set by the agent"
-                                },
-                                "type": {
-                                    "description": "The type of the memory",
-                                    "title": "Type",
-                                    "type": "string",
-                                    "examples": [
-                                        "chatHistory",
-                                        "vectorDBMemory",
-                                        "chatSummary"
-                                    ]
-                                },
-                                "query": {
-                                    "type": "string",
-                                    "title": "Query",
-                                    "description": "The query to retrieve memory from"
-                                }
+                        "memory": {
+                            "title": "memory",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
                             }
                         },
                         "reasoning": {
@@ -1102,9 +950,8 @@
                     },
                     "required": [
                         "context",
-                        "memoryRetrieval",
-                        "reasoning",
-                        "executionId"
+                        "memory",
+                        "reasoning"
                     ]
                 }
             },
@@ -1113,10 +960,10 @@
                 "params",
                 "id"
             ],
-            "title": "MemoryRetrievalStepRequest",
+            "title": "MemoryContextRetrievalStep",
             "type": "object"
         },
-        "MemoryRetrievalResultStepRequest": {
+        "MemoryStoreStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -1136,8 +983,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "steps/memoryRetrievalResult",
-                    "default": "steps/memoryRetrievalResult",
+                    "const": "steps/memoryStore",
+                    "default": "steps/memoryStore",
                     "title": "Method",
                     "type": "string"
                 },
@@ -1145,40 +992,13 @@
                     "type": "object",
                     "properties": {
                         "context": {
-                            "$ref": "#/$defs/RequestContext"
+                            "$ref": "#/$defs/StepContext"
                         },
-                        "memoryRetrievalResult": {
-                            "type": "object",
-                            "title": "memoryRetrievalResult",
-                            "properties": {
-                                "executionId": {
-                                    "type": "string",
-                                    "title": "Execution Id",
-                                    "description": "The execution id of the memory retrieval set by the agent"
-                                },
-                                "type": {
-                                    "description": "The type of the memory",
-                                    "title": "Type",
-                                    "type": "string",
-                                    "examples": [
-                                        "chatHistory",
-                                        "vectorDBMemory",
-                                        "chatSummary"
-                                    ]
-                                },
-                                "memory": {
-                                    "type": "array",
-                                    "items": {
-                                        "oneOf": [
-                                            {
-                                                "$ref": "#/$defs/Message"
-                                            },
-                                            {
-                                                "type": "string"
-                                            }
-                                        ]
-                                    }
-                                }
+                        "memory": {
+                            "title": "memory",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
                             }
                         },
                         "reasoning": {
@@ -1188,9 +1008,8 @@
                     },
                     "required": [
                         "context",
-                        "memoryRetrievalResult",
-                        "reasoning",
-                        "executionId"
+                        "memory",
+                        "reasoning"
                     ]
                 }
             },
@@ -1199,10 +1018,10 @@
                 "params",
                 "id"
             ],
-            "title": "MemoryRetrievalResultStepRequest",
+            "title": "MemoryStoreStep",
             "type": "object"
         },
-        "LlmProvider": {
+        "LclmProvider": {
             "properties": {
                 "name": {
                     "title": "Name",
@@ -1269,7 +1088,7 @@
             "title": "Message",
             "type": "object"
         },
-        "MessageStepRequest": {
+        "MessageStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -1298,10 +1117,16 @@
                     "type": "object",
                     "properties": {
                         "context": {
-                            "$ref": "#/$defs/RequestContext"
+                            "$ref": "#/$defs/StepContext"
                         },
                         "message": {
                             "$ref": "#/$defs/Message"
+                        },
+                        "citations": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/Source"
+                            }
                         },
                         "reasoning": {
                             "type": "string",
@@ -1320,7 +1145,7 @@
                 "params",
                 "id"
             ],
-            "title": "MessageStepRequest",
+            "title": "MessageStep",
             "type": "object"
         },
         "MethodNotFoundError": {
@@ -1604,54 +1429,6 @@
                 "timestamp"
             ]
         },
-        "RequestContext": {
-            "type": "object",
-            "title": "RequestContext",
-            "properties": {
-                "agent": {
-                    "$ref": "#/$defs/Agent"
-                },
-                "session": {
-                    "$ref": "#/$defs/Session"
-                },
-                "turnId": {
-                    "type": "string",
-                    "title": "TurnId",
-                    "description": "Id of the current turn in the session"
-                },
-                "stepId": {
-                    "type": "string",
-                    "title": "StepId",
-                    "description": "Id of the current step in the session"
-                },
-                "timestamp": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "ISO 8601 timestamp of the request"
-                },
-                "user": {
-                    "$ref": "#/$defs/User"
-                }
-            },
-            "additionalProperties": {
-                "anyOf": [
-                    {
-                        "type": "object"
-                    },
-                    {
-                        "type": "null"
-                    }
-                ],
-                "default": null
-            },
-            "required": [
-                "agent",
-                "session",
-                "turnId",
-                "stepId",
-                "timestamp"
-            ]
-        },
         "Resource": {
             "description": "A known resource that the server is capable of reading.",
             "properties": {
@@ -1721,6 +1498,85 @@
             },
             "required": [
                 "id"
+            ]
+        },
+        "SiteSource": {
+            "type": "object",
+            "title": "SiteSource",
+            "properties": {
+                "type": {
+                    "const": "site"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "type",
+                "id",
+                "url"
+            ]
+        },
+        "Source": {
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/FileSource"
+                },
+                {
+                    "$ref": "#/$defs/SiteSource" 
+                }
+            ],
+            "title": "Source"
+        },
+        "StepContext": {
+            "type": "object",
+            "title": "StepContext",
+            "properties": {
+                "agent": {
+                    "$ref": "#/$defs/Agent"
+                },
+                "session": {
+                    "$ref": "#/$defs/Session"
+                },
+                "turnId": {
+                    "type": "string",
+                    "title": "TurnId",
+                    "description": "Id of the current turn in the session"
+                },
+                "stepId": {
+                    "type": "string",
+                    "title": "StepId",
+                    "description": "Id of the current step in the session"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "ISO 8601 timestamp of the request"
+                },
+                "user": {
+                    "$ref": "#/$defs/User"
+                }
+            },
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "type": "object"
+                    },
+                    {
+                        "type": "null"
+                    }
+                ],
+                "default": null
+            },
+            "required": [
+                "agent",
+                "session",
+                "turnId",
+                "stepId",
+                "timestamp"
             ]
         },
         "TextPart": {
@@ -1862,7 +1718,7 @@
                 "value"
             ]
         },
-        "ToolCallRequestStepRequest": {
+        "ToolCallRequestStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -1891,10 +1747,10 @@
                     "type": "object",
                     "properties": {
                         "context": {
-                            "$ref": "#/$defs/RequestContext"
+                            "$ref": "#/$defs/StepContext"
                         },
                         "toolCallRequest": {
-                            "$ref": "#/$defs/ToolCallRequestStep"
+                            "$ref": "#/$defs/ToolCallRequest"
                         },
                         "reasoning": {
                             "type": "string",
@@ -1913,10 +1769,10 @@
                 "params",
                 "id"
             ],
-            "title": "ToolCallRequestStepRequest",
+            "title": "ToolCallRequestStep",
             "type": "object"
         },
-        "ToolCallResultStepRequest": {
+        "ToolCallResultStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -1945,7 +1801,7 @@
                     "type": "object",
                     "properties": {
                         "context": {
-                            "$ref": "#/$defs/RequestContext"
+                            "$ref": "#/$defs/StepContext"
                         },
                         "toolCallResult": {
                             "type": "object",
@@ -1995,7 +1851,7 @@
                 "params",
                 "id"
             ],
-            "title": "ToolCallResultStepRequest",
+            "title": "ToolCallResultStep",
             "type": "object"
         },
         "ToolDefinition": {
@@ -2014,13 +1870,9 @@
                     "type": "string",
                     "title": "Description"
                 },
-                "kind": {
+                "type": {
                     "type": "string",
-                    "title": "Kind",
-                    "examples": [
-                        "web",
-                        "function"
-                    ]
+                    "title": "Type"
                 },
                 "arguments": {
                     "type": "array",
@@ -2035,22 +1887,19 @@
                         "$ref": "#/$defs/ToolArgumentDefinition"
                     },
                     "title": "Outputs"
-                },
-                "implementation": {
-                    "$ref": "#/$defs/ToolImplementation"
                 }
             },
             "required": [
                 "name",
                 "id",
-                "kind",
+                "type",
                 "arguments",
                 "outputs"
             ]
         },
-        "ToolCallRequestStep": {
+        "ToolCallRequest": {
             "type": "object",
-            "title": "ToolCallRequestStep",
+            "title": "ToolCallRequest",
             "properties": {
                 "executionId": {
                     "type": "string",
@@ -2074,61 +1923,6 @@
                 "inputs",
                 "executionId"
             ]
-        },
-        "ToolImplementation": {
-            "type": "object",
-            "title": "ToolImplementation",
-            "description": "The implementation of the tool. Used for local function calls.",
-            "properties": {
-                "code": {
-                    "type": "string",
-                    "title": "Code"
-                },
-                "language": {
-                    "type": "string",
-                    "title": "Language"
-                }
-            },
-            "required": [
-                "code",
-                "language"
-            ]
-        },
-        "UnsupportedOperationError": {
-            "properties": {
-                "code": {
-                    "const": -32001,
-                    "default": -32001,
-                    "description": "Error code",
-                    "examples": [
-                        -32001
-                    ],
-                    "title": "Code",
-                    "type": "integer"
-                },
-                "message": {
-                    "const": "This operation is not supported",
-                    "default": "This operation is not supported",
-                    "description": "A short description of the error",
-                    "examples": [
-                        "This operation is not supported"
-                    ],
-                    "title": "Message",
-                    "type": "string"
-                },
-                "data": {
-                    "const": null,
-                    "default": null,
-                    "title": "Data"
-                }
-            },
-            "required": [
-                "code",
-                "message",
-                "data"
-            ],
-            "title": "UnsupportedOperationError",
-            "type": "object"
         },
         "User": {
             "type": "object",
