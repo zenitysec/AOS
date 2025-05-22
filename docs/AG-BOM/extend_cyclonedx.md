@@ -2,6 +2,7 @@
 
 Agent Bill of Material example using CycloneDX
 
+```python
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
@@ -73,3 +74,4 @@ Agent Bill of Material example using CycloneDX
     }
   ]
 }
+```
