@@ -207,8 +207,7 @@
                     },
                     "required": [
                         "context",
-                        "trigger",
-                        "reasoning"
+                        "trigger"
                     ]
                 }
             },
@@ -242,7 +241,7 @@
                     "$ref": "#/$defs/ToolCallResultStep"
                 },
                 {
-                    "$ref": "#/$defs/KnowledgeStep"
+                    "$ref": "#/$defs/KnowledgeRetrievalStep"
                 },
                 {
                     "$ref": "#/$defs/PingRequest"
@@ -312,8 +311,7 @@
                     "title": "Result",
                     "required": [
                         "decision",
-                        "message",
-                        "reasoning"
+                        "message"
                     ]
                 },
                 "error": {
@@ -779,7 +777,7 @@
             "title": "JSONRPCResponse",
             "type": "object"
         },
-        "KnowledgeStep": {
+        "KnowledgeRetrievalStep": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -799,8 +797,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "steps/knowledgeRetrievalResult",
-                    "default": "steps/knowledgeRetrievalResult",
+                    "const": "steps/knowledge",
+                    "default": "steps/knowledge",
                     "title": "Method",
                     "type": "string"
                 },
@@ -876,8 +874,7 @@
                     },
                     "required": [
                         "context",
-                        "knowledgeRetrievalResult",
-                        "reasoning"
+                        "knowledgeRetrievalResult"
                     ]
                 }
             },
@@ -886,7 +883,7 @@
                 "params",
                 "id"
             ],
-            "title": "KnowledgeStep",
+            "title": "KnowledgeRetrievalStep",
             "type": "object"
         },
         "MCPServer": {
@@ -950,8 +947,7 @@
                     },
                     "required": [
                         "context",
-                        "memory",
-                        "reasoning"
+                        "memory"
                     ]
                 }
             },
@@ -1008,8 +1004,7 @@
                     },
                     "required": [
                         "context",
-                        "memory",
-                        "reasoning"
+                        "memory"
                     ]
                 }
             },
@@ -1135,8 +1130,7 @@
                     },
                     "required": [
                         "context",
-                        "message",
-                        "reasoning"
+                        "message"
                     ]
                 }
             },
@@ -1759,8 +1753,7 @@
                     },
                     "required": [
                         "context",
-                        "toolCallRequest",
-                        "reasoning"
+                        "toolCallRequest"
                     ]
                 }
             },
@@ -1841,8 +1834,7 @@
                     },
                     "required": [
                         "context",
-                        "toolCallResult",
-                        "reasoning"
+                        "toolCallResult"
                     ]
                 }
             },
