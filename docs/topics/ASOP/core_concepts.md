@@ -10,7 +10,7 @@ An agent operates within an environment that includes interactions with several 
 
 A trustworthy agent is an Observed Agent that transparently exposes its interactions with the environment through standardized APIs to a Guardian Agent
 
-![Agent Diagram](./agent_env.png "Agent Environment Diagram")
+![Agent Diagram](../../assets/agent_env.png "Agent Environment Diagram")
 
 ## Agent Instrumentation
 
@@ -43,6 +43,6 @@ For further details on the required extensions read [ASOP](./docs/ASOP/README.md
 
 ## Read Next
 
-- [ASOP](./docs/ASOP/README.md)
-- [Traceablity](./docs/Traceability/README.md)
-- [AG-BOM](./docs/AG-BOM/README.md)
+- [ASOP](./topics/ASOP/README.md)
+- [AG-BOM](./topics/AG-BOM/README.md)
+- [Observability](./topics/Observability/README.md)

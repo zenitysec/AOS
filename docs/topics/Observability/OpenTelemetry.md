@@ -1,23 +1,4 @@
-# Audit
-Modern AI agents, by design, operate with a degree of autonomy and complexity that makes their internal logic and decision-making difficult to inspect. 
-As these agents orchestrate reasoning, planning, and tool use to achieve their goals, understanding not just _what_ they did, but _why_ and _how_, becomes essential for trust, compliance, and operational excellence. 
-
-**Observability**, rooted in robust auditing, transforms agents from black boxes into transparent, governable systems.
-
-To achieve this, we extend the Agent Observability Standard (AOS) with a comprehensive audit layer, built on industry-standard telemetry protocols like OpenTelemetry. 
-This approach ensures that every significant agent action is not only recorded, but contextualized and correlated across distributed systems and multi-agent workflows.
-
-## AI Agent Auditing Objectives
-
-- **Transparency**: Observability enables a clear, step-by-step reconstruction of agent behavior, including the reasoning behind each action. This is fundamental for incident response, compliance audits, and continuous improvement.
-    
-- **Security and Risk Management**: By tracing agent actions down to atomic operations, organizations can detect anomalous or unauthorized behavior, investigate root causes, and enforce policy controls in real time.
-    
-- **Performance and Optimization**: Detailed metrics and traces reveal bottlenecks, inefficiencies, and error patterns in agent workflows, supporting targeted tuning and resource management.
-    
-- **Trust and Accountability**: A verifiable audit trail is the foundation for building trust with stakeholders, regulators, and end users, ensuring that agent-driven decisions can always be justified and explained.
-
-## Mapping Traces with Open Telemetry
+# Mapping Traces with Open Telemetry
 
 To thoroughly audit an AI agent, it is crucial to connect traces and events in a manner that accurately reflects the agent's atomic actions and its broader units of logical operation. This provides a transparent, step-by-step visualization of how an agent processes information, arrives at decisions, and executes tasks. The Agent Security & Observability Protocol (ASOP) schema offers a structured framework for defining these interactions, which can then be effectively mapped to OpenTelemetry concepts.
 
