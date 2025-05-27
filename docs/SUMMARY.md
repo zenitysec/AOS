@@ -4,7 +4,6 @@
 
 # Topics
 
-- [Agent Security & Observability Protocol (ASOP)](./topics/asop.md)
 - [Core concepts](./topics/core_concepts.md)
 - [MCP & A2A](./topics/mcp_a2a.md)
 - [Implementation](./topics/implementation.md)
