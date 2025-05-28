@@ -26,17 +26,28 @@ To ensure usefulness across diverse workflows and tooling environments, the AG-B
 ### AG-BOM entities and parameters:
 
 - Standard Packages: Name, Description, Version
-- Models:	Name, Description, Endpoint, Auth Mechanism, Context Window
-- Capabilities:	A2A Protocols, Agent Card Definitions, MCP Protocol and servers
-- Knowledge: Name, Description, Type
-- Memory: Name, Description, Type, Size
-- Tools: Name, Description, Endpoint, Auth Mechanism
+- Models:	Name, Version, Description, Endpoint, Context Window, Args
+- Capabilities:	Agent Card Definitions (per A2A), list of discovered Agents, list of MCP servers and parameters (protocolVersion, capabilities, serverInfo)
+- Knowledge: Name, Description, Schema, Search type, Search args
+- Memory: Name, Description, Type, Size, Search args, Window size, Path
+- Tools: Name, Description, Scheme, Endpoint (local/directly-attached and MCP)
+
+### Triggers for AG-BOM Update
+
+- Changes in Agent capabilities
+- Agent discovered, removed or changed capabilities
+- MCP server discovered, removed or changed capabilities
+- Knowledge discovered, removed or changed capabilities
+- Tool discovered, removed or changed capabilities
+- Memory discovered, removed or changed capabilities
+- Model discovered, removed or changed capabilities
+
 
 ### Dynamic Update Procedure Principles
 
 1. Emit a new AG-BOM Update Event Whenever the agent:
-- Use a new tool
-- Switches models
+- Discovers a new agent, MCP server and tool
+- Switches LLM models
 - Modifies its declared capabilities
 
 Regenerate the full BOM using the latest internal state.

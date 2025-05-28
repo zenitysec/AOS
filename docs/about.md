@@ -1,11 +1,12 @@
-# Misson statement
-
+# About 
 <!-- 
 TODO: this page is probably not needed
 Leaving here for now because not all content has found its place elsewhere
  -->
 
-## Scope of work
+## Misson statement
+
+### Scope of work
 
 1. Extend CycloneDX, SPDX, SWID to support AI agent components
 1. Extend OCSF and OpenTelemetry with a schema for AI agent cybersecurity observability
@@ -15,3 +16,5 @@ Leaving here for now because not all content has found its place elsewhere
     1. Standardize instrumentation hooks for unstandardized agent capabilities (e,g, long-term, RAG)
     1. Implement the standard on popular Open Source agent platforms (e,g, CrewAI)
 1. Provide a reference architecture for usage of instrumentation hooks to deliver OCSF and OpenTelemetry compliant audit log
+
+## Partners
