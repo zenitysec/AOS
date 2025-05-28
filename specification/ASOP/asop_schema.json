@@ -3,6 +3,59 @@
     "title": "ASOP Schema",
     "description": "JSON Schema Agent Security & Observability Protocol",
     "$defs": {
+        "A2AMessage": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "messages/a2a",
+                    "default": "messages/a2a",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                            "additionalProperties": {},
+                            "title": "Data",
+                            "type": "object",
+                            "description": "The raw json message of A2A protocol"
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        },
+                        "required": [
+                            "message"
+                        ]
+                    }
+                },
+                "required": [
+                    "method",
+                    "params",
+                    "id"
+                ],
+                "title": "A2AMessage",
+                "type": "object",
+                "description": "Method that captures the A2A protocol messages."
+            }
+        },
         "Agent": {
             "type": "object",
             "title": "Agent",
@@ -77,6 +130,7 @@
             "required": [
                 "id",
                 "name",
+                "instructions",
                 "version",
                 "provider"
             ]
@@ -85,6 +139,10 @@
             "properties": {
                 "name": {
                     "title": "Name",
+                    "type": "string"
+                },
+                "url": {
+                    "title": "Url",
                     "type": "string"
                 },
                 "metadata": {
@@ -102,7 +160,8 @@
                 }
             },
             "required": [
-                "name"
+                "name",
+                "url"
             ],
             "title": "AgentProvider",
             "type": "object"
@@ -119,32 +178,14 @@
                     "title": "Type"
                 },
                 "content": {
-                    "$ref": "#/$defs/Content"
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "title": "Parts",
+                    "type": "array"
                 },
                 "event": {
-                    "type": "object",
-                    "title": "Event",
-                    "description": "Event that triggered the agent",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "title": "Type",
-                            "description": "Type of the event",
-                            "examples": [
-                                "email",
-                                "slackNotification",
-                                "jiraTicket"
-                            ]
-                        },
-                        "id": {
-                            "type": "string",
-                            "title": "Id",
-                            "description": "Id of the event"
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
+                    "$ref": "#/$defs/AgentTriggerEvent"
                 },
                 "metadata": {
                     "anyOf": [
@@ -164,6 +205,32 @@
                 "type",
                 "content",
                 "event"
+            ]
+        },
+        "AgentTriggerEvent": {
+            "type": "object",
+            "title": "Event",
+            "description": "Event that triggered the agent",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "title": "Type",
+                    "description": "Type of the event",
+                    "examples": [
+                        "email",
+                        "slackNotification",
+                        "jiraTicket"
+                    ]
+                },
+                "id": {
+                    "type": "string",
+                    "title": "Id",
+                    "description": "Id of the event"
+                }
+            },
+            "required": [
+                "id",
+                "type"
             ]
         },
         "AgentTriggerStep": {
@@ -245,6 +312,12 @@
                 },
                 {
                     "$ref": "#/$defs/PingRequest"
+                },
+                {
+                    "$ref": "#/$defs/A2AMessage"
+                },
+                {
+                    "$ref": "#/$defs/MCPMessage"
                 }
             ],
             "title": "ASOPRequest"
@@ -332,29 +405,16 @@
             "type": "object",
             "title": "ASOPResponse"
         },
-        "Content": {
-            "properties": {
-                "parts": {
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "title": "Parts",
-                    "type": "array"
-                }
-            },
-            "type": "object",
-            "title": "Content"
-        },
         "DataPart": {
             "properties": {
-                "type": {
+                "kind": {
                     "const": "data",
                     "default": "data",
                     "description": "Type of the part",
                     "examples": [
                         "data"
                     ],
-                    "title": "Type",
+                    "title": "Kind",
                     "type": "string"
                 },
                 "data": {
@@ -382,101 +442,42 @@
             "title": "DataPart",
             "type": "object"
         },
-        "FileContent": {
-            "properties": {
-                "name": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Name"
-                },
-                "mimeType": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Mimetype"
-                },
-                "bytes": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Bytes"
-                },
-                "uri": {
-                    "anyOf": [
-                        {
-                            "type": "string"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Uri"
-                }
-            },
-            "title": "FileContent",
-            "type": "object",
-            "description": "Represents the content of a file, either as base64 encoded bytes or a URI.\n\nEnsures that either 'bytes' or 'uri' is provided, but not both."
-        },
         "FilePart": {
+            "description": "Represents a File segment within parts.",
             "properties": {
-                "type": {
-                    "const": "file",
-                    "default": "file",
-                    "description": "Type of the part",
-                    "examples": [
-                        "file"
+                "file": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/FileWithBytes"
+                        },
+                        {
+                            "$ref": "#/definitions/FileWithUri"
+                        }
                     ],
-                    "title": "Type",
+                    "description": "File content either as url or bytes"
+                },
+                "kind": {
+                    "const": "file",
+                    "description": "Part type - file for FileParts",
                     "type": "string"
                 },
-                "file": {
-                    "$ref": "#/$defs/FileContent"
-                },
                 "metadata": {
-                    "anyOf": [
-                        {
-                            "additionalProperties": {},
-                            "type": "object"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null,
-                    "title": "Metadata"
+                    "additionalProperties": {},
+                    "description": "Optional metadata associated with the part.",
+                    "type": "object"
                 }
             },
             "required": [
-                "file"
+                "file",
+                "kind"
             ],
-            "title": "FilePart",
             "type": "object"
         },
         "FileSource": {
             "type": "object",
             "title": "FileSource",
             "properties": {
-                "type": {
+                "kind": {
                     "type": "string",
                     "const": "file"
                 },
@@ -491,10 +492,52 @@
                 }
             },
             "required": [
-                "type",
+                "kind",
                 "id",
                 "name"
             ]
+        },
+        "FileWithBytes": {
+            "description": "Define the variant where 'bytes' is present and 'uri' is absent",
+            "properties": {
+                "bytes": {
+                    "description": "base64 encoded content of the file",
+                    "type": "string"
+                },
+                "mimeType": {
+                    "description": "Optional mimeType for the file",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Optional name for the file",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "bytes"
+            ],
+            "type": "object"
+        },
+        "FileWithUri": {
+            "description": "Define the variant where 'uri' is present and 'bytes' is absent",
+            "properties": {
+                "mimeType": {
+                    "description": "Optional mimeType for the file",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Optional name for the file",
+                    "type": "string"
+                },
+                "uri": {
+                    "description": "URL for the File content",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "uri"
+            ],
+            "type": "object"
         },
         "InternalError": {
             "properties": {
@@ -886,8 +929,61 @@
             "title": "KnowledgeRetrievalStep",
             "type": "object"
         },
+        "MCPMessage": {
+            "properties": {
+                "jsonrpc": {
+                    "const": "2.0",
+                    "default": "2.0",
+                    "title": "Jsonrpc",
+                    "type": "string"
+                },
+                "id": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "title": "Id"
+                },
+                "method": {
+                    "const": "messages/mcp",
+                    "default": "messages/mcp",
+                    "title": "Method",
+                    "type": "string"
+                },
+                "params": {
+                    "type": "object",
+                    "properties": {
+                        "message": {
+                            "additionalProperties": {},
+                            "title": "message",
+                            "type": "object",
+                            "description": "The raw json message of MCP protocol"
+                        },
+                        "reasoning": {
+                            "type": "string",
+                            "title": "Reasoning"
+                        },
+                        "required": [
+                            "message"
+                        ]
+                    }
+                },
+                "required": [
+                    "method",
+                    "params",
+                    "id"
+                ],
+                "title": "MCPMessage",
+                "type": "object",
+                "description": "Method that captures the MCP protocol messages."
+            }
+        },
         "MCPServer": {
-            "description": "Describes the name and version of an MCP server.",
+            "description": "Information about an MCP server.",
             "properties": {
                 "name": {
                     "type": "string"
@@ -1054,7 +1150,11 @@
                     "type": "string"
                 },
                 "content": {
-                    "$ref": "#/$defs/Content"
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "title": "Parts",
+                    "type": "array"
                 },
                 "id": {
                     "type": "string",
@@ -1498,10 +1598,8 @@
             "type": "object",
             "title": "SiteSource",
             "properties": {
-                "type": {
-                    "const": "site"
-                },
-                "id": {
+                "kind": {
+                    "const": "site",
                     "type": "string"
                 },
                 "url": {
@@ -1509,8 +1607,7 @@
                 }
             },
             "required": [
-                "type",
-                "id",
+                "kind",
                 "url"
             ]
         },
@@ -1520,7 +1617,7 @@
                     "$ref": "#/$defs/FileSource"
                 },
                 {
-                    "$ref": "#/$defs/SiteSource" 
+                    "$ref": "#/$defs/SiteSource"
                 }
             ],
             "title": "Source"
@@ -1575,14 +1672,14 @@
         },
         "TextPart": {
             "properties": {
-                "type": {
+                "kind": {
                     "const": "text",
                     "default": "text",
                     "description": "Type of the part",
                     "examples": [
                         "text"
                     ],
-                    "title": "Type",
+                    "title": "Kind",
                     "type": "string"
                 },
                 "text": {
@@ -1659,15 +1756,15 @@
                         "audio/mpeg"
                     ]
                 },
-                "optional": {
+                "required": {
                     "type": "boolean",
-                    "title": "optional",
+                    "title": "Required",
                     "description": "Whether the argument is required"
                 }
             },
             "required": [
                 "name",
-                "optional"
+                "required"
             ]
         },
         "ToolArgumentValue": {
@@ -1867,17 +1964,31 @@
                     "title": "Type"
                 },
                 "arguments": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/$defs/ToolArgumentDefinition"
-                    },
-                    "title": "Inputs"
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/ToolArgumentDefinition"
+                            }
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "title": "Arguments"
                 },
                 "outputs": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/$defs/ToolArgumentDefinition"
-                    },
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/ToolOutputDefinition"
+                            }
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
                     "title": "Outputs"
                 }
             },
@@ -1916,6 +2027,58 @@
                 "executionId"
             ]
         },
+        "ToolOutputDefinition": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the output parameter",
+                    "title": "Name"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the output parameter",
+                    "title": "Id"
+                },
+                "description": {
+                    "type": "string",
+                    "title": "Description",
+                    "description": "Description of the tool output parameter"
+                },
+                "type": {
+                    "type": "string",
+                    "title": "Type",
+                    "description": "Type of the tool output parameter",
+                    "enum": [
+                        "string",
+                        "number",
+                        "boolean",
+                        "object",
+                        "array",
+                        "null"
+                    ]
+                },
+                "mimeType": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "MIME type of the value if applicable",
+                    "default": null,
+                    "title": "Mimetype",
+                    "examples": [
+                        "application/json",
+                        "text/plain",
+                        "image/png",
+                        "audio/mpeg"
+                    ]
+                }
+            }
+        },
         "User": {
             "type": "object",
             "properties": {
@@ -1950,10 +2113,7 @@
                 }
             },
             "required": [
-                "id",
-                "name",
-                "email",
-                "organization"
+                "id"
             ]
         }
     }
