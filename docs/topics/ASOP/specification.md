@@ -26,7 +26,10 @@ ASOP uses **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** as the paylo
 
 
 ## 3. Protocol Data Objects
-### 3.1 `Agent` Object
+These objects define the structure of data exchanged within the JSON-RPC methods of the ASOP protocol.
+
+
+### 3.1. `Agent` Object
 
 
 
@@ -46,7 +49,7 @@ ASOP uses **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** as the paylo
 | `organization`                   | [`Organization`](#311-organization-object) | No       | Organization / entity that agent belongs to. |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the agent. |
 
-#### 3.1.1 `AgentProvider` Object
+#### 3.1.1. `AgentProvider` Object
 
 Information about the organization or entity providing the agent.
 
@@ -57,7 +60,7 @@ Information about the organization or entity providing the agent.
 | `url`                   | `string` | Yes       | URL for the provider's website/contact. |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the agent provider. |
 
-#### 3.1.2 `Model` Object
+#### 3.1.2. `Model` Object
 
 Information about LLM associated with the agent.
 
@@ -70,7 +73,7 @@ Information about LLM associated with the agent.
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the model. |
 
 
-#### 3.1.3 `LlmProvider` Object
+#### 3.1.3. `LlmProvider` Object
 
 Information about the organization or entity providing the LLM.
 
@@ -80,7 +83,7 @@ Information about the organization or entity providing the LLM.
 | `name`                              | `string`                                                           | Yes      | Human-readable name of the LLM provider.                                                                                                           |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the LLM provider. |
 
-#### 3.1.4 `MCPServer` Object
+#### 3.1.4. `MCPServer` Object
 
 Information about the available MCP servers.
 
@@ -90,7 +93,7 @@ Information about the available MCP servers.
 | `name`                              | `string`                                                           | Yes      | Name of the MCP server.                                                                                                           |
 | `version`                   |  `string`  | Yes       | Version of the MCP server. |
 
-#### 3.1.5 `Resource` Object
+#### 3.1.5. `Resource` Object
 
 Information about the available resources.
 
@@ -104,7 +107,7 @@ Information about the available resources.
 | `mimeType`                              | `string`                                                            | No      | [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) (e.g., text/plain, image/png). Strongly recommended.                                                                                                           |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the resource. |
 
-### 3.2 `ToolDefinition` Object
+### 3.2. `ToolDefinition` Object
 
 Describes the tool schema used by the agent.
 
@@ -120,7 +123,7 @@ Describes the tool schema used by the agent.
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the LLM provider. |
 
 
-#### 3.2.1 `ToolArgumentDefinition` Object
+#### 3.2.1. `ToolArgumentDefinition` Object
 
 Describes the tool argument schema.
 
@@ -134,7 +137,7 @@ Describes the tool argument schema.
 | `mimeType`                              | `string` \| `null`                                                            | No      | [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) (e.g., text/plain, image/png). Strongly recommended.                                                                                                           |
 | `required`                              | `boolean`                                                           | Yes      | Whether the tool argument is required.                                                                                                           |
 
-#### 3.2.2 `ToolOutputDefinition` Object
+#### 3.2.2. `ToolOutputDefinition` Object
 
 Describes the tool output schema.
 
@@ -148,7 +151,7 @@ Describes the tool output schema.
 | `mimeType`                              | `string` \| `null`                                                            | No      | [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) (e.g., text/plain, image/png). Strongly recommended.                                                                                                           |
 
 
-### 3.3 `Message` Object
+### 3.3. `Message` Object
 
 Represents a single communication turn or a piece of contextual information between a user and an agent.
 
@@ -161,7 +164,7 @@ Represents a single communication turn or a piece of contextual information betw
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the message. |
 
 
-### 3.4 `Part` Union Type
+### 3.4. `Part` Union Type
 
 Represents a distinct piece of content within a `Message`. A `Part` is a union type representing exportable content as either `TextPart`, `FilePart`, or `DataPart`. All `Part` types also include an optional `metadata` field (`Record<string, any>`) for part-specific metadata.
 
@@ -201,7 +204,7 @@ For conveying structured JSON data. Useful for forms, parameters, or any machine
 | `data`     | `Record<string, any>` | Yes      | The structured JSON data payload (an object or an array).                   |
 | `metadata` | `Record<string, any>` | No       | Optional metadata specific to this data part (e.g., reference to a schema). |
 
-### 3.5.1 `FileWithBytes` Object
+### 3.5.1. `FileWithBytes` Object
 
 Represents the data for a file, used within a `FilePart`.
 
@@ -212,7 +215,7 @@ Represents the data for a file, used within a `FilePart`.
 | `mimeType` | `string` | No       | [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) (e.g., `image/png`). Strongly recommended. |
 | `bytes`    | `string` | Yes      | Base64 encoded file content.                                                                                                        |
 
-### 3.5.2 `FileWithUri` Object
+### 3.5.2. `FileWithUri` Object
 
 Represents the URI for a file, used within a `FilePart`.
 
@@ -224,7 +227,7 @@ Represents the URI for a file, used within a `FilePart`.
 | `uri`      | `string` | Yes      | URI (absolute URL strongly recommended) to file content. Accessibility is context-dependent.                                        |
 
 
-### 3.6 `AgentTrigger` Object
+### 3.6. `AgentTrigger` Object
 
 Represents the trigger that resulted in agent activation.It can be a recurring trigger or responding to an event. <br>
 User prompt is not included and it is included in `Message`. 
@@ -237,7 +240,7 @@ User prompt is not included and it is included in `Message`.
 | `content`            | [`Part[]`](#34-part-union-type) | Yes      | Array of content parts. Must contain at least one part.                          |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the trigger. |
 
-#### 3.6.1 `AgentTriggerEvent` Object
+#### 3.6.1. `AgentTriggerEvent` Object
 
 
 Info about triggering event.   
@@ -249,7 +252,7 @@ Info about triggering event.
 | `id`                              | `string`                                                           | Yes      | The Id of the triggering event.                                                                                                  |
 
 
-### 3.7 `Source` Union Type
+### 3.7. `Source` Union Type
 
 Represents a source that is used as a reference or citation in the Agent response (`Message`) to justify or explain the output.<br>
 A `Source` is a union type representing the cited source as either `FileSource` or `SiteSource`.
@@ -257,7 +260,7 @@ A `Source` is a union type representing the cited source as either `FileSource` 
 
 It **MUST** be one of the following:
 
-#### 3.7.1 `FileSource` Object
+#### 3.7.1. `FileSource` Object
 For conveying file source.
 
 
@@ -269,7 +272,7 @@ For conveying file source.
 | `url`                              | `string`                                                           | No      | The url of the file if the file is available remotely to the agent. For example url to Sharepoint or GoogleDrive.                                                                                                   |
 
 
-#### 3.7.1 `SiteSource` Object
+#### 3.7.2. `SiteSource` Object
 For conveying site source.
 
 
@@ -278,7 +281,7 @@ For conveying site source.
 | `kind`                              | `"site"` (literal)                                                            | Yes      |  Identifies this source as file source.                                                                                                         |
 | `url`                              | `string`                                                           | Yes      | The url of the referenced site.                                                                                                  |
 
-### 3.8 `StepContext` Object
+### 3.8. `StepContext` Object
 
 Holds information about the context of agent step
 
@@ -292,7 +295,7 @@ Holds information about the context of agent step
 | `user`                   | [`User`](#310-user-object) | No       | The user involved with the agent interaction. Exists if the agent was triggered by a user prompt. |
 
 
-### 3.9 `Session` Object
+### 3.9. `Session` Object
 
 Holds information about the session.
 
@@ -303,7 +306,7 @@ Holds information about the session.
 | `id`                              | `string`                                                           | Yes      | A unique identifier of the session.                                                                                                         |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the session. |
 
-### 3.10 `User` Object
+### 3.10. `User` Object
 
 Holds information about the user involved in the interaction with the agent. Used when the agent is triggered by a user prompt.
 
@@ -316,7 +319,7 @@ Holds information about the user involved in the interaction with the agent. Use
 | `organization`                              | [`Organization`](#311-organization-object)                                                           | Yes      | The organization that the user belong to.                                                                                                         |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the user. |
 
-### 3.11 `Organization` Object
+### 3.11. `Organization` Object
 
 Represents an organization. Used in: `Agent` as the owning organization of the agent, `User` as the organization the user belongs to.
 
@@ -327,10 +330,44 @@ Represents an organization. Used in: `Agent` as the owning organization of the a
 | `name`                              | `string`                                                           | No      | Human-readable name of the organization.                                                                                                         |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the organization. |
 
+### 3.12. JSON-RPC Structures
 
-## 4. Protocol Methods placeholder
+ASOP adheres to the standard [JSON-RPC 2.0](https://www.jsonrpc.org/specification) structures for requests and responses.
+
+#### 3.12.1. `JSONRPCRequest` Object
+
+All A2A method calls are encapsulated in a JSON-RPC Request object.
+
+- `jsonrpc`: A String specifying the version of the JSON-RPC protocol. **MUST** be exactly `"2.0"`.
+- `method`: A String containing the name of the method to be invoked (e.g., `"steps/knowledge"`, `"messages/mcp"`).
+- `params`: A Structured value that holds the parameter values to be used during the invocation of the method. This member **MAY** be omitted if the method expects no parameters. ASOP methods typically use an `object` for `params`.
+- `id`: An identifier established by the Client that **MUST** contain a String or Number(Integer) value. The Guardian Agent **MUST** reply with the same value in the Response object. This member is used to correlate the context between the two request and response objects.
+
+#### 3.12.2. `JSONRPCResponse` Object
+
+Responses from the Guardian Agent are encapsulated in a JSON-RPC Response object.
+
+- `jsonrpc`: A String specifying the version of the JSON-RPC protocol. **MUST** be exactly `"2.0"`.
+- `id`: This member is **REQUIRED**. It **MUST** be the same as the value of the `id` member in the Request Object. If there was an error in detecting the `id` in the Request object (e.g. Parse error/Invalid Request), it **MUST** be `null`.
+- **EITHER** `result`: This member is **REQUIRED** on success. This member **MUST NOT** exist if there was an error invoking the method. The value of this member is determined by the method invoked on the Guardian Agent.
+- **OR** `error`: This member is **REQUIRED** on failure. This member **MUST NOT** exist if there was no error triggered during invocation. The value of this member **MUST** be an [`JSONRPCError`](#313-jsonrpcerror-object) object.
+- The members `result` and `error` are mutually exclusive: one **MUST** be present, and the other **MUST NOT**.
+
+### 3.13. `JSONRPCError` Object
+
+When a JSON-RPC call encounters an error, the Response Object will contain an `error` member with a value of this structure.
 
 
-## 5. Protocol Errors placeholder
+| Field Name | Type      | Required | Description                                                                                                  |
+| :--------- | :-------- | :------- | :----------------------------------------------------------------------------------------------------------- |
+| `code`     | `integer` | Yes      | Integer error code. See [Section 5 (Error Handling)](#5-error-handling) for error codes. |
+| `message`  | `string`  | Yes      | Short, human-readable summary of the error.                                                                  |
+| `data`     | `any`     | No       | Optional additional structured information about the error.                                                  |
+
+
+## 4. Protocol RPC Methods
+
+
+## 5. Error Handling
 
 

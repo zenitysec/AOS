@@ -23,8 +23,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "a2a",
-                    "default": "a2a",
+                    "const": "messages/a2a",
+                    "default": "messages/a2a",
                     "title": "Method",
                     "type": "string"
                 },
@@ -949,8 +949,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "mcp",
-                    "default": "mcp",
+                    "const": "messages/mcp",
+                    "default": "messages/mcp",
                     "title": "Method",
                     "type": "string"
                 },
