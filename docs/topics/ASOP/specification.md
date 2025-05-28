@@ -1,4 +1,4 @@
-# Specification documentation placeholder
+# ASOP Protocol Specification
 
 **Version:** `1.0.0`
 
@@ -26,7 +26,8 @@ ASOP uses **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** as the paylo
 
 
 ## 3. Protocol Data Objects
-### 3.1. `Agent` Object Structure
+### 3.1 `Agent` Object
+
 
 
 | Field Name                          | Type                                                               | Required | Description                                                                                                                                 |
@@ -236,7 +237,8 @@ User prompt is not included and it is included in `Message`.
 | `content`            | [`Part[]`](#34-part-union-type) | Yes      | Array of content parts. Must contain at least one part.                          |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the trigger. |
 
-#### 3.6 `AgentTriggerEvent` Object
+#### 3.6.1 `AgentTriggerEvent` Object
+
 
 Info about triggering event.   
 
