@@ -1,29 +1,29 @@
-# How to contribute
+# Contributing Guidelines
 
-We'd love to accept your patches and contributions to this project.
+Contributions welcome!
 
-## Before you begin
+**Before spending lots of time on something, ask for feedback on your idea first!**
 
-### Sign our Contributor License Agreement
+Please search issues and pull requests before adding something new to avoid duplicating
+efforts and conversations.
 
-Contributions to this project must be accompanied by a
-[Contributor License Agreement](https://cla.developers.google.com/about) (CLA).
-You (or your employer) retain the copyright to your contribution; this simply
-gives us permission to use and redistribute your contributions as part of the
-project.
+This project welcomes non-code contributions, too! The following types of contributions
+are welcome:
 
-If you or your current employer have already signed the Google CLA (even if it
-was for a different project), you probably don't need to do it again.
+- **Ideas**: participate in an issue thread or start your own to have your voice heard.
+- **Writing**: contribute your expertise in an area by helping expand the included docs.
+- **Copy editing**: fix typos, clarify language, and improve the quality of the docs.
+- **Formatting**: help keep docs easy to read with consistent formatting.
 
-Visit <https://cla.developers.google.com/> to see your current agreements or to
-sign a new one.
+## Code Style
 
-### Review our community guidelines
+[![standard][standard-image]][standard-url]
 
-This project follows
-[Google's Open Source Community Guidelines](https://opensource.google/conduct/).
+This repository uses [`standard`][standard-url] to maintain code style and consistency,
+and to avoid style arguments. `npm test` runs `standard` automatically, so you don't have
+to!
 
-## Contribution process
+[standard-url]: https://github.com/standard/standard
 
 ### Code reviews
 
@@ -48,10 +48,29 @@ Here are some additional things to keep in mind during the process:
 - **Test your changes.** Before you submit a pull request, make sure that your changes work as expected.
 - **Be patient.** It may take some time for your pull request to be reviewed and merged.
 
----
+### Releases
 
-## For Google Employees
+Declaring formal releases remains the prerogative of the project maintainer.
 
-Complete the following steps to register your GitHub account and be added as a contributor to this repository.
+## Developer's Certificate of Origin 1.1
 
-1. Register your GitHub account at [go/GitHub](http://go/github)
+By making a contribution to this project, I certify that:
+
+- (a) The contribution was created in whole or in part by me and I have the right to
+  submit it under the open source license indicated in the file; or
+
+- (b) The contribution is based upon previous work that, to the best of my knowledge, is
+  covered under an appropriate open source license and I have the right under that license
+  to submit that work with modifications, whether created in whole or in part by me, under
+  the same open source license (unless I am permitted to submit under a different
+  license), as indicated in the file; or
+
+- (c) The contribution was provided directly to me by some other person who certified
+  (a), (b) or (c) and I have not modified it.
+
+- (d) I understand and agree that this project and the contribution are public and that a
+  record of the contribution (including all personal information I submit with it,
+  including my sign-off) is maintained indefinitely and may be redistributed consistent
+  with this project or the open source license(s) involved.
+
+This guide is based on [github-contributing]https://raw.githubusercontent.com/standard/.github/refs/heads/master/CONTRIBUTING.md
