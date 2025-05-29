@@ -365,9 +365,225 @@ When a JSON-RPC call encounters an error, the Response Object will contain an `e
 | `data`     | `any`     | No       | Optional additional structured information about the error.                                                  |
 
 
+### 3.14. `KnowledgeRetrievalStepParams` Object
+Holds the parameters for the knowledge retrieval step. See `steps/knowledgeRetrieval` for more info.
+
+| Field Name | Type      | Required | Description                                                                                                  |
+| :--------- | :-------- | :------- | :----------------------------------------------------------------------------------------------------------- |
+| `query`     | `string` | No      | The query extracted from agent's input and used to fetch data / knowledge. |
+| `keywords`  | `string[]`  | No      | Keywords used to fetch data / knowledge. Usually used with word matching search.                                                                  |
+| `results`     | [`KnowledgeRetrievalResult`](#3141-knowledgeretrievalresult-object)[]     | Yes       | Array of retrieved knowledge.                                                  |
+
+
+#### 3.14.1. `KnowledgeRetrievalResult` Object
+Represents a result of knowledge retrieval process.
+
+| Field Name | Type      | Required | Description                                                                                                  |
+| :--------- | :-------- | :------- | :----------------------------------------------------------------------------------------------------------- |
+| `id`     | `string` | Yes      | The Id of the source. The Id is identical to the `Resource` id in the list of agent's available resources (`resources`) if found. |
+| `content`  | `string`  | Yes      | The retrieved content from the source.                                                                  |
+| `mimeType`                              | `string`                                                            | No      | [MIME type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) (e.g., text/plain, image/png). Strongly recommended.                                                                                                           | 
+| `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the retrieved result. |
+
+
+### 3.15. `ToolCallRequest` Object
+Information about the tool call request.<br>
+Agents use tools to complete tasks and fulfill user's requests. Available tools might be listed in [`Agent`](#31-agent-object) object under `tools`.<br>
+Using descriptions from [`ToolDefinition`](#32-tooldefinition-object), the agent decide on which tool to call and on arguments to provide.<br>
+
+| Field Name | Type      | Required | Description                                                                                                  |
+| :--------- | :-------- | :------- | :----------------------------------------------------------------------------------------------------------- |
+| `executionId`     | `string` | Yes      | Execution id of the tool provided by the orchestrator/planner. This id is used later on by the agent and LLM to correlate between tool call request and result. |
+| `toolId`  | `string`  | Yes      | The Id of the tool as specified in [`ToolDefinition`](#32-tooldefinition-object) if exists in `Agent`'s tools.                                                                   |
+| `inputs`     | [`ToolArgumentValue`](#3151-toolargumentvalue-object)[]     | Yes       | Array of inputs for the tool.                                                  |
+
+
+#### 3.15.1. `ToolArgumentValue` Object
+Defines a single argument / input for the tool.
+
+| Field Name | Type      | Required | Description                                                                                                  |
+| :--------- | :-------- | :------- | :----------------------------------------------------------------------------------------------------------- |
+| `name`     | `string` | Yes      | The name of the argument. This is correlated with argument's name as specified in [`ToolArgumentDefinition`](#321-toolargumentdefinition-object) |
+| `id`  | `string`  | No      | The id of the argument. It is correlated with argument's id as specified in [`ToolArgumentDefinition`](#321-toolargumentdefinition-object)                                                                   |
+| `value`                              | `string`\| `number` \| `boolean` \| `object` \| `array` \| `null`                                                           | Yes      | The argument's value.                                                                                                           |
+
+
 ## 4. Protocol RPC Methods
+All ASOP RPC methods are invoked by the agent by sending an HTTP POST request to the guardian agent. The body of the HTTP POST request **MUST** be a `JSONRPCRequest` object, and the `Content-Type` header **MUST** be `application/json`.
+
+The guardian's agent HTTP response body **MUST** be a `JSONRPCResponse` object. The `Content-Type` for JSON-RPC responses is `application/json`.<br>
+
+Most of the protocol methods refers to steps within the agent's workflow: tool call, knowledge, memory etc.<br>
+ASOP also supports industial standards for Agent to Agent communication (A2A protocol) and tool call and context (MCP protocol).
+
+### 4.1. steps/agentTrigger
+This is the first step that activates or triggers the agent as a result or a response to an event.<br>
+This method should be used after the agent's input is extracted from the trigger and before it gets to the agent.
 
 
-## 5. Error Handling
+#### 4.1.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
+| `trigger` | [`AgentTrigger`](#36-agentrigger-object) | Yes       | The trigger that activated the agent.                        |
+
+
+#### 4.1.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.1.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+
+### 4.2. steps/knowledgeRetrieval
+This step refers to the process of fetching relevant information from an external source (like document store, vector databse, API etc.) to ground agent's response in facts, context and data.<br>
+Result can be a chunk or multiple chunks of data from a source.<br>
+There are many retrieval techniques including semantic search (embedding-based similarity) and keyword search (exact/partial matching), or any combination.
+
+
+#### 4.2.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
+| `knowledgeStep` | [`KnowledgeRetrievalStepParams`](#314-knowledgeretrievalstepparams-object) | Yes       | Knowledge retrieval step parameters.                        |
+
+
+#### 4.2.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.2.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+### 4.3. steps/memoryStore
+This step refers to the process of memorizing and store memory to the memory store for additional context for future or current agent interactions.<br>
+Mostly, interaction history or a summary is stored to the memory store.
+
+#### 4.3.1. **Request `params` Object**
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
+| `memory` | `string`[]| Yes       | Array of retrieved memory contents. For JSON structured memory (for example chat history), a stringified JSON should be provided.                       |
+
+
+#### 4.3.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.3.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+
+### 4.4. steps/memoryContextRetrieval
+This step refers to the process of retrieving memory to add to the context of the current agent interactions.<br>
+This context is passed alongside with the agent's instructions(system prompt), user prompt and additional information such as retrieved knowledge to the LLM.
+
+#### 4.4.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
+| `memory` | `string`[]| Yes       | Array of retrieved memory contents. For JSON structured memory (for example chat history), a stringified JSON should be provided.                       |
+
+
+#### 4.4.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.4.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+
+### 4.5. steps/message
+Message step refers to the agent's input or output - depends on the `role`.<br>
+A message with `user` role represents the user prompt / agent's input from the user. The method with `user` message **must** be used before the extracted input gets into the agent.<br>
+A message with `agent` role represents the agent's output (AI response).The method with `agent` message **must** be used after the agent's response is ready and before it is sent back to the user.<br>
+A message with `system` role represents a message from the system, such as guardrails controls etc. The method with `system` message **must** be used a before it is sent back to the user.
+
+#### 4.5.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
+| `message` |[`Message`](#33-message-object)| Yes       | The message.                       |
+| `citation` | [`Source`](#37-source-union-type)[]| Yes       | Array of referenced sources. Relevant mostly with `agent` message.                       |
+
+
+#### 4.5.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.5.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+
+### 4.6. steps/toolCallRequest
+Agents use tools to complete tasks and fulfill user's requests.<br>
+This method should be used after tool inputs are inferred by the LLM and before calling the tool.
+
+#### 4.6.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
+| `toolCallRequest` |[`ToolCallRequest`](#315-toolcallrequest-object)| Yes       | Tool call request details.                       |
+
+
+
+#### 4.5.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.5.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+### 4.6. steps/toolCallResult
+This method should be used after tool is completed and before the result goes back into the LLM for further processing.
+
+#### 4.6.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
+| `executionId` |`string`| Yes       | Execution id, correlated with executionId in [`ToolCallRequest`](#315-toolcallrequest-object) that was previously provided in `steps/toolCallRequest`.                       |
+| `result` |[`ToolCallResult`](#4611-toolcallresult-object)| Yes       | Result.                       |
+
+
+##### 4.6.1.1. `ToolCallResult` Object
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `outputs`       | [`TextPart`](#341-textpart-object)[]                                 | Yes      | Array of `TextPart`. Can be empty if tool does not have output. |
+| `isError` |`boolean`| Yes       | Whether tool completed successfully or resulted in an error.                       |
+
+
+#### 4.6.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.6.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+
+### 4.7. protocols/A2A
+This method should be used to wrap all [A2A](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) communications and messages.<br>
+This method should be used before sending A2A message to a remote agent to monitor outbound communications.<br>
+This method should be used after receiving A2A message (response) from a remote agent to monitor inbound communications.<br>
+Read more about A2A support in [extend_a2a](./extend_a2a.md).
+
+
+#### 4.7.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `message`       | `object`                               | Yes      | A2A-compliant message. |
+
+#### 4.7.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.7.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+### 4.8. protocols/MCP
+This method should be used to wrap all [MCP](https://modelcontextprotocol.io/introduction) communications and messages.<br>
+This method should be used before sending MCP message to MCP server to monitor outbound communications.<br>
+This method should be used after receiving MCPmessage (response) from a MCP server to monitor inbound communications.<br>
+Read more about MCP support in [extend_mcp](./extend_mcp.md).
+
+
+#### 4.8.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `message`       | `object`                               | Yes      | MCP-compliant message. |
+
+#### 4.8.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
+#### 4.8.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
+## 5. Responses
+
+### 5.1. `ASOPResponse` Object
+
+## 6. Error Handling
 
 
