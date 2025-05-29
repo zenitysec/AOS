@@ -12,15 +12,15 @@ AG-BOM, short for Agent Bill of Materials, is a comprehensive inventory that cap
 This visibility supports better security auditing, version tracking, and regulatory compliance. AG-BOM must dynamically adapt to reflect the rapid iteration and evolution of agent architectures, especially in real-time or distributed environments.
 
 ## Outcome and Standardization
-The end result of generating an AG-BOM is a standardized, machine-readable artifact that outlines the full software composition of the agent. To support industry-wide adoption and interoperability, AgBOM supports output in the following standard formats:
+The end result of generating an AG-BOM is a standardized, machine-readable artifact that outlines the full software composition of the agent. To support industry-wide adoption and interoperability, AG-BOM supports output in the following standard formats:
 - CycloneDX: A lightweight SBOM standard emphasizing security contexts
-- SPDX: An open standard maintained by the Linux Foundation, commonly used in open source software compliance
+- SPDX (Software Package Data Exchange): An open standard maintained by the Linux Foundation, commonly used in open source software compliance
 - SWID (Software Identification Tags): ISO standard for tagging software products to support asset management and compliance
 
 ## High-level Requirements
-To ensure usefulness across diverse workflows and tooling environments, the AG-BOM system must:
+To ensure usefulness across diverse workflows and tooling environments, the AG-BOM system should:
 - Allow the agent to generate a bill-of-material upon request and dynamically upon changes
-- Include all necessary metadata fields for Agent, Knowledge, Memory and Tools
+- Include all necessary fields for Agent, Knowledge, Memory and Tools
 - Provide output in one or more standardized SBOM formats (CycloneDX, SPDX, SWID)
 
 ### AG-BOM entities and parameters:
@@ -42,26 +42,3 @@ To ensure usefulness across diverse workflows and tooling environments, the AG-B
 - Memory discovered, removed or changed capabilities
 - Model discovered, removed or changed capabilities
 
-
-### Dynamic Update Procedure Principles
-
-1. Emit a new AG-BOM Update Event Whenever the agent:
-- Discovers a new agent, MCP server and tool
-- Switches LLM models
-- Modifies its declared capabilities
-
-Regenerate the full BOM using the latest internal state.
-
-2. Update metadata fields
-
-- timestamp: current UTC time
-- version: increment if applicable
-- serialNumber: new UUID (e.g., urn:uuid:…)
-- Optional: previousSerialNumber as a custom property for linkage
-
-3. Push the updated BOM
-
-- Serve at .well-known/agent.bom.json (latest only, recommended option)
-Other options
-- Append to a versioned BOM log (e.g., /bom-history/2025-05-19T12:40:00Z.json)
-- Store in SBOM registry (e.g., GUAC, Sigstore, in-toto)
