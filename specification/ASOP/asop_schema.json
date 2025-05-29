@@ -23,8 +23,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "messages/a2a",
-                    "default": "messages/a2a",
+                    "const": "protocols/A2A",
+                    "default": "protocols/A2A",
                     "title": "Method",
                     "type": "string"
                 },
@@ -266,10 +266,6 @@
                         },
                         "trigger": {
                             "$ref": "#/$defs/AgentTrigger"
-                        },
-                        "reasoning": {
-                            "type": "string",
-                            "title": "Reasoning"
                         }
                     },
                     "required": [
@@ -840,8 +836,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "steps/knowledge",
-                    "default": "steps/knowledge",
+                    "const": "steps/knowledgeRetrieval",
+                    "default": "steps/knowledgeRetrieval",
                     "title": "Method",
                     "type": "string"
                 },
@@ -851,64 +847,8 @@
                         "context": {
                             "$ref": "#/$defs/StepContext"
                         },
-                        "knowledgeRetrievalResult": {
-                            "type": "object",
-                            "properties": {
-                                "query": {
-                                    "type": "string",
-                                    "title": "Query",
-                                    "description": "The query to retrieve knowledge"
-                                },
-                                "keywords": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    },
-                                    "description": "Keywords for knowledge retrieval hints"
-                                },
-                                "results": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "id": {
-                                                "type": "string",
-                                                "title": "Id"
-                                            },
-                                            "content": {
-                                                "type": "string",
-                                                "title": "Content"
-                                            },
-                                            "mimeType": {
-                                                "type": "string",
-                                                "title": "Mime Type",
-                                                "description": "The mime type of the content"
-                                            },
-                                            "metadata": {
-                                                "anyOf": [
-                                                    {
-                                                        "additionalProperties": {},
-                                                        "type": "object"
-                                                    },
-                                                    {
-                                                        "type": "null"
-                                                    }
-                                                ],
-                                                "default": null,
-                                                "title": "Metadata"
-                                            }
-                                        },
-                                        "required": [
-                                            "id",
-                                            "content"
-                                        ]
-                                    }
-                                }
-                            },
-                            "required": [
-                                "query",
-                                "results"
-                            ]
+                        "knowledgeStep": {
+                            "$ref": "#/$defs/KnowledgeRetrievalStepParams"
                         },
                         "reasoning": {
                             "type": "string",
@@ -917,7 +857,7 @@
                     },
                     "required": [
                         "context",
-                        "knowledgeRetrievalResult"
+                        "knowledgeStep"
                     ]
                 }
             },
@@ -928,6 +868,67 @@
             ],
             "title": "KnowledgeRetrievalStep",
             "type": "object"
+        },
+        "KnowledgeRetrievalStepParams": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "title": "Query",
+                    "description": "The query to retrieve knowledge"
+                },
+                "keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Keywords for knowledge retrieval hints"
+                },
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/KnowledgeRetrievalResult"
+                    }
+                }
+            },
+            "required": [
+                "results"
+            ]
+        },
+        "KnowledgeRetrievalResult": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "title": "Id"
+                },
+                "content": {
+                    "type": "string",
+                    "title": "Content"
+                },
+                "mimeType": {
+                    "type": "string",
+                    "title": "Mime Type",
+                    "description": "The mime type of the content"
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "additionalProperties": {},
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "default": null,
+                    "title": "Metadata"
+                }
+            },
+            "required": [
+                "id",
+                "content"
+            ]
         },
         "MCPMessage": {
             "properties": {
@@ -949,8 +950,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "messages/mcp",
-                    "default": "messages/mcp",
+                    "const": "protocols/MCP",
+                    "default": "protocols/MCP",
                     "title": "Method",
                     "type": "string"
                 },
@@ -1862,6 +1863,25 @@
             "title": "ToolCallRequestStep",
             "type": "object"
         },
+        "ToolCallResult":{
+            "type": "object",
+            "properties": {
+                "outputs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/TextPart"
+                    }
+                },
+                "isError": {
+                    "type": "boolean",
+                    "description": "Whether the tool call resulted in an error"
+                }
+            },
+            "required": [
+                "outputs",
+                "isError"
+            ]
+        },
         "ToolCallResultStep": {
             "properties": {
                 "jsonrpc": {
@@ -1902,21 +1922,7 @@
                                     "description": "Id of the execution set by the agent"
                                 },
                                 "result": {
-                                    "type": "object",
-                                    "properties": {
-                                        "content": {
-                                            "$ref": "#/$defs/TextPart"
-                                        },
-                                        "isError": {
-                                            "type": "boolean",
-                                            "description": "Whether the tool invocation resulted in an error",
-                                            "default": false
-                                        }
-                                    },
-                                    "required": [
-                                        "content",
-                                        "isError"
-                                    ]
+                                    "$ref": "#/$defs/ToolCallResult"
                                 }
                             },
                             "required": [
