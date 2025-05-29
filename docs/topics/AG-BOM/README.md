@@ -34,7 +34,6 @@ To ensure usefulness across diverse workflows and tooling environments, the AG-B
 
 ### Triggers for AG-BOM Update
 
-- Changes in Agent capabilities
 - Agent discovered, removed or changed capabilities
 - MCP server discovered, removed or changed capabilities
 - Knowledge discovered, removed or changed capabilities
