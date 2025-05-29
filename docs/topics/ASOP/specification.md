@@ -447,6 +447,7 @@ There are many retrieval techniques including semantic search (embedding-based s
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
 | `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
 | `knowledgeStep` | [`KnowledgeRetrievalStepParams`](#314-knowledgeretrievalstepparams-object) | Yes       | Knowledge retrieval step parameters.                        |
+| `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 
 #### 4.2.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
@@ -462,6 +463,7 @@ Mostly, interaction history or a summary is stored to the memory store.
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
 | `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
 | `memory` | `string`[]| Yes       | Array of retrieved memory contents. For JSON structured memory (for example chat history), a stringified JSON should be provided.                       |
+| `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 
 #### 4.3.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
@@ -479,6 +481,7 @@ This context is passed alongside with the agent's instructions(system prompt), u
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
 | `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
 | `memory` | `string`[]| Yes       | Array of retrieved memory contents. For JSON structured memory (for example chat history), a stringified JSON should be provided.                       |
+| `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 
 #### 4.4.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
@@ -499,6 +502,7 @@ A message with `system` role represents a message from the system, such as guard
 | `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
 | `message` |[`Message`](#33-message-object)| Yes       | The message.                       |
 | `citation` | [`Source`](#37-source-union-type)[]| Yes       | Array of referenced sources. Relevant mostly with `agent` message.                       |
+| `reasoning`       | `string`                               | No      | Agent's reasoning. Should be used with `agent` or `system` message. |
 
 
 #### 4.5.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
@@ -516,6 +520,7 @@ This method should be used after tool inputs are inferred by the LLM and before 
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
 | `context`       | [`StepContext`](#38-stepcontext-object)                                 | Yes      | The context of the current step. |
 | `toolCallRequest` |[`ToolCallRequest`](#315-toolcallrequest-object)| Yes       | Tool call request details.                       |
+| `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 
 
@@ -559,6 +564,7 @@ Read more about A2A support in [extend_a2a](./extend_a2a.md).
 | Field Name      | Type                                                            | Required | Description                                                        |
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
 | `message`       | `object`                               | Yes      | A2A-compliant message. |
+| `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 #### 4.7.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
 #### 4.7.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
@@ -576,13 +582,47 @@ Read more about MCP support in [extend_mcp](./extend_mcp.md).
 | Field Name      | Type                                                            | Required | Description                                                        |
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
 | `message`       | `object`                               | Yes      | MCP-compliant message. |
+| `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 #### 4.8.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
 #### 4.8.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
 
+### 4.9. ping
+This method is used by the agent to ensure that guardian agent is alive.
+
+
+#### 4.9.1. **Request `params` Object**
+
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `timestamp`                   | `string` (ISO 8601) | Yes       | Timestamp (UTC recommended). |
+| `timeout`                   | `integer`| No       | Timeout in milliseconds after which the communication with guardian agent is considered to be lost. |
+| `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the agent. |
+
+#### 4.9.2. **Response `result` type (on success)**: [`PingRequestResponse`](#51-pingrequestresponse-object).
+#### 4.9.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+
 ## 5. Responses
 
 ### 5.1. `ASOPResponse` Object
+
+
+### 5.2. `PingRequestResponse` Object
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `id`                   | `string` \| `integer`  | Yes       | Same id as the id in the correlated ping request. |
+| `result`                   |[`PingRequestResult`](#521-pingrequestresult-object)| No       | Ping result. |
+| `error`                   | [`JSONRPCError`](#313-jsonrpcerror-object) | No       | Timestamp (UTC recommended). |
+
+#### 5.2.1. `PingRequestResult` Object
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `status`                   | `string`  | Yes       | Guardian agent's status. One of `connected`, `error`. |
+| `version`                   | `string`| Yes       | Guardian agent's version. |
+| `timestamp`                   | `string` (ISO 8601) | Yes       | Timestamp (UTC recommended). |
+| `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the agent. |
 
 ## 6. Error Handling
 
