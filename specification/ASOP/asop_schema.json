@@ -1396,8 +1396,8 @@
                     "title": "Id"
                 },
                 "method": {
-                    "const": "agent/ping",
-                    "default": "agent/ping",
+                    "const": "ping",
+                    "default": "ping",
                     "title": "Method",
                     "type": "string"
                 },
@@ -1929,10 +1929,6 @@
                                 "executionId",
                                 "result"
                             ]
-                        },
-                        "reasoning": {
-                            "type": "string",
-                            "title": "Reasoning"
                         }
                     },
                     "required": [
