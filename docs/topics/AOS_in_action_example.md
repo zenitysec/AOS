@@ -7,7 +7,7 @@ Please read [Core Concepts](./core_concepts.md) if you haven't already.
 The following sequence diagram describes an example of MCP tool call request by an Observed Agent.
 Instrumented with ASOP protocol the Observed Agent communicates with a Guardian Agent.
 
-![Sequence Diagram](../../assets/sequence_diagram.png "Sequence Diagram")
+![Sequence Diagram](/docs/assets/sequence_diagram.png "Sequence Diagram")
 
 The Guardian Agent has 3 roles:
 1. It should permit, deny or modify the request and send back its verdict by ASOP protocol
