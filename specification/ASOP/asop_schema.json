@@ -103,10 +103,6 @@
                     "title": "Version",
                     "type": "string"
                 },
-                "url": {
-                    "title": "Url",
-                    "type": "string"
-                },
                 "provider": {
                     "$ref": "#/$defs/AgentProvider"
                 },
@@ -319,6 +315,19 @@
             "title": "ASOPRequest"
         },
         "ASOPResponse": {
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/ASOPSuccessResponse"
+                },
+                {
+                    "$ref": "#/$defs/PingRequestSuccessResponse"
+                },
+                {
+                    "$ref": "#/$defs/JSONRPCErrorResponse"
+                }
+            ]
+        },
+        "ASOPSuccessResponse": {
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -338,68 +347,62 @@
                     "title": "Id"
                 },
                 "result": {
-                    "properties": {
-                        "decision": {
-                            "type": "string",
-                            "title": "Decision",
-                            "description": "The decision",
-                            "enum": [
-                                "allow",
-                                "deny",
-                                "modify"
-                            ]
-                        },
-                        "reasoning": {
-                            "type": "string",
-                            "title": "Reasoning",
-                            "description": "The reasoning of the decision"
-                        },
-                        "reasonCode": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        },
-                        "message": {
-                            "type": "string",
-                            "title": "Message",
-                            "description": "The message of the monitoring agent"
-                        },
-                        "data": {
-                            "type": "object",
-                            "title": "Data",
-                            "additionalProperties": {},
-                            "description": "Additional data"
-                        },
-                        "modifiedRequest": {
-                            "$ref": "#/$defs/ASOPRequest",
-                            "description": "Modified request if the decision is modify."
-                        }
-                    },
-                    "type": "object",
-                    "title": "Result",
-                    "required": [
-                        "decision",
-                        "message"
-                    ]
-                },
-                "error": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/JSONRPCError"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null
+                    "$ref": "#/$defs/ASOPSuccessResult"
                 }
             },
             "required": [
-                "id"
+                "id",
+                "result",
+                "jsonrpc"
             ],
             "type": "object",
-            "title": "ASOPResponse"
+            "title": "ASOPSuccessResponse"
+        },
+        "ASOPSuccessResult":{
+            "properties": {
+                "decision": {
+                    "type": "string",
+                    "title": "Decision",
+                    "description": "The decision",
+                    "enum": [
+                        "allow",
+                        "deny",
+                        "modify"
+                    ]
+                },
+                "reasoning": {
+                    "type": "string",
+                    "title": "Reasoning",
+                    "description": "The reasoning of the decision"
+                },
+                "reasonCode": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "title": "Message",
+                    "description": "Human readable message explaining the decision"
+                },
+                "data": {
+                    "type": "object",
+                    "title": "Data",
+                    "additionalProperties": {},
+                    "description": "Additional data"
+                },
+                "modifiedRequest": {
+                    "$ref": "#/$defs/ASOPRequest",
+                    "description": "Modified request if the decision is modify."
+                }
+            },
+            "type": "object",
+            "title": "Result",
+            "required": [
+                "decision",
+                "message"
+            ]
         },
         "DataPart": {
             "properties": {
@@ -721,6 +724,51 @@
                 "message"
             ],
             "title": "JSONRPCError",
+            "type": "object"
+        },
+        "JSONRPCErrorResponse": {
+            "description": "Represents a JSON-RPC 2.0 Error Response object.",
+            "properties": {
+                "error": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/JSONRPCError"
+                        },
+                        {
+                            "$ref": "#/definitions/JSONParseError"
+                        },
+                        {
+                            "$ref": "#/definitions/InvalidRequestError"
+                        },
+                        {
+                            "$ref": "#/definitions/MethodNotFoundError"
+                        },
+                        {
+                            "$ref": "#/definitions/InvalidParamsError"
+                        },
+                        {
+                            "$ref": "#/definitions/InternalError"
+                        }
+                    ]
+                },
+                "id": {
+                    "description": "An identifier identical to the correlated request",
+                    "type": [
+                        "string",
+                        "integer"
+                    ]
+                },
+                "jsonrpc": {
+                    "const": "2.0",
+                    "description": "Specifies the version of the JSON-RPC protocol. MUST be exactly \"2.0\".",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "error",
+                "id",
+                "jsonrpc"
+            ],
             "type": "object"
         },
         "JSONRPCRequest": {
@@ -1340,6 +1388,12 @@
                 "contextWindow": {
                     "type": "integer"
                 },
+                "stopSequences":{
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
                 "metadata": {
                     "anyOf": [
                         {
@@ -1436,9 +1490,9 @@
                 "timestamp"
             ]
         },
-        "PingRequestResponse": {
+        "PingRequestSuccessResponse": {
             "type": "object",
-            "title": "PingRequestResponse",
+            "title": "PingRequestSuccessResponse",
             "properties": {
                 "jsonrpc": {
                     "const": "2.0",
@@ -1458,30 +1512,13 @@
                     "title": "Id"
                 },
                 "result": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/PingRequestResult"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null
-                },
-                "error": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/JSONRPCError"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "default": null
+                    "$ref": "#/$defs/PingRequestResult"
                 }
             },
             "required": [
-                "id"
+                "id",
+                "result",
+                "jsonrpc"
             ]
         },
         "PingRequestResult": {

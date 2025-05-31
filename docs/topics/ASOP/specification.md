@@ -39,7 +39,6 @@ These objects define the structure of data exchanged within the JSON-RPC methods
 | `id`                              | `string`                                                           | Yes      | Id of the agent.                                                                                                           |
 | `description`                       | `string`                                                           | No      | Human-readable description.                                                             |
 | `instructions`                       | `string`                                                           | Yes      | Agent internal instrucions, known as system prompt.                                                             |
-| `url`                               | `string`                                                           | No      | Base URL for the agent's A2A service. Must be absolute. HTTPS for production.                                                               |
 | `version`                           | `string`                                                           | Yes      | Agent version string.                                                                                                 |
 | `provider`                          | [`AgentProvider`](#311-agentprovider-object)                       | Yes       | Information about the agent's provider.                                                                                                     |
 | `model`                           | [`Model`](#312-model-object)                                                           | No      | Agent's underlying LLM.                                                                                                 |
@@ -70,6 +69,10 @@ Information about LLM associated with the agent.
 | `name`                              | `string`                                                           | Yes      | Human-readable name of the model (LLM).                                                                                                           |
 | `id`                              | `string`                                                           | Yes      | Id of the model (LLM).                                                                                                           |
 | `provider`                   | [`LlmProvider`](#313-llmprovider-object) | Yes       | The LLM provider. |
+| `maxTokens`                   | `integer` | No       | Maximum number of tokens the model is allowed to generate in the response. |
+| `contextWindow`                   | `integer` | No       | Total number of tokens (input + output) the model can handle in one request. |
+| `stopSequences`                   | `string`[] | No       | 	List of tokens that will stop the generation early (e.g., ["User:", "Agent:"]). |
+| `defaultParams`                   | `object` | No       | Default model parameters, such as `temperature`, `topK`, etc. |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the model. |
 
 
@@ -336,7 +339,7 @@ ASOP adheres to the standard [JSON-RPC 2.0](https://www.jsonrpc.org/specificatio
 
 #### 3.12.1. `JSONRPCRequest` Object
 
-All A2A method calls are encapsulated in a JSON-RPC Request object.
+All ASOP method calls are encapsulated in a JSON-RPC Request object.
 
 - `jsonrpc`: A String specifying the version of the JSON-RPC protocol. **MUST** be exactly `"2.0"`.
 - `method`: A String containing the name of the method to be invoked (e.g., `"steps/knowledge"`, `"messages/mcp"`).
@@ -413,7 +416,7 @@ All ASOP RPC methods are invoked by the agent by sending an HTTP POST request to
 
 The guardian's agent HTTP response body **MUST** be a `JSONRPCResponse` object. The `Content-Type` for JSON-RPC responses is `application/json`.<br>
 
-Most of the protocol methods refers to steps within the agent's workflow: tool call, knowledge, memory etc.<br>
+Most of the protocol methods refer to steps within the agent's workflow: tool call, knowledge, memory etc.<br>
 ASOP also supports industial standards for Agent to Agent communication (A2A protocol) and tool call and context (MCP protocol).
 
 ### 4.1. steps/agentTrigger
@@ -430,8 +433,8 @@ This method should be used after the agent's input is extracted from the trigger
 | `trigger` | [`AgentTrigger`](#36-agentrigger-object) | Yes       | The trigger that activated the agent.                        |
 
 
-#### 4.1.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.1.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.1.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.1.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 
 ### 4.2. steps/knowledgeRetrieval
@@ -450,8 +453,8 @@ There are many retrieval techniques including semantic search (embedding-based s
 | `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 
-#### 4.2.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.2.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.2.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.2.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 ### 4.3. steps/memoryStore
 This step refers to the process of memorizing and store memory to the memory store for additional context for future or current agent interactions.<br>
@@ -466,8 +469,8 @@ Mostly, interaction history or a summary is stored to the memory store.
 | `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 
-#### 4.3.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.3.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.3.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.3.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 
 ### 4.4. steps/memoryContextRetrieval
@@ -484,8 +487,8 @@ This context is passed alongside with the agent's instructions(system prompt), u
 | `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
 
-#### 4.4.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.4.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.4.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.4.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 
 ### 4.5. steps/message
@@ -505,8 +508,8 @@ A message with `system` role represents a message from the system, such as guard
 | `reasoning`       | `string`                               | No      | Agent's reasoning. Should be used with `agent` or `system` message. |
 
 
-#### 4.5.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.5.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.5.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.5.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 
 ### 4.6. steps/toolCallRequest
@@ -524,8 +527,8 @@ This method should be used after tool inputs are inferred by the LLM and before 
 
 
 
-#### 4.5.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.5.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.5.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.5.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 ### 4.6. steps/toolCallResult
 This method should be used after tool is completed and before the result goes back into the LLM for further processing.
@@ -547,8 +550,8 @@ This method should be used after tool is completed and before the result goes ba
 | `isError` |`boolean`| Yes       | Whether tool completed successfully or resulted in an error.                       |
 
 
-#### 4.6.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.6.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.6.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.6.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 
 ### 4.7. protocols/A2A
@@ -566,8 +569,8 @@ Read more about A2A support in [extend_a2a](./extend_a2a.md).
 | `message`       | `object`                               | Yes      | A2A-compliant message. |
 | `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
-#### 4.7.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.7.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.7.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.7.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 ### 4.8. protocols/MCP
 This method should be used to wrap all [MCP](https://modelcontextprotocol.io/introduction) communications and messages.<br>
@@ -584,8 +587,8 @@ Read more about MCP support in [extend_mcp](./extend_mcp.md).
 | `message`       | `object`                               | Yes      | MCP-compliant message. |
 | `reasoning`       | `string`                               | No      | Agent's reasoning. |
 
-#### 4.8.2. **Response `result` type (on success)**: [`ASOPResponse`](#51-asopresponse-object).
-#### 4.8.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.8.2. **Response on success**: [`ASOPSuccessResponse`](#51-asopsuccessresponse-object).
+#### 4.8.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 ### 4.9. ping
 This method is used by the agent to ensure that guardian agent is alive.
@@ -600,22 +603,51 @@ This method is used by the agent to ensure that guardian agent is alive.
 | `timeout`                   | `integer`| No       | Timeout in milliseconds after which the communication with guardian agent is considered to be lost. |
 | `metadata`                   | `Record<string, any>` | No       | Arbitrary key-value metadata associated with the agent. |
 
-#### 4.9.2. **Response `result` type (on success)**: [`PingRequestResponse`](#51-pingrequestresponse-object).
-#### 4.9.3. **Response `error` type (on failure)**: [`JSONRPCError`](#313-jsonrpcerror-object).
+#### 4.9.2. **Response on success**: [`PingRequestSuccessResponse`](#53-pingrequestsuccessresponse-object).
+#### 4.9.3. **Response on failure**: [`JSONRPCErrorResponse`](#313-jsonrpcerrorresonse-object).
 
 ## 5. Responses
 
-### 5.1. `ASOPResponse` Object
+### 5.1. `ASOPSuccessResponse` Object
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `id`                   | `string` \| `integer`  | Yes       | Same id as the id in the correlated request. |
+| `jsonrpc`                   |`"2.0"` (literal)| Yes       | JSON-RPC version string. |
+| `result`                   |[`ASOPSuccessResult`](#511-asopsuccessresult-object)| Yes       | Success result. |
+
+#### 5.1.1. `ASOPSuccessResult` Object
+
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `decision`                   | `strin`  | Yes       | Guardian agent's de. One of `allow`, `deny`, `modify`. |
+| `reasoning`                   | `string`| No       | Guardian agent's reasoning/thought explaining the decision. |
+| `reasonCode`                   | `string`[] | No       | Timestamp (UTC recommended). |
+| `message`                   | `string`| Yes       | Human readable message explaining the decision. |
+| `data`                   | `Record<string, any>` | No       | Additional key-value data. |
+| `modifiedRequest`                   | `ASOPRequest` | No       | Modified request. This is relevant when decision is `modify`. |
+
+### 5.2.`JSONRPCErrorResponse` Object
+| Field Name      | Type                                                            | Required | Description                                                        |
+| :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
+| `id`                   | `strin`  | Yes       | Guardian agent's de. One of `allow`, `deny`, `modify`. |
+| `error`                   | `string`| No       | Guardian agent's reasoning/thought explaining the decision. |
+| `reasonCode`                   | `string`[] | No       | Timestamp (UTC recommended). |
+| `message`                   | `string`| Yes       | Human readable message explaining the decision. |
+| `data`                   | `Record<string, any>` | No       | Additional key-value data. |
+| `modifiedRequest`                   | `ASOPRequest` | No       | Modified request. This is relevant when decision is `modify`. |
+| `jsonrpc`                   |`"2.0"` (literal)| Yes       | JSON-RPC version string. |
 
 
-### 5.2. `PingRequestResponse` Object
+
+### 5.3. `PingRequestSuccessResponse` Object
 | Field Name      | Type                                                            | Required | Description                                                        |
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
 | `id`                   | `string` \| `integer`  | Yes       | Same id as the id in the correlated ping request. |
-| `result`                   |[`PingRequestResult`](#521-pingrequestresult-object)| No       | Ping result. |
-| `error`                   | [`JSONRPCError`](#313-jsonrpcerror-object) | No       | Timestamp (UTC recommended). |
+| `result`                   |[`PingRequestResult`](#531-pingrequestresult-object)| Yes       | Ping result. |
+| `jsonrpc`                   |`"2.0"` (literal)| Yes       | JSON-RPC version string. |
 
-#### 5.2.1. `PingRequestResult` Object
+
+#### 5.3.1. `PingRequestResult` Object
 
 | Field Name      | Type                                                            | Required | Description                                                        |
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
@@ -626,4 +658,17 @@ This method is used by the agent to ensure that guardian agent is alive.
 
 ## 6. Error Handling
 
+ASOP uses standard [JSON-RPC 2.0 error codes and structure](https://www.jsonrpc.org/specification#error_object) for reporting errors. Errors are returned in the `error` member of the `JSONRPCErrorResponse` object. See [`JSONRPCError` Object definition](#313-jsonrpcerror-object).
 
+### 6.1. Standard JSON-RPC Errors
+
+These are standard codes defined by the JSON-RPC 2.0 specification.
+
+| Code                 | JSON-RPC Spec Meaning | Typical ASOP `message`     | Description                                                                                  |
+| :------------------- | :-------------------- | :------------------------ | :------------------------------------------------------------------------------------------- |
+| `-32700`             | Parse error           | Invalid JSON payload      | Server received JSON that was not well-formed.                                               |
+| `-32600`             | Invalid Request       | Invalid JSON-RPC Request  | The JSON payload was valid JSON, but not a valid JSON-RPC Request object.                    |
+| `-32601`             | Method not found      | Method not found          | The requested ASOP RPC `method` (e.g., `"steps/foo"`) does not exist or is not supported.     |
+| `-32602`             | Invalid params        | Invalid method parameters | The `params` provided for the method are invalid (e.g., wrong type, missing required field). |
+| `-32603`             | Internal error        | Internal server error     | An unexpected error occurred on the server during processing.                                |
+| `-32000` to `-32099` | Server error          | _(Server-defined)_        | Reserved for implementation-defined server-errors. ASOP-specific errors use this range.       |
