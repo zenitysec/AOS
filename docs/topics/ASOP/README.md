@@ -32,8 +32,6 @@ They have a dynamic bill-of-material, a clear audit trail and hard inline-contro
 Trustworthiness of agents builds upon the foundation of MCP and A2A, but provides value regardless. 
 It is compatible with cybersecurity and obseravbility standards including OpenTelemetry, OCSF, CycloneDX, SPDX and SWID.
 
-ASOP provides three benefits for agents:
-
 <!-- TODO: Change this to three-sections with a menu. 
 Each section has the security property and an example of what the outcome looks like.
 Support switching the examples to show a different language or agent framework.
