@@ -43,6 +43,4 @@ For further details on the required extensions read [ASOP](./docs/ASOP/README.md
 
 ## Read Next
 
-- [ASOP](./topics/ASOP/README.md)
-- [AG-BOM](./topics/AG-BOM/README.md)
-- [Observability](./topics/Observability/README.md)
+- [AOS in Action](./topics/AOS_in_action.md)
