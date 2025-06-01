@@ -38,8 +38,9 @@ To support an holistic view and security enforcement, the framework defines thre
 
 Our framework assumes MCP and A2A are natural part of an Agent's environment.
 The ASOP protocol carries MCP and A2A intact, ensuring full compatability and transparency.
+
 Security extensions proposed for those protocols will be coordinated with A2A and MCP groups.
-For further details on the required extensions read [ASOP](./docs/ASOP/README.md)
+For further details on the required extensions read [Security Extensions](./docs/topics/security_extensions/README.md)
 
 ## Read Next
 
