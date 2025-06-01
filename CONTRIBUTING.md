@@ -17,8 +17,6 @@ are welcome:
 
 ## Code Style
 
-[![standard][standard-image]][standard-url]
-
 This repository uses [`standard`][standard-url] to maintain code style and consistency,
 and to avoid style arguments. `npm test` runs `standard` automatically, so you don't have
 to!
@@ -73,4 +71,4 @@ By making a contribution to this project, I certify that:
   including my sign-off) is maintained indefinitely and may be redistributed consistent
   with this project or the open source license(s) involved.
 
-This guide is based on [github-contributing]https://raw.githubusercontent.com/standard/.github/refs/heads/master/CONTRIBUTING.md
+This guide is based on [github-contributing](https://raw.githubusercontent.com/standard/.github/refs/heads/master/CONTRIBUTING.md).
