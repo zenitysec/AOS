@@ -30,6 +30,7 @@ The Guardian Agent has 3 roles:
 ```
 ### Step 4: Guardian Agent Applying Policy Enforcement
 ```python
+# This is a code snippet example for list of allowed MCP servers
 def is_known_mcp_server(ip):
     """
     Check if the provided IP address belongs to a known MCP CIDR block.
