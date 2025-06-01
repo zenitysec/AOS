@@ -1,0 +1,77 @@
+site_name: Agent Observability Standard
+site_url: !ENV GITHUB_PAGES_URL
+site_description: >-
+  An industry standard for building trustworthy AI agents – inspectable, observable and instrumentable
+   to enable enterprise-wide adoption with confidence.
+
+# Repository
+repo_name: zenitysec/aos
+repo_url: https://github.com/zenitysec/aos
+
+# Copyright
+copyright: Copyright &copy; 2025 AOS
+
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - search.suggest
+    # edit this page for each doc page
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: material/security
+  icon: 
+    logo: material/security
+
+# Additional configuration
+extra:
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  social:
+    - icon: fontawesome/brands/github
+      name: GitHub
+      link: https://github.com/zenitysec/aos
+    - icon: /fontawesome/regular/envelope
+      name: Send us an email
+      link: mailto:aos@zenity.io
+
+markdown_extensions:
+  # Emojis
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  # Syntax Highlighting
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  # Callouts
+  - admonition
+  - pymdownx.details
