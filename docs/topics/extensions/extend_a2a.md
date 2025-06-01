@@ -1,7 +1,7 @@
 # Extending A2A
 
 ## A2A protocol
-[A2A](#https://github.com/google-a2a/A2A/tree/main) is a communication protocol that enables AI agents or autonomous systems to exchange information, coordinate actions, or delegate tasks in a structured and secure way.<br><br>
+[A2A](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) is a communication protocol that enables AI agents or autonomous systems to exchange information, coordinate actions, or delegate tasks in a structured and secure way.<br><br>
 It defines how two or more agents exchange messages, requests, responses or task results and enables AI agents, built on diverse frameworks by different companies running on separate servers, to communicate and collaborate effectively.<br><br>
 In the landscape where the world is leaning towards multi-agent systems, where these agents can be autonomous or semi-autonomous, working together to solve problems or perform tasks that would be difficult or impossible for a single agent or monolithic system, A2A protocol is essential for standardizing inter-agent communication—making it easier to build, compose, and scale these systems.<br><br>
 Securing A2A protocol with ASOP extension is crucial for agent security and observability.
