@@ -558,7 +558,7 @@ This method should be used after tool is completed and before the result goes ba
 This method should be used to wrap all [A2A](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) communications and messages.<br>
 This method should be used before sending A2A message to a remote agent to monitor outbound communications.<br>
 This method should be used after receiving A2A message (response) from a remote agent to monitor inbound communications.<br>
-Read more about A2A support in [extend_a2a](./extend_a2a.md).
+Read more about A2A support in [extend_a2a](./extensions/extend_a2a.md).
 
 
 #### 4.7.1. **Request `params` Object**
@@ -576,7 +576,7 @@ Read more about A2A support in [extend_a2a](./extend_a2a.md).
 This method should be used to wrap all [MCP](https://modelcontextprotocol.io/introduction) communications and messages.<br>
 This method should be used before sending MCP message to MCP server to monitor outbound communications.<br>
 This method should be used after receiving MCPmessage (response) from a MCP server to monitor inbound communications.<br>
-Read more about MCP support in [extend_mcp](./extend_mcp.md).
+Read more about MCP support in [extend_mcp](./extensions/extend_mcp.md).
 
 
 #### 4.8.1. **Request `params` Object**
