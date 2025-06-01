@@ -1,7 +1,7 @@
 # Extending MCP
 
 ## MCP protocol
-The Model Context Protocol ([MCP](#https://modelcontextprotocol.io/introduction)) is an open standard that simplifies how AI models, particularly Large Language Models (LLMs) and agents, interact with external data sources, tools, and APIs. It's designed to provide a standardized way for AI agents to connect with the real world, making it easier to build AI applications that can access and use external information.<br><br>
+The Model Context Protocol ([MCP](https://modelcontextprotocol.io/introduction)) is an open standard that simplifies how AI models, particularly Large Language Models (LLMs) and agents, interact with external data sources, tools, and APIs. It's designed to provide a standardized way for AI agents to connect with the real world, making it easier to build AI applications that can access and use external information.<br><br>
 MCP is gaining popularity world-wide and is being adopted and integrated almost everywhere, security and observability must be implemented to prevent unwanted bad consequences.<br>
 In the same manner as ASOP standardize security for non-standardize access and use of tools and data, it also extends MCP protocol to allow secure usage and implement security controls.
 
