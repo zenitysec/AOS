@@ -51,9 +51,6 @@ extra:
     provider: google
     property: !ENV GOOGLE_ANALYTICS_KEY
   social:
-    - icon: fontawesome/brands/github
-      name: GitHub
-      link: https://github.com/zenitysec/aos
     - icon: /fontawesome/regular/envelope
       name: Send us an email
       link: mailto:aos@zenity.io
