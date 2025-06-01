@@ -56,7 +56,7 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
 
 #### 2. Agent **A** uses ASOP as a transport and sends `protocols/A2A` message 
    ```json
-    {
+   {
         "jsonrpc": "2.0",
         "id": 70,
         "method": "protocols/A2A",
@@ -82,8 +82,8 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
    ```
 
 #### 3. Guardian agent sends `allow` response to agent **A**
-    ```json
-        {
+   ```json
+    {
         "jsonrpc": "2.0",
         "id": 70,
         "result": {
@@ -92,12 +92,12 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
             "reasoning": "I understand that this is an A2A message. An agent is asking for a joke. Nothing suspicious here."
         }
     }
-    ```
+   ```
 
 ### Scenario: Agent **A** shares PII and sensitive information with agent **B** and guardian agent respond with modified content
 
 #### 1. Agent **A** prepares A2A `message/send` message with sensitive info
-    ```json
+   ```json
     {
         "jsonrpc": "2.0",
         "id": 1,
@@ -137,10 +137,10 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
             "metadata": {}
         }
     }
-    ```
+   ```
 
 #### 2. Agent **A** uses ASOP as a transport and sends `message/send` message with sensitive info
-    ```json
+   ```json
     {
         "jsonrpc": "2.0",
         "id": 80,
@@ -185,10 +185,11 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
             }
         }
     }
-    ```
+   ```
 
 #### 3. Guardian agent sends `modify` response to agent **A** 
-    ```json
+
+   ```json
     {
         "jsonrpc": "2.0",
         "id": 80,
@@ -242,14 +243,13 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
             }
         }
     }
-    ```
+   ```
 
 
 ### Scenario: Agent **A** sends disallowed content and guardian agent respond with `deny`
 
 #### 1. Agent ***A*** prepares `message/send` with disallowed content
-
-    ```json
+   ```json
     {
         "jsonrpc": "2.0",
         "id": 1,
@@ -268,12 +268,12 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
         "metadata": {}
         }
     }
-    ```
+   ```
 
 
 #### 2. Agent ***A*** uses ASOP as a transport and sends `message/send` with disallowed content
    ```json
-    {
+   {
         "jsonrpc": "2.0",
         "id": 100,
         "method": "protocols/A2A",
@@ -300,7 +300,7 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
 
 #### 3. Guardian agent sends `deny` response to agent **A** 
    ```json
-    {
+   {
         "jsonrpc": "2.0",
         "id": 100,
         "result": {
