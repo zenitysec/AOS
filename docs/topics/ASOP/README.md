@@ -37,6 +37,15 @@ Each section has the security property and an example of what the outcome looks 
 Support switching the examples to show a different language or agent framework.
 Ideally this shows major agent frameworks and also A2A and MCP -->
 
+### Extensions
+Our mission is to enable secure usage and observability of AI agents everywhere. While the landscape is evolving very fast, new standards and protocols are published and adopted by users, vendors and companies.<br>
+We love and appreciate standards, but we don't compromise on security. We believe that security should be implemented also on agent's ecosystem to fill in the security gaps.<br>
+Introducing ASOP extensions we are committed to:
+- Keep up with existing protocols and support new ones.
+- Transparent support for native protocols.
+
+Read more about [MCP](../extensions/extend_mcp.md) and [A2A](../extensions/extend_a2a.md) extensions.
+
 
 ### Read Next
 
