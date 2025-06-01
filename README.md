@@ -28,12 +28,10 @@ The framework covers the following aspects
 
 - 📚 **Explore the Documentation:** Visit the [Documentation Site](https://improved-adventure-3jj129k.pages.github.io/) for a complete overview, the full protocol specification, tutorials, and guides.
 - 📝 **View the Specification:** [Specification](https://github.com/zenitysec/AOS/tree/main/specification)
-- 🐍 Use the [A2A Python SDK](https://github.com/google-a2a/a2a-python)
-  - `pip install a2a-sdk`
 
 ## Contributing
 
-We welcome community contributions to enhance and evolve the A2A protocol!
+We welcome community contributions to enhance and evolve the AOS protocol!
 
 - **Questions & Discussions:** Join our [GitHub Discussions](do we have github enterprise?).
 - **Issues & Feedback:** Report issues or suggest improvements via [GitHub Issues](https://github.com/zenitysec/AOS/issues).
