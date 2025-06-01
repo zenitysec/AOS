@@ -39,13 +39,13 @@ We welcome community contributions to enhance and evolve the AOS protocol!
 
 ## What's next
 
-### Public Preview v0.1
+#### v0.1 (Public Preview)
 - Overall documentation and requirements
 - ASOP protocol definitions and schema
 - Observability definitions for for OpenTelemetry and OCSF
 - AG-BOM requirements
 
-### Milestone: v1
+#### v1
 - Implementation of Agent instrumentation
 - Implementation of Guardian Agent sample app with
   - ASOP protocol Support
@@ -54,11 +54,11 @@ We welcome community contributions to enhance and evolve the AOS protocol!
 - FastMCP client instrumentation for ASOP
 - A2A client instrumentation for ASOP
 
-### Milestone: v2
+#### v2
 - Requirements for CycloneDX, SPDX, SWID
 - Implementation of ASOP to AG-BOM mappers for CycloneDX, SPDX, SWID
 
-### Milestone: v3
+#### v3
 - Extending A2A and MCP to support deny and modify operations
 - Implementation of Agent with deny and modify support
 
