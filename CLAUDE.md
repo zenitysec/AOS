@@ -18,9 +18,6 @@ uv run mkdocs serve
 
 # Build documentation static files
 uv run mkdocs build
-
-# Deploy versioned documentation (requires push permissions)
-mike deploy --push --update-aliases VERSION latest
 ```
 
 ### Python Development
