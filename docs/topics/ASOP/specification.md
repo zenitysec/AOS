@@ -619,7 +619,7 @@ This method is used by the agent to ensure that guardian agent is alive.
 
 | Field Name      | Type                                                            | Required | Description                                                        |
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
-| `decision`                   | `strin`  | Yes       | Guardian agent's de. One of `allow`, `deny`, `modify`. |
+| `decision`                   | `string`  | Yes       | Guardian agent's de. One of `allow`, `deny`, `modify`. |
 | `reasoning`                   | `string`| No       | Guardian agent's reasoning/thought explaining the decision. |
 | `reasonCode`                   | `string`[] | No       | Timestamp (UTC recommended). |
 | `message`                   | `string`| Yes       | Human readable message explaining the decision. |
@@ -629,12 +629,8 @@ This method is used by the agent to ensure that guardian agent is alive.
 ### 5.2.`JSONRPCErrorResponse` Object
 | Field Name      | Type                                                            | Required | Description                                                        |
 | :-------------- | :-------------------------------------------------------------- | :------- | :----------------------------------------------------------------- |
-| `id`                   | `strin`  | Yes       | Guardian agent's de. One of `allow`, `deny`, `modify`. |
-| `error`                   | `string`| No       | Guardian agent's reasoning/thought explaining the decision. |
-| `reasonCode`                   | `string`[] | No       | Timestamp (UTC recommended). |
-| `message`                   | `string`| Yes       | Human readable message explaining the decision. |
-| `data`                   | `Record<string, any>` | No       | Additional key-value data. |
-| `modifiedRequest`                   | `ASOPRequest` | No       | Modified request. This is relevant when decision is `modify`. |
+| `id`                   | `string`  | Yes       | Response id. This should be the same as the request id. |
+| `error`                   | `string`| Yes       | One of `JSONRPCError`, `JSONParseError`, `InvalidRequestError`, `MethodNotFoundError`, `InvalidParamsError`, `InternalError`. |
 | `jsonrpc`                   |`"2.0"` (literal)| Yes       | JSON-RPC version string. |
 
 
@@ -666,9 +662,9 @@ These are standard codes defined by the JSON-RPC 2.0 specification.
 
 | Code                 | JSON-RPC Spec Meaning | Typical ASOP `message`     | Description                                                                                  |
 | :------------------- | :-------------------- | :------------------------ | :------------------------------------------------------------------------------------------- |
-| `-32700`             | Parse error           | Invalid JSON payload      | Server received JSON that was not well-formed.                                               |
-| `-32600`             | Invalid Request       | Invalid JSON-RPC Request  | The JSON payload was valid JSON, but not a valid JSON-RPC Request object.                    |
-| `-32601`             | Method not found      | Method not found          | The requested ASOP RPC `method` (e.g., `"steps/foo"`) does not exist or is not supported.     |
-| `-32602`             | Invalid params        | Invalid method parameters | The `params` provided for the method are invalid (e.g., wrong type, missing required field). |
-| `-32603`             | Internal error        | Internal server error     | An unexpected error occurred on the server during processing.                                |
+| `-32700`             | Parse error (JSONParseError)          | Invalid JSON payload      | Server received JSON that was not well-formed.                                               |
+| `-32600`             | Invalid Request (InvalidRequestError)      | Invalid JSON-RPC Request  | The JSON payload was valid JSON, but not a valid JSON-RPC Request object.                    |
+| `-32601`             | Method not found (MethodNotFoundError)      | Method not found          | The requested ASOP RPC `method` (e.g., `"steps/foo"`) does not exist or is not supported.     |
+| `-32602`             | Invalid params (InvalidParamsError)        | Invalid method parameters | The `params` provided for the method are invalid (e.g., wrong type, missing required field). |
+| `-32603`             | Internal error (InternalError)       | Internal server error     | An unexpected error occurred on the server during processing.                                |
 | `-32000` to `-32099` | Server error          | _(Server-defined)_        | Reserved for implementation-defined server-errors. ASOP-specific errors use this range.       |
