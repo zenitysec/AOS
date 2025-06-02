@@ -46,6 +46,7 @@ theme:
     logo: material/security
 
 plugins:
+  - search
   - mike:
       alias_type: symlink
       redirect_template: null
