@@ -1,9 +1,13 @@
 # Extending CycloneDX
-![Status: Conceptual](https://img.shields.io/badge/Status-Conceptual-purple)
+
+!!! warning "Work in progress"
+    This specification is currently under development. We're working on defining how AgBOM extends SPDX to support AI agent components.
+    
+    **Want to contribute?** Check out the [GitHub issue](https://github.com/zenitysec/aos/issues/22) and join the discussion!
 
 Agent Bill of Material example using CycloneDX
 
-```python
+```json
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
