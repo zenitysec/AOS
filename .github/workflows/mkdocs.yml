@@ -1,7 +1,7 @@
-# Sample workflow for building and deploying a MkDocs site to GitHub Pages
-#
-# To get started with MkDocs see: https://www.mkdocs.org/getting-started/
-#
+# This workflow builds a MkDocs site and deploys it to GitHub Pages.
+# It uses the `uv` tool to run MkDocs, which is a modern Python package manager.
+# The workflow is triggered on pushes to the main branch and can also be run manually.
+# It sets up the necessary permissions for the GITHUB_TOKEN
 name: Deploy MkDocs site to Pages
 
 on:

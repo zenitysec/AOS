@@ -22,7 +22,7 @@ For agents to become trustworthy they must be **inspectable, auditable and instr
 The framework covers the following aspects
 1. Agent Security & Observability Protocol (ASOP) that defines the interaction between the Observed Agent and the Guardian Agent
 2. Observability requirements and implementations for tracing all ASOP events using OpenTelemetry and OCSF
-3. Agent BOM (AG-BOM) requirements and implementations for exposing dynamic Agent's bill-of-material via CoycloneDX, SWID and SPDX
+3. Agent BOM (AgBOM) requirements and implementations for exposing dynamic Agent's bill-of-material via CoycloneDX, SWID and SPDX
 
 ## Getting Started
 
@@ -43,7 +43,7 @@ We welcome community contributions to enhance and evolve the AOS protocol!
 - Overall documentation and requirements
 - ASOP protocol definitions and schema
 - Observability definitions for for OpenTelemetry and OCSF
-- AG-BOM requirements
+- AgBOM requirements
 
 #### v1
 - Implementation of Agent instrumentation
@@ -56,7 +56,7 @@ We welcome community contributions to enhance and evolve the AOS protocol!
 
 #### v2
 - Requirements for CycloneDX, SPDX, SWID
-- Implementation of ASOP to AG-BOM mappers for CycloneDX, SPDX, SWID
+- Implementation of ASOP to AgBOM mappers for CycloneDX, SPDX, SWID
 
 #### v3
 - Extending A2A and MCP to support deny and modify operations

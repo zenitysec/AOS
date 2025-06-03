@@ -140,6 +140,6 @@ The Guardian Agent update its BOM and send an updated file in CycloneDx format
 
 ## Read Next
 
-- [AG-BOM](./../topics/AG-BOM/README.md)
+- [AgBOM](./../topics/AgBOM/README.md)
 - [ASOP](./../topics/ASOP/README.md)
 - [Observability](./../topics/Observability/README.md)
