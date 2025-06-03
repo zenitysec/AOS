@@ -1,7 +1,7 @@
 site_name: Agent Observability Standard
 site_url: !ENV GITHUB_PAGES_URL
 site_description: >-
-  An industry standard for building trustworthy AI agents – inspectable, observable and instrumentable
+  An industry standard for building trustworthy AI agents - inspectable, observable and instrumentable
    to enable enterprise-wide adoption with confidence.
 
 # Repository
@@ -45,6 +45,17 @@ theme:
   icon: 
     logo: material/security
 
+plugins:
+  - search
+  # - mike:
+  #     alias_type: symlink
+  #     redirect_template: null
+  #     deploy_prefix: ''
+  #     canonical_version: null
+  #     version_selector: true
+  #     css_dir: css
+  #     javascript_dir: js
+
 # Additional configuration
 extra:
   analytics:
@@ -54,6 +65,8 @@ extra:
     - icon: /fontawesome/regular/envelope
       name: Send us an email
       link: mailto:aos@zenity.io
+  # version:
+  #   provider: mike
 
 markdown_extensions:
   # Emojis
