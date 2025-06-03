@@ -68,6 +68,38 @@ extra:
   # version:
   #   provider: mike
 
+nav:
+  - Trustworthy Agents: README.md
+  - Topics:
+    - Core concepts: topics/core_concepts.md
+    - AOS in Action: topics/AOS_in_action_example.md
+    - ASOP:
+      - Overview: topics/ASOP/README.md
+      - ASOP specification: topics/ASOP/specification.md
+    - Observability:
+      - Overview: topics/Observability/README.md
+      - OpenTelemetry: topics/Observability/OpenTelemetry.md
+      - OCSF:
+        - Overview: topics/Observability/OCSF/README.md
+        - Implementation Examples: topics/Observability/OCSF/implementation_examples.md
+    - AG-BOM:
+      - Overview: topics/AG-BOM/README.md
+      - Extend CycloneDX: topics/AG-BOM/extend_cyclonedx.md
+      - Extend SPDX: topics/AG-BOM/extend_spdx.md
+      - Extend SWID: topics/AG-BOM/extend_swid.md
+    - Extensions:
+      - Extend A2A: topics/extensions/extend_a2a.md
+      - Extend MCP: topics/extensions/extend_mcp.md
+  - Tools:
+    - Guardian Agent:
+      - Overview: tools/guardian_agent/README.md
+      - Apply Corporate Policy: tools/guardian_agent/apply_corporate_policy.md
+      - Block Data Leakage: tools/guardian_agent/block_data_leakage.md
+      - Generate Audit Log: tools/guardian_agent/generate_audit_log.md
+      - Generate SBOM: tools/guardian_agent/generate_sbom.md
+    - Native Support: tools/native_support/README.md
+  - About: about.md
+
 markdown_extensions:
   # Emojis
   - attr_list
