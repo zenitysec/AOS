@@ -4,7 +4,7 @@ TODO: this page is probably not needed
 Leaving here for now because not all content has found its place elsewhere
  -->
 
-## Misson statement
+## Mission statement
 
 ### Scope of work
 
