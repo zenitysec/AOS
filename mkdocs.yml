@@ -70,6 +70,7 @@ extra:
 
 nav:
   - Trustworthy Agents: README.md
+  - AOS: aos.md
   - Topics:
     - Core concepts: topics/core_concepts.md
     - AOS in Action: topics/AOS_in_action_example.md

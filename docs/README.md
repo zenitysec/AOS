@@ -53,4 +53,5 @@ Early standardization provides a unique opportunity to build trustworthiness int
 
 ## Read Next
 
+- [Agent Observability Standard (AOS)](./aos.md)
 - [Core Concepts](./core_concepts.md)
