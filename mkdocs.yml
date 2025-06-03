@@ -99,6 +99,11 @@ nav:
       - Generate Audit Log: tools/guardian_agent/generate_audit_log.md
       - Generate SBOM: tools/guardian_agent/generate_sbom.md
     - Native Support: tools/native_support/README.md
+  - Specifications:
+    - AOS Specification: ../specification/ASOP/asop_schema.json
+    - ASOP Specification: specifications/asop_specification.md
+    - OCSF Specification: specifications/ocsf_specification.md
+    - AG-BOM Specification: specifications/ag_bom_specification.md
   - About: about.md
 
 markdown_extensions:
