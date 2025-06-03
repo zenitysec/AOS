@@ -11,6 +11,7 @@
         "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format"
     ],
     "cSpell.words": [
+        "cyclonedx",
         "inspectable",
         "OCSF",
         "Roboto",
