@@ -1,4 +1,5 @@
 # Extending CycloneDX
+![Status: Conceptual](https://img.shields.io/badge/Status-Conceptual-purple)
 
 Agent Bill of Material example using CycloneDX
 
@@ -50,6 +51,7 @@ Agent Bill of Material example using CycloneDX
     {
       "type": "tool",
       "name": "PythonREPL",
+      "version": "1.2",
       "bom-ref": "urn:tool:pythonrepl",
       "properties": [
         { "name": "description", "value": "Sandboxed Python evaluator" },
