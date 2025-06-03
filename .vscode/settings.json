@@ -12,10 +12,18 @@
     ],
     "cSpell.words": [
         "cyclonedx",
+        "fontawesome",
+        "inlinehilite",
         "inspectable",
+        "instrumentable",
+        "linenums",
         "OCSF",
+        "pygments",
+        "pymdownx",
         "Roboto",
+        "superfences",
         "SWID",
+        "twemoji",
         "zenitysec"
     ]
 }

@@ -9,14 +9,14 @@ But we cannot trust any of them – the biggest inhibitor to their adoption.
 LLMs are an opaque technology from the get go. 
 Planning, reasoning and long-term memories make agents even more of a black box. 
 Agents invent, but not always like we want them to — ignoring instructions and following other goals.
-Goals can be baked-in inadvertidely by the training process, or forced by an attacker exploiting the agent's gullibility.
+Goals can be baked-in inadvertently by the training process, or forced by an attacker exploiting the agent's gullibility.
 
 Understanding what and why an agent performed an action is a big challenge. 
 Multi-agent systems, implicit dependencies and remote tools make it worse. 
 Inconsistent identity and reliance on [impersonation](https://www.jpmorgan.com/technology/technology-blog/open-letter-to-our-suppliers) adds more fuel to the fire. 
 Lack of standardization makes every agent different.
 
-Agents must become [trustworthy](https://www.wired.com/2002/01/bill-gates-trustworthy-computing/) to enable widescale adoption.
+Agents must become [trustworthy](https://www.wired.com/2002/01/bill-gates-trustworthy-computing/) to enable wide-scale adoption.
 
 Transparency is the foundation of trust.
 Whether built in-house or adopted as part of a service.
@@ -36,7 +36,7 @@ For agents to become trustworthy they must be inspectable, auditable and instrum
 Which tools, models and capabilities are being used. 
 What software version is running and who built it. 
 What are the services behind them, and which data they can access.
-Must dynamicly adapt to account for rapid changes in agent components.
+Must dynamically adapt to account for rapid changes in agent components.
 
 **Auditable**: we know what the agent did and why. 
 We can trace back any action taken to the reasoning behind it and the originating task. 
@@ -48,7 +48,7 @@ We can put hard controls around agents and define their scope of action.
 Apply centralized enterprise logic, be it security, compliance or legal, uniformly across agent platforms. 
 Prevent or modify behavior to comply.
 
-Driven by high risk and high rewards, we are collectively thinking about these cybersecurity challanges with agents early on. 
+Driven by high risk and high rewards, we are collectively thinking about these cybersecurity challenges with agents early on. 
 Early standardization provides a unique opportunity to build trustworthiness into agents.
 
 ## Read Next
