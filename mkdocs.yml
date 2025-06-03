@@ -100,8 +100,6 @@ nav:
     - Instrument:
       - Overview: spec/ASOP/README.md
       - ASOP specification: spec/ASOP/specification.md
-    
-    
   - About: about.md
 
 markdown_extensions:
