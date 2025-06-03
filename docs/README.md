@@ -16,7 +16,7 @@ Multi-agent systems, implicit dependencies and remote tools make it worse.
 Inconsistent identity and reliance on [impersonation](https://www.jpmorgan.com/technology/technology-blog/open-letter-to-our-suppliers) adds more fuel to the fire. 
 Lack of standardization makes every agent different.
 
-Agents must become [trustworthy](https://www.wired.com/2002/01/bill-gates-trustworthy-computing/) to enable wide-scale adoption.
+Agents must become [trustworthy](https://news.microsoft.com/2012/01/11/memo-from-bill-gates/) to enable wide-scale adoption.
 
 Transparency is the foundation of trust.
 Whether built in-house or adopted as part of a service.
