@@ -9,10 +9,10 @@ This approach ensures that every significant agent action is not only recorded, 
 
 ## Observability Objectives
 
-- **Transparency**: Observability enables a clear, step-by-step reconstruction of agent behavior, including the reasoning behind each action. This is fundamental for incident response, compliance audits, and continuous improvement.
+- **Transparency**: Observability enables a clear, step-by-step reconstruction of agent behavior, including the reasoning behind each action. This is fundamental for incident response, compliance traces, and continuous improvement.
     
 - **Security and Risk Management**: By tracing agent actions down to atomic operations, organizations can detect anomalous or unauthorized behavior, investigate root causes, and enforce policy controls in real time.
     
 - **Performance and Optimization**: Detailed metrics and traces reveal bottlenecks, inefficiencies, and error patterns in agent workflows, supporting targeted tuning and resource management.
     
-- **Trust and Accountability**: A verifiable audit trail is the foundation for building trust with stakeholders, regulators, and end users, ensuring that agent-driven decisions can always be justified and explained.
+- **Trust and Accountability**: A verifiable trace trail is the foundation for building trust with stakeholders, regulators, and end users, ensuring that agent-driven decisions can always be justified and explained.

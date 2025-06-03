@@ -8,7 +8,7 @@ ASOP maps agent activities to OCSF event classes, providing:
 - Standardized security event format
 - SIEM compatibility out of the box
 - Unified view of agent and traditional security events
-- Compliance-ready audit trails
+- Compliance-ready trace trails
 
 ## Event Mapping
 
@@ -87,7 +87,7 @@ Security-relevant agent activities map to appropriate OCSF classes:
 - Customizable dashboards and alerts
 
 ### 3. Compliance Support
-- Audit-ready event logging
+- Trace-ready event logging
 - Traceable agent activities
 - Policy violation tracking
 

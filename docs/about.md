@@ -15,6 +15,6 @@ Leaving here for now because not all content has found its place elsewhere
     1. Extend MCP, A2A with instrumentation hooks
     1. Standardize instrumentation hooks for unstandardized agent capabilities (e,g, long-term, RAG)
     1. Implement the standard on popular Open Source agent platforms (e,g, CrewAI)
-1. Provide a reference architecture for usage of instrumentation hooks to deliver OCSF and OpenTelemetry compliant audit log
+1. Provide a reference architecture for usage of instrumentation hooks to deliver OCSF and OpenTelemetry compliant trace log
 
 ## Partners

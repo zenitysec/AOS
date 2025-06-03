@@ -82,7 +82,7 @@ nav:
       - Overview: tools/guardian_agent/README.md
       - Apply Corporate Policy: tools/guardian_agent/apply_corporate_policy.md
       - Block Data Leakage: tools/guardian_agent/block_data_leakage.md
-      - Generate Audit Log: tools/guardian_agent/generate_audit_log.md
+      - Generate Trace Log: tools/guardian_agent/generate_trace_log.md
       - Generate SBOM: tools/guardian_agent/generate_sbom.md
     - Native Support: tools/native_support/README.md
   - Specification:
@@ -91,7 +91,7 @@ nav:
       - Extend CycloneDX: spec/inspect/extend_cyclonedx.md
       - Extend SPDX: spec/inspect/extend_spdx.md
       - Extend SWID: spec/inspect/extend_swid.md
-    - Audit:
+    - Trace:
       - Overview: spec/audit/README.md
       - OpenTelemetry: spec/audit/OpenTelemetry.md
       - OCSF:

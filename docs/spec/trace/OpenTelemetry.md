@@ -1,6 +1,6 @@
 # Mapping Traces with Open Telemetry
 
-To thoroughly audit an AI agent, it is crucial to connect traces and events in a manner that accurately reflects the agent's atomic actions and its broader units of logical operation. This provides a transparent, step-by-step visualization of how an agent processes information, arrives at decisions, and executes tasks. The Agent Security & Observability Protocol (ASOP) schema offers a structured framework for defining these interactions, which can then be effectively mapped to OpenTelemetry concepts.
+To thoroughly trace an AI agent, it is crucial to connect traces and events in a manner that accurately reflects the agent's atomic actions and its broader units of logical operation. This provides a transparent, step-by-step visualization of how an agent processes information, arrives at decisions, and executes tasks. The Agent Security & Observability Protocol (ASOP) schema offers a structured framework for defining these interactions, which can then be effectively mapped to OpenTelemetry concepts.
 
 - **Mapping ASOP Steps to OpenTelemetry Spans**: Each distinct step defined within a protocol such as ASOP can be directly correlated with an OpenTelemetry span. For instance:
     

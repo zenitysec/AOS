@@ -12,7 +12,7 @@ AgBOM, short for Agent Bill-of-Materials, is a comprehensive inventory that capt
 - What version and configuration is currently deployed
 - What external services and data sources are accessed
 
-This visibility supports better security auditing, version tracking, and regulatory compliance. AgBOM must dynamically adapt to reflect the rapid iteration and evolution of agent architectures, especially in real-time or distributed environments.
+This visibility supports better security tracing, version tracking, and regulatory compliance. AgBOM must dynamically adapt to reflect the rapid iteration and evolution of agent architectures, especially in real-time or distributed environments.
 
 ## Desired Outcome
 The end result of generating an AgBOM is a standardized, machine-readable artifact that outlines the full software composition of the agent.

@@ -6,7 +6,7 @@ In a landscape where AI agents increasingly orchestrate critical and complex wor
 Agents use tools, memory and knowledge to achieve the goals. They collaborate, communicate and negotiate independently (A2A) to complete tasks. All the magic is wrapped in a black box and we remain blind, too blind to trust them.
 
 **Agent Security & Observability Protocol (ASOP)** is a standard that establishes a unified, platform-agnostic framework for surfacing every decision, action, prompt, and output as structured events while simultaneously providing hooks for live intervention and control. 
-By embedding lightweight call-outs at each step of an agent’s reasoning cycle—from retrieval-augmented generation through action execution—**ASOP** streams context-rich events to observability back-ends, and also allows supervisors or automated guards to modify, or veto agent bad behavior, enforcing security and compliance policies. The result is a transparent, auditable, and governable AI runtime that lets organizations widely adopt intelligent agents without sacrificing control, trust, or safety.
+By embedding lightweight call-outs at each step of an agent’s reasoning cycle—from retrieval-augmented generation through action execution—**ASOP** streams context-rich events to observability back-ends, and also allows supervisors or automated guards to modify, or veto agent bad behavior, enforcing security and compliance policies. The result is a transparent, traceable, and governable AI runtime that lets organizations widely adopt intelligent agents without sacrificing control, trust, or safety.
 
 
 ## The ASOP solution
@@ -25,7 +25,7 @@ Agents that implement ASOP can be deployed with higher trust.
 They are inspectable, auditable and instrumentable.
 They are an open book 
 
-They have a dynamic bill-of-material, a clear audit trail and hard inline-controls.
+They have a dynamic bill-of-material, a clear trace trail and hard inline-controls.
 
 <!-- TODO: add diagram -->
 
