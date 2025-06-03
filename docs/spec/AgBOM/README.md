@@ -18,11 +18,11 @@ This visibility supports better security auditing, version tracking, and regulat
 The end result of generating an AgBOM is a standardized, machine-readable artifact that outlines the full software composition of the agent.
 To support industry-wide adoption and interoperability, AgBOM supports output in the following standard formats:
 
-| BOM standard | AgBOM spec |
-|--|--|
-| [CycloneDX](https://cyclonedx.org/) | [AgBOM for CycloneDX](./extend_cyclonedx.md) |
-| [SPDX](https://spdx.dev/) | [AgBOM for SPDX](./extend_spdx.md) |
-| [SWID](https://csrc.nist.gov/Projects/Software-Identification-SWID) | [AgBOM for SWID](./extend_swid.md) |
+| BOM standard | AgBOM spec | Status |
+|--|--|--|
+| [CycloneDX](https://cyclonedx.org/) | [AgBOM for CycloneDX](./extend_cyclonedx.md) | Working draft |
+| [SPDX](https://spdx.dev/) | [AgBOM for SPDX](./extend_spdx.md) | [Help wanted](https://github.com/zenitysec/AOS/issues/20) |
+| [SWID](https://csrc.nist.gov/Projects/Software-Identification-SWID) | [AgBOM for SWID](./extend_swid.md) | [Help wanted](https://github.com/zenitysec/AOS/issues/21) |
 
 ### AgBOM entities and parameters:
 
