@@ -74,20 +74,6 @@ nav:
   - Topics:
     - Core concepts: topics/core_concepts.md
     - AOS in Action: topics/AOS_in_action_example.md
-    - ASOP:
-      - Overview: topics/ASOP/README.md
-      - ASOP specification: topics/ASOP/specification.md
-    - Observability:
-      - Overview: topics/Observability/README.md
-      - OpenTelemetry: topics/Observability/OpenTelemetry.md
-      - OCSF:
-        - Overview: topics/Observability/OCSF/README.md
-        - Implementation Examples: topics/Observability/OCSF/implementation_examples.md
-    - AG-BOM:
-      - Overview: topics/AG-BOM/README.md
-      - Extend CycloneDX: topics/AG-BOM/extend_cyclonedx.md
-      - Extend SPDX: topics/AG-BOM/extend_spdx.md
-      - Extend SWID: topics/AG-BOM/extend_swid.md
     - Extensions:
       - Extend A2A: topics/extensions/extend_a2a.md
       - Extend MCP: topics/extensions/extend_mcp.md
@@ -99,11 +85,23 @@ nav:
       - Generate Audit Log: tools/guardian_agent/generate_audit_log.md
       - Generate SBOM: tools/guardian_agent/generate_sbom.md
     - Native Support: tools/native_support/README.md
-  - Specifications:
-    - AOS Specification: ../specification/ASOP/asop_schema.json
-    - ASOP Specification: specifications/asop_specification.md
-    - OCSF Specification: specifications/ocsf_specification.md
-    - AG-BOM Specification: specifications/ag_bom_specification.md
+  - Specification:
+    - Inspect:
+      - Overview: spec/AG-BOM/README.md
+      - Extend CycloneDX: spec/AG-BOM/extend_cyclonedx.md
+      - Extend SPDX: spec/AG-BOM/extend_spdx.md
+      - Extend SWID: spec/AG-BOM/extend_swid.md
+    - Audit:
+      - Overview: spec/Observability/README.md
+      - OpenTelemetry: spec/Observability/OpenTelemetry.md
+      - OCSF:
+        - Overview: spec/Observability/OCSF/README.md
+        - Implementation Examples: spec/Observability/OCSF/implementation_examples.md
+    - Instrument:
+      - Overview: spec/ASOP/README.md
+      - ASOP specification: spec/ASOP/specification.md
+    
+    
   - About: about.md
 
 markdown_extensions:
