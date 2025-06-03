@@ -31,7 +31,7 @@ uv pip install -e .
 ### Core Components
 1. **ASOP (Agent Security & Observability Protocol)**: JSON-RPC 2.0 protocol defining interactions between Observed Agents and Guardian Agents
 2. **Observability Layer**: Built on OpenTelemetry and OCSF standards for comprehensive agent tracing
-3. **AG-BOM (Agent Bill of Materials)**: Dynamic inventory using CycloneDX, SPDX, and SWID standards
+3. **AgBOM (Agent Bill of Materials)**: Dynamic inventory using CycloneDX, SPDX, and SWID standards
 
 ### Key Protocol Concepts
 - **Observed Agent**: The AI agent being monitored

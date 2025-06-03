@@ -87,10 +87,10 @@ nav:
     - Native Support: tools/native_support/README.md
   - Specification:
     - Inspect:
-      - Overview: spec/AG-BOM/README.md
-      - Extend CycloneDX: spec/AG-BOM/extend_cyclonedx.md
-      - Extend SPDX: spec/AG-BOM/extend_spdx.md
-      - Extend SWID: spec/AG-BOM/extend_swid.md
+      - Overview: spec/AgBOM/README.md
+      - Extend CycloneDX: spec/AgBOM/extend_cyclonedx.md
+      - Extend SPDX: spec/AgBOM/extend_spdx.md
+      - Extend SWID: spec/AgBOM/extend_swid.md
     - Audit:
       - Overview: spec/Observability/README.md
       - OpenTelemetry: spec/Observability/OpenTelemetry.md
