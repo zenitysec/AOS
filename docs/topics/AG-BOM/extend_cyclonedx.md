@@ -51,6 +51,7 @@ Agent Bill of Material example using CycloneDX
     {
       "type": "tool",
       "name": "PythonREPL",
+      "version": "1.2",
       "bom-ref": "urn:tool:pythonrepl",
       "properties": [
         { "name": "description", "value": "Sandboxed Python evaluator" },
