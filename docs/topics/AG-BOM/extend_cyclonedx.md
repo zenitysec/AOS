@@ -1,4 +1,5 @@
 # Extending CycloneDX
+![Status: Conceptual](https://img.shields.io/badge/Status-Conceptual-purple)
 
 Agent Bill of Material example using CycloneDX
 
