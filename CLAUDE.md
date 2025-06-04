@@ -45,8 +45,20 @@ uv pip install -e .
 - **Step Types**: Message, ToolCall, KnowledgeRetrieval, MemoryStore, AgentTrigger
 - **Guardian Actions**: permit, deny, or modify agent operations
 
+### Protocol Architecture
+- **Transport**: HTTP(S) with JSON-RPC 2.0 payload format
+- **Core Methods**: `steps/agentTrigger`, `steps/message`, `steps/toolCallRequest`, `steps/knowledgeRetrieval`, `steps/memoryStore`, `protocols/A2A`, `protocols/MCP`
+- **Guardian Actions**: permit, deny, or modify agent operations
+- **Standards Integration**: OpenTelemetry for tracing, OCSF for security events, CycloneDX/SPDX/SWID for bill of materials
+
 ### Important Files
 - `specification/ASOP/asop_schema.json`: Complete JSON Schema for ASOP protocol
-- `docs/topics/ASOP/specification.md`: Detailed protocol specification
+- `docs/spec/instrument/specification.md`: Detailed protocol specification
 - `docs/topics/core_concepts.md`: Fundamental concepts and terminology
 - `mkdocs.yml`: Documentation configuration
+
+### Development Setup
+This is a documentation-focused project built with:
+- **UV** for Python dependency management (replaces pip)
+- **MkDocs Material** for documentation generation
+- **GitHub Pages** for hosting at improved-adventure-3jj129k.pages.github.io
