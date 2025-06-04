@@ -1,54 +1,55 @@
-# Contributing Guidelines
+# Contributing to AOS
 
-Contributions welcome!
+We're building trustworthy AI agents together. Your contributions make the future of agent observability possible.
 
 **Before spending lots of time on something, ask for feedback on your idea first!**
 
-Please search issues and pull requests before adding something new to avoid duplicating
-efforts and conversations.
+Search existing issues and pull requests to avoid duplicating efforts.
 
-This project welcomes non-code contributions, too! The following types of contributions
-are welcome:
+## How to Contribute
 
-- **Ideas**: participate in an issue thread or start your own to have your voice heard.
-- **Writing**: contribute your expertise in an area by helping expand the included docs.
-- **Copy editing**: fix typos, clarify language, and improve the quality of the docs.
-- **Formatting**: help keep docs easy to read with consistent formatting.
+**Ideas**: Join issue discussions or start new ones. Your voice shapes AOS direction.
 
-## Code Style
+**Writing**: Expand documentation with your expertise. Clear explanations help everyone.
 
-This repository uses [`standard`][standard-url] to maintain code style and consistency,
-and to avoid style arguments. `npm test` runs `standard` automatically, so you don't have
-to!
+**Copy Editing**: Fix typos, clarify language, improve quality. Every word matters. Follow our [styling guide](./STYLE.md).
+
+**Code**: Implement specifications, build tools, create examples.
+
+**Standards**: Help Improve AOS, extend CycloneDX, SPDX, SWID for agent components.
+
+## Development Process
+
+1. **Fork the repository** - Create your own copy
+2. **Sync branches** - Keep up-to-date with latest changes  
+3. **Create feature branch** - Work in isolation
+4. **Make your changes** - Implement improvements
+5. **Test thoroughly** - Ensure everything works
+6. **Submit pull request** - Request merge to `dev` branch
+7. **Address feedback** - Collaborate on refinements
+
+## Code Standards
+
+We use [`standard`][standard-url] for consistent code style. Run `npm test` to check automatically.
+
+All submissions require review via GitHub pull requests. Consult [GitHub Help](https://help.github.com/articles/about-pull-requests/) for guidance.
 
 [standard-url]: https://github.com/standard/standard
 
-### Code reviews
+## What We Need
 
-All submissions, including submissions by project members, require review. We
-use GitHub pull requests for this purpose. Consult
-[GitHub Help](https://help.github.com/articles/about-pull-requests/) for more
-information on using pull requests.
+**High Priority:**
+Look for unassigned [Open Issues](https://github.com/zenitysec/AOS/issues).
 
-### Contributor Guide
+**Always Welcome:**
+- Documentation improvements
+- Real-world use case examples
+- Security analysis and feedback
+- Performance optimizations
 
-You may follow these steps to contribute:
+## Release Process
 
-1. **Fork the official repository.** This will create a copy of the official repository in your own account.
-2. **Sync the branches.** This will ensure that your copy of the repository is up-to-date with the latest changes from the official repository.
-3. **Work on your forked repository's feature branch.** This is where you will make your changes to the code.
-4. **Commit your updates on your forked repository's feature branch.** This will save your changes to your copy of the repository.
-5. **Submit a pull request to the official repository's main branch.** This will request that your changes be merged into the official repository.
-6. **Resolve any linting errors.** This will ensure that your changes are formatted correctly.
-
-Here are some additional things to keep in mind during the process:
-
-- **Test your changes.** Before you submit a pull request, make sure that your changes work as expected.
-- **Be patient.** It may take some time for your pull request to be reviewed and merged.
-
-### Releases
-
-Declaring formal releases remains the prerogative of the project maintainer.
+Project maintainers handle formal releases. Focus on contributing great features and fixes.
 
 ## Developer's Certificate of Origin 1.1
 
@@ -72,3 +73,10 @@ By making a contribution to this project, I certify that:
   with this project or the open source license(s) involved.
 
 This guide is based on [github-contributing](https://raw.githubusercontent.com/standard/.github/refs/heads/master/CONTRIBUTING.md).
+
+## Community
+
+- **[GitHub Discussions](https://github.com/zenitysec/AOS/discussions)**: Ask questions, share ideas
+- **[Issues](https://github.com/zenitysec/AOS/issues)**: Report bugs, request features
+
+We're building the future of AI agent observability. Join us.

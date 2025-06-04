@@ -602,7 +602,7 @@ index=security sourcetype=ocsf
 - Sanitize all user inputs before event creation
 - Implement rate limiting for event generation
 - Use secure transport for SIEM communication
-- Regular audit of logged data for sensitive information
+- Regular trace of logged data for sensitive information
 
 ### 4. Schema Versioning
 Always specify OCSF schema version in metadata:
