@@ -30,23 +30,23 @@ Correct course when an agent goes astray.
 Agents must be instrumentable, allowing intervention at run-time and preventing bad outcomes.
 Providing hard-controls, not soft-guardrails.
 
-For agents to become trustworthy they must be inspectable, traceable and instrumentable.
+For agents to become trustworthy they must be instrumentable, traceable, and inspectable.
 
-**Inspectable**: we don’t have to guess what’s inside. 
-Which tools, models and capabilities are being used. 
-What software version is running and who built it. 
-What are the services behind them, and which data they can access.
-Must dynamically adapt to account for rapid changes in agent components.
+**Instrumentable**: we can hook into agent execution and steer it in the right direction. 
+We can put hard controls around agents and define their scope of action. 
+Apply centralized enterprise logic, be it security, compliance or legal, uniformly across agent platforms. 
+Prevent or modify behavior to comply.
 
 **Traceable**: we know what the agent did and why. 
 We can trace back any action taken to the reasoning behind it and the originating task. 
 Even if the thread goes through multiple agents and software systems. 
 In case of compromise, we can identify and remediate the root cause.
 
-**Instrumentable**: we can hook into agent execution and steer it in the right direction. 
-We can put hard controls around agents and define their scope of action. 
-Apply centralized enterprise logic, be it security, compliance or legal, uniformly across agent platforms. 
-Prevent or modify behavior to comply.
+**Inspectable**: we don’t have to guess what’s inside. 
+Which tools, models and capabilities are being used. 
+What software version is running and who built it. 
+What are the services behind them, and which data they can access.
+Must dynamically adapt to account for rapid changes in agent components.
 
 Driven by high risk and high rewards, we are collectively thinking about these cybersecurity challenges with agents early on. 
 Early standardization provides a unique opportunity to build trustworthiness into agents.

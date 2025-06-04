@@ -1,18 +1,39 @@
-# AI Agents and Observability
-Modern AI agents, by design, operate with a degree of autonomy and complexity that makes their internal logic and decision-making difficult to inspect. 
-As these agents orchestrate reasoning, planning, and tool use to achieve their goals, understanding not just _what_ they did, but _why_ and _how_, becomes essential for trust, compliance, and operational excellence. 
+# Agent Observability
 
-**Observability**, rooted in robust tracing and monitoring, transforms agents from black boxes into transparent, governable systems.
+AI agents make autonomous decisions that impact business outcomes. Without observability, enterprises can't understand, trust, or control these decisions.
 
-To achieve this, we extend the Agent Security & Observability Protocol (ASOP) with a comprehensive observability layer, built on industry-standard telemetry protocols like OpenTelemetry and OCSF. 
-This approach ensures that every significant agent action is not only recorded, but contextualized and correlated across distributed systems and multi-agent workflows.
+**Transform agent black boxes into transparent, auditable systems through comprehensive tracing.**
 
-## Observability Objectives
+!!! info "AOS Extends Industry Standards"
+    We already have great observability standards, so AOS doesn't introduce a new one. Instead, it extends existing industry-proven standards: OpenTelemetry and OCSF to support AI agent-specific components.
 
-- **Transparency**: Observability enables a clear, step-by-step reconstruction of agent behavior, including the reasoning behind each action. This is fundamental for incident response, compliance traces, and continuous improvement.
-    
-- **Security and Risk Management**: By tracing agent actions down to atomic operations, organizations can detect anomalous or unauthorized behavior, investigate root causes, and enforce policy controls in real time.
-    
-- **Performance and Optimization**: Detailed metrics and traces reveal bottlenecks, inefficiencies, and error patterns in agent workflows, supporting targeted tuning and resource management.
-    
-- **Trust and Accountability**: A verifiable trace trail is the foundation for building trust with stakeholders, regulators, and end users, ensuring that agent-driven decisions can always be justified and explained.
+## Why Agent Observability Matters
+
+Modern agents orchestrate complex workflows: reasoning chains, tool execution, knowledge retrieval, multi-agent collaboration. When things go wrong, or right, you need to understand exactly what happened.
+
+**The Problem**: Agents operate autonomously with complex internal logic. Traditional monitoring can't capture reasoning processes or decision context.
+
+**The Solution**: Comprehensive observability that traces every agent action from trigger to outcome, with full reasoning context.
+
+## Observability Goals
+
+**Transparency**: Complete reconstruction of agent behavior. See not just what agents did, but why they made each decision.
+
+**Security**: Detect anomalous behavior in real-time. Trace attack vectors across multi-agent systems. Enforce policies at decision points.
+
+**Performance**: Identify bottlenecks in reasoning chains. Optimize tool usage patterns. Monitor resource consumption across agent workflows.
+
+**Trust**: Verifiable audit trails for regulatory compliance. Explainable decisions for stakeholder confidence.
+
+## How It Works
+
+AOS provides specification for detailed tracing of agent behavior. Traces are implemented via extensions of proven industry standards:
+
+| Standard | AgBOM spec | Status |
+|--|--|--|
+| [OpenTelemetry](https://opentelemetry.io/) | [AOS with OpenTelemetry](./extend_opentelemetry.md) | Working draft |
+| [OCSF](https://ocsf.io/) | [AOS with OCSF](./extend_ocsf.md) | Working draft |
+
+## Read Next
+
+- [Supported Events](./events.md)

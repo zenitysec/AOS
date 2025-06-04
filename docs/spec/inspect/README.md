@@ -2,7 +2,7 @@
 
 As AI agents become more sophisticated, transparent insight into their architecture, behavior, and security posture becomes critical. The Agent Bill of Materials (AgBOM) addresses this need by providing a structured, dynamic inventory of all components comprising an agent system including tools, models, capabilities, and dependencies. This concept aligns with growing calls for AI system transparency and supply chain integrity, particularly within regulated or enterprise environments.
 
-!!! info "AgBOM extends existing standards"
+!!! info "AgBOM Extends Industry Standards"
     We already have great Bill-of-Material standards, so AOS doesn't introduce a new one. Instead, it extends existing industry-proven standards: CycloneDX, SPDX, and SWID to support AI agent-specific components.
 
 ## What Is AgBOM?
@@ -20,9 +20,9 @@ To support industry-wide adoption and interoperability, AgBOM supports output in
 
 | BOM standard | AgBOM spec | Status |
 |--|--|--|
-| [CycloneDX](https://cyclonedx.org/) | [AgBOM for CycloneDX](./extend_cyclonedx.md) | Working draft |
-| [SPDX](https://spdx.dev/) | [AgBOM for SPDX](./extend_spdx.md) | [Help wanted](https://github.com/zenitysec/AOS/issues/20) |
-| [SWID](https://csrc.nist.gov/Projects/Software-Identification-SWID) | [AgBOM for SWID](./extend_swid.md) | [Help wanted](https://github.com/zenitysec/AOS/issues/21) |
+| [CycloneDX](https://cyclonedx.org/) | [AgBOM with CycloneDX](./extend_cyclonedx.md) | Working draft |
+| [SPDX](https://spdx.dev/) | [AgBOM with SPDX](./extend_spdx.md) | [Help wanted](https://github.com/zenitysec/AOS/issues/20) |
+| [SWID](https://csrc.nist.gov/Projects/Software-Identification-SWID) | [AgBOM with SWID](./extend_swid.md) | [Help wanted](https://github.com/zenitysec/AOS/issues/21) |
 
 ### AgBOM entities and parameters:
 
