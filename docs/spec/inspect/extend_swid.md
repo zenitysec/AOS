@@ -1,4 +1,4 @@
-# Extending SWID
+# AgBOM with SWID
 
 !!! warning "Help wanted"
     This specification is currently under development. We're working on defining how AgBOM extends SWID to support AI agent components.
