@@ -2,7 +2,7 @@
 
 As AI agents become more sophisticated, transparent insight into their architecture, behavior, and security posture becomes critical. The Agent Bill of Materials (AgBOM) addresses this need by providing a structured, dynamic inventory of all components comprising an agent system including tools, models, capabilities, and dependencies. This concept aligns with growing calls for AI system transparency and supply chain integrity, particularly within regulated or enterprise environments.
 
-!!! info "AgBOM extends existing standards"
+!!! info "AgBOM Extends Industry Standards"
     We already have great Bill-of-Material standards, so AOS doesn't introduce a new one. Instead, it extends existing industry-proven standards: CycloneDX, SPDX, and SWID to support AI agent-specific components.
 
 ## What Is AgBOM?
