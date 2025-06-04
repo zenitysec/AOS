@@ -2,7 +2,7 @@
 
 We're building trustworthy AI agents together. Your contributions make the future of agent observability possible.
 
-**Before diving in, ask for feedback on your idea first!** This saves time and ensures alignment.
+**Before spending lots of time on something, ask for feedback on your idea first!**
 
 Search existing issues and pull requests to avoid duplicating efforts.
 
@@ -25,7 +25,7 @@ Search existing issues and pull requests to avoid duplicating efforts.
 3. **Create feature branch** - Work in isolation
 4. **Make your changes** - Implement improvements
 5. **Test thoroughly** - Ensure everything works
-6. **Submit pull request** - Request merge to main branch
+6. **Submit pull request** - Request merge to `dev` branch
 7. **Address feedback** - Collaborate on refinements
 
 ## Code Standards
