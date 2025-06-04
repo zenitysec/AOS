@@ -31,6 +31,9 @@ AOS provides specification for detailed tracing of agent behavior. Traces are im
 
 | Standard | AgBOM spec | Status |
 |--|--|--|
-| [OpenTelemetry](https://opentelemetry.io/) | [AOS with OpenTelemetry](./OpenTelemetry.md) | Working draft |
-| [OCSF](https://ocsf.io/) | [AgBOM with OCSF](./OCSF/README.md) | Working draft |
+| [OpenTelemetry](https://opentelemetry.io/) | [AOS with OpenTelemetry](./extend_opentelemetry.md) | Working draft |
+| [OCSF](https://ocsf.io/) | [AOS with OCSF](./extend_ocsf.md) | Working draft |
 
+## Read Next
+
+- [Supported Events](./events.md)

@@ -91,10 +91,9 @@ nav:
       - ASOP specification: spec/instrument/specification.md
     - Trace:
       - Overview: spec/trace/README.md
+      - Supported Events: spec/trace/events.md
       - OpenTelemetry: spec/trace/extend_opentelemetry.md
-      - OCSF:
-        - Overview: spec/trace/OCSF/README.md
-        - Implementation Examples: spec/trace/OCSF/implementation_examples.md
+      - OCSF: spec/trace/extend_ocsf.md
     - Inspect:
       - Overview: spec/inspect/README.md
       - AgBOM with CycloneDX: spec/inspect/extend_cyclonedx.md
