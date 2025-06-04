@@ -91,7 +91,7 @@ nav:
       - ASOP specification: spec/instrument/specification.md
     - Trace:
       - Overview: spec/trace/README.md
-      - OpenTelemetry: spec/trace/OpenTelemetry.md
+      - OpenTelemetry: spec/trace/extend_opentelemetry.md
       - OCSF:
         - Overview: spec/trace/OCSF/README.md
         - Implementation Examples: spec/trace/OCSF/implementation_examples.md
