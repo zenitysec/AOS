@@ -22,7 +22,7 @@ ASOP provides a standardized way for these independent opaque agentic systems to
 
 The Agent Security & Observability Protocol (ASOP) provides specification to buliding [trustworthy agents](./../introduction.md).
 Agents that implement ASOP can be deployed with higher trust.
-They are inspectable, auditable and instrumentable.
+They are inspectable, traceable and instrumentable.
 They are an open book 
 
 They have a dynamic bill-of-material, a clear trace trail and hard inline-controls.

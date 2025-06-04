@@ -92,11 +92,11 @@ nav:
       - Extend SPDX: spec/inspect/extend_spdx.md
       - Extend SWID: spec/inspect/extend_swid.md
     - Trace:
-      - Overview: spec/audit/README.md
-      - OpenTelemetry: spec/audit/OpenTelemetry.md
+      - Overview: spec/trace/README.md
+      - OpenTelemetry: spec/trace/OpenTelemetry.md
       - OCSF:
-        - Overview: spec/audit/OCSF/README.md
-        - Implementation Examples: spec/audit/OCSF/implementation_examples.md
+        - Overview: spec/trace/OCSF/README.md
+        - Implementation Examples: spec/trace/OCSF/implementation_examples.md
     - Instrument:
       - Overview: spec/instrument/README.md
       - ASOP specification: spec/instrument/specification.md
