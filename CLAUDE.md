@@ -2,12 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Writing and Documentation Standards
+
+**IMPORTANT**: When editing ANY text content (documentation, specifications, blog posts, or code comments), you MUST follow the editorial guidelines in `STYLE.md`.
+
+Before finalizing any text, review against the Editorial Checklist in STYLE.md.
+
 ## Project Overview
 
-AOS (Agent Observability Standard) is an industry standard for building secure observable agents. The project aims to make AI agents trustworthy for enterprise adoption by providing:
-- **Inspectability**: Know what's inside agents (tools, models, capabilities)
-- **Traceability**: Trace what agents did and why with full reasoning chains
-- **Instrumentability**: Add controls and apply policies to agent behaviors
+AOS (Agent Observability Standard) is the industry standard for building secure, observable AI agents. It delivers three core capabilities:
+- **Inspectability**: Complete visibility into agent components and capabilities
+- **Traceability**: Full trace trail with reasoning chains
+- **Instrumentability**: Hard controls and policy enforcement
 
 ## Development Commands
 
