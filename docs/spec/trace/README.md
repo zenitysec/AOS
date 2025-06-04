@@ -7,6 +7,9 @@ As these agents orchestrate reasoning, planning, and tool use to achieve their g
 To achieve this, we extend the Agent Security & Observability Protocol (ASOP) with a comprehensive observability layer, built on industry-standard telemetry protocols like OpenTelemetry and OCSF. 
 This approach ensures that every significant agent action is not only recorded, but contextualized and correlated across distributed systems and multi-agent workflows.
 
+> [!TIP]
+> Read the AI agent list of [canonical events](./events.md) next.
+
 ## Observability Objectives
 
 - **Transparency**: Observability enables a clear, step-by-step reconstruction of agent behavior, including the reasoning behind each action. This is fundamental for incident response, compliance traces, and continuous improvement.
