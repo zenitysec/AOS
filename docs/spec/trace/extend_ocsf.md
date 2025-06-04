@@ -1,4 +1,4 @@
-# OCSF Integration and Support
+# AOS tracing with OCSF
 
 The Open Cybersecurity Schema Framework (OCSF) integration enables standardized security event logging for AI agent activities, making them compatible with existing SIEM and security monitoring tools.
 
