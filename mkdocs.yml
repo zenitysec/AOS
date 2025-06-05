@@ -74,9 +74,6 @@ nav:
   - Topics:
     - Core concepts: topics/core_concepts.md
     - AOS in Action: topics/AOS_in_action_example.md
-    - Extensions:
-      - Extend A2A: topics/extensions/extend_a2a.md
-      - Extend MCP: topics/extensions/extend_mcp.md
   - Tools:
     - Guardian Agent:
       - Overview: tools/guardian_agent/README.md
