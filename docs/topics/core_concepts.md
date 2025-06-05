@@ -1,16 +1,23 @@
 # Core concepts
 
 ## Agent Environment Overview
+
 An agent operates within an environment that includes interactions with several key entities and system components:
-- User: The agent interfaces directly with the user
-- Other Agents: Communication with peer agents is handled via the A2A protocol, enabling collaboration or delegation.
-- Memory: The agent accesses memory resources that may be either local or remote through MCP.
-- Knowledge Base: Knowledge sources can be either locally or accessed remotely via MCP
-- Tools: Function or tool calling are either locally or invoked remotely using the MCP
+
+| Components | Description | CaLocal | Remote | Protocols |
+|--|--|--|--|--|
+| User | Interface with the user, either directly or indirectly | ✗ | ✓ | |
+| Other Agents | Communication and collaboration with peer agents | ✓ | ✓ | |
+| Memory | Access short-term or long-ter, memory resources | ✓ | ✓ | A2A |
+| Knowledge | Files, resources, RAG, and other sources | ✓ | ✓ | MCP |
+| Prompts | Saved prompts used by the agent as templates for sub-tasks | ✓ | ✗ | MCP |
+| API Tools | Tool calls that operate over REST API calls | ✓ | ✓ | MCP |
+| OS Tools | Tool calls that operate via Operating System calls or direct keyboard and mouse manipulation (CUA agents) | ✓ | ✗ | |
+| LLM | Direct access to LLMs either for sub-tasks or reasoning | ✓ | ✓ | |
 
 A trustworthy agent is an Observed Agent that transparently exposes its interactions with the environment through standardized APIs to a Guardian Agent
 
-![Agent Diagram](/docs/assets/agent_env.png "Agent Environment Diagram")
+![Agent Diagram](../assets/agent_env.png "Agent Environment Diagram")
 
 ## Agent Instrumentation
 
