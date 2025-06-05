@@ -1,4 +1,4 @@
-# Overview
+# Agent Observability Standard - Inspect with AgBOM
 
 As AI agents become more sophisticated, transparent insight into their architecture, behavior, and security posture becomes critical. The Agent Bill of Materials (AgBOM) addresses this need by providing a structured, dynamic inventory of all components comprising an agent system including tools, models, capabilities, and dependencies. This concept aligns with growing calls for AI system transparency and supply chain integrity, particularly within regulated or enterprise environments.
 

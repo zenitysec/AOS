@@ -1,4 +1,4 @@
-# Agent Observability
+# Agent Observability Standard - Trace
 
 AI agents make autonomous decisions that impact business outcomes. Without observability, enterprises can't understand, trust, or control these decisions.
 
