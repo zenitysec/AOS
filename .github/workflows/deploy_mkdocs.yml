@@ -1,7 +1,6 @@
 # This workflow builds a MkDocs site and deploys it to GitHub Pages.
 # It uses the `uv` tool to run MkDocs, which is a modern Python package manager.
 # The workflow is triggered on pushes to the main branch and can also be run manually.
-# It sets up the necessary permissions for the GITHUB_TOKEN
 name: Deploy MkDocs site to Pages
 
 on:
@@ -33,16 +32,17 @@ jobs:
       
       - name: Install uv
         uses: astral-sh/setup-uv@v3
-        
+      
+      - name: Build documentation
+        env:
+          GITHUB_PAGES_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
+        run: |
+          uv run mkdocs build
+          
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-        
-      - name: Build with MkDocs
-        env:
-          GITHUB_PAGES_URL: ${{ steps.pages.outputs.base_url }}
-          GOOGLE_ANALYTICS_KEY: ${{ secrets.GOOGLE_ANALYTICS_KEY }}
-        run: uv run mkdocs build
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

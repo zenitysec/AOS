@@ -1,10 +1,10 @@
-# Agent Security & Observability Framework
+# Agent Observability Standard
 
-[![Apache License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Apache License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](./LICENSE.txt)
 
 ![AOS Banner](docs/assets/banner.png)
 
-**Holistic framework for Agent Security and Observability making trustworthy Agents achievable.**
+**Making AI agents trustworthy by standardizing observability.**
 
 ## Rational
 Agents must become trustworthy to enable widescale adoption.
@@ -19,7 +19,7 @@ For agents to become trustworthy they must be **inspectable, traceable and instr
 
 ### Key Components
 
-The framework covers the following aspects
+The standard covers the following aspects
 1. AOS that defines the interaction between the Observed Agent and the Guardian Agent
 2. Observability requirements and implementations for tracing all AOS events using OpenTelemetry and OCSF
 3. Agent BOM (AgBOM) requirements and implementations for exposing dynamic Agent's bill-of-material via CoycloneDX, SWID and SPDX
@@ -64,4 +64,4 @@ We welcome community contributions to enhance and evolve AOS!
 
 ## About
 
-The AOS is an open-source project by Zenity, under the [Apache License 2.0](LICENSE), and is open to contributions from the community.
+The AOS is an open-source project under the [Apache License 2.0](LICENSE), and is open to contributions from the community.

@@ -1,6 +1,6 @@
 # AOS Specification
 
-**Version:** `1.0.0`
+**Version:** `0.1.0`
 
 ## 1. Core concepts
 - **Guardian Agent**: An agent that monitors other agents behavior for anomalous and risky decisions.
