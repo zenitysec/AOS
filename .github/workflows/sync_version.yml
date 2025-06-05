@@ -41,6 +41,17 @@ jobs:
         run: |
           uv run .github/workflows/sync_version.py "${{ env.VERSION }}"
       
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+      
       - name: Create Pull Request
         if: steps.changes.outputs.has_changes == 'true'
         uses: peter-evans/create-pull-request@v5
@@ -56,7 +67,11 @@ jobs:
             - `docs/spec/instrument/specification.md`
             - `specification/AOS/aos_schema.json`
             
-            The version was read from the `VERSION` file.
+            The version was read from the `version.txt` file.
           branch: version-sync-${{ env.VERSION }}
           delete-branch: true
+          add-paths: |
+            pyproject.toml
+            docs/spec/instrument/specification.md
+            specification/AOS/aos_schema.json
           
