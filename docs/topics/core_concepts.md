@@ -56,4 +56,4 @@ AOS also proposes security extensions for [MCP](../spec/instrument/extend_mcp.md
 
 ## Read Next
 
-- [AOS in Action](./topics/AOS_in_action.md)
+- [AOS in Action](./AOS_in_action_example.md)
