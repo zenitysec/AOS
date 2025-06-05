@@ -179,9 +179,8 @@ It **MUST** be one of the following:
 For conveying plain textual content.
 
 
-| Field Name | Type                  | Required | Description                                   |
-| :--------- | :-------------------- | :------- | :------------------
--------------------------- |
+| Field Name                          | Type                                                               | Required | Description                                                                                                                                 |
+| :---------------------------------- | :----------------------------------------------------------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
 | `kind`     | `"text"` (literal)    | Yes      | Identifies this part as textual content.      |
 | `text`     | `string`              | Yes      | The textual content of the part.              |
 | `metadata` | `Record<string, any>` | No       | Optional metadata specific to this text part. |
