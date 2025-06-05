@@ -47,14 +47,11 @@ theme:
 
 plugins:
   - search
-  # - mike:
-  #     alias_type: symlink
-  #     redirect_template: null
-  #     deploy_prefix: ''
-  #     canonical_version: null
-  #     version_selector: true
-  #     css_dir: css
-  #     javascript_dir: js
+  - mike:
+      deploy_prefix: ''
+      canonical_version: latest
+      version_selector: true
+      branch: gh-pages
 
 # Additional configuration
 extra:
@@ -65,8 +62,8 @@ extra:
     - icon: /fontawesome/regular/envelope
       name: Send us an email
       link: mailto:aos@zenity.io
-  # version:
-  #   provider: mike
+  version:
+    provider: mike
 
 nav:
   - Trustworthy Agents: README.md
