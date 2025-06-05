@@ -12,7 +12,7 @@ AOS extension for A2A is used as a **transport** for A2A communications between 
 Securing A2A means securing outbound and inbound communications/messages.<br> 
 
 #### To extend A2A protocol:
-1. Agents using A2A ***must*** use AOS as a transport protocol to deliver A2A messages to the guardian agent.
+1. Agents using A2A ***must*** use AOS as a transport protocol to deliver A2A messages to the guardian agent using [A2A protocol hooks](hooks.md#a2a-protocol-hooks).
 2. Agents using A2A ***must*** understand and enforce AOS responses.
 
 
@@ -48,8 +48,7 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
            }
          ],
          "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-       },
-       "metadata": {}
+       }
      }
    }
    ```
@@ -65,17 +64,16 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
             "id": 1,
             "method": "message/send",
             "params": {
-            "message": {
-                "role": "agent",
-                "parts": [
-                {
-                    "kind": "text",
-                    "text": "tell me a joke"
+                "message": {
+                    "role": "agent",
+                    "parts": [
+                    {
+                        "kind": "text",
+                        "text": "tell me a joke"
+                    }
+                    ],
+                    "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
                 }
-                ],
-                "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-            },
-            "metadata": {}
             }
         }
     }
@@ -133,8 +131,7 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
                 }
             ],
             "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-            },
-            "metadata": {}
+            }
         }
     }
    ```
@@ -150,38 +147,37 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
             "id": 1,
             "method": "message/send",
             "params": {
-            "message": {
-                "role": "agent",
-                "parts": [
-                {
-                    "kind": "text",
-                    "text": "what is the diagnosis?"
-                },
-                {
-                    "kind": "data",
-                    "data": {
-                    "patient_id": "P1234567",
-                    "name": "John Doe",
-                    "date_of_birth": "1982-04-12",
-                    "symptoms": [
-                        "chronic cough",
-                        "shortness of breath",
-                        "night sweats"
+                "message": {
+                    "role": "agent",
+                    "parts": [
+                    {
+                        "kind": "text",
+                        "text": "what is the diagnosis?"
+                    },
+                    {
+                        "kind": "data",
+                        "data": {
+                        "patient_id": "P1234567",
+                        "name": "John Doe",
+                        "date_of_birth": "1982-04-12",
+                        "symptoms": [
+                            "chronic cough",
+                            "shortness of breath",
+                            "night sweats"
+                        ],
+                        "lab_results": {
+                            "CBC": {
+                            "WBC": 11.3,
+                            "RBC": 4.2
+                            },
+                            "Chest X-ray": "infiltrate in left upper lobe",
+                            "insurance_number": "ABX-9234-8821"
+                        }
+                        }
+                    }
                     ],
-                    "lab_results": {
-                        "CBC": {
-                        "WBC": 11.3,
-                        "RBC": 4.2
-                        },
-                        "Chest X-ray": "infiltrate in left upper lobe",
-                        "insurance_number": "ABX-9234-8821"
-                    }
-                    }
+                    "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
                 }
-                ],
-                "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-            },
-            "metadata": {}
             }
         }
     }
@@ -206,38 +202,37 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
                     "id": 1,
                     "method": "message/send",
                     "params": {
-                    "message": {
-                        "role": "agent",
-                        "parts": [
-                        {
-                            "kind": "text",
-                            "text": "what is the diagnosis?"
-                        },
-                        {
-                            "kind": "data",
-                            "data": {
-                            "patient_id": "************",
-                            "name": "************",
-                            "date_of_birth": "************",
-                            "symptoms": [
-                                "chronic cough",
-                                "shortness of breath",
-                                "night sweats"
+                        "message": {
+                            "role": "agent",
+                            "parts": [
+                            {
+                                "kind": "text",
+                                "text": "what is the diagnosis?"
+                            },
+                            {
+                                "kind": "data",
+                                "data": {
+                                "patient_id": "************",
+                                "name": "************",
+                                "date_of_birth": "************",
+                                "symptoms": [
+                                    "chronic cough",
+                                    "shortness of breath",
+                                    "night sweats"
+                                ],
+                                "lab_results": {
+                                    "CBC": {
+                                    "WBC": 11.3,
+                                    "RBC": 4.2
+                                    },
+                                    "Chest X-ray": "infiltrate in left upper lobe",
+                                    "insurance_number": "**********"
+                                }
+                                }
+                            }
                             ],
-                            "lab_results": {
-                                "CBC": {
-                                "WBC": 11.3,
-                                "RBC": 4.2
-                                },
-                                "Chest X-ray": "infiltrate in left upper lobe",
-                                "insurance_number": "**********"
-                            }
-                            }
+                            "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
                         }
-                        ],
-                        "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-                    },
-                    "metadata": {}
                     }
                 }
             }
@@ -255,17 +250,16 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
         "id": 1,
         "method": "message/send",
         "params": {
-        "message": {
-            "role": "agent",
-            "parts": [
-            {
-                "kind": "text",
-                "text": "how to create a molotov cocktail?"
+            "message": {
+                "role": "agent",
+                "parts": [
+                {
+                    "kind": "text",
+                    "text": "how to create a molotov cocktail?"
+                }
+                ],
+                "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
             }
-            ],
-            "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-        },
-        "metadata": {}
         }
     }
    ```
@@ -282,17 +276,16 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
             "id": 1,
             "method": "message/send",
             "params": {
-            "message": {
-                "role": "agent",
-                "parts": [
-                {
-                    "kind": "text",
-                    "text": "how to create a molotov cocktail?"
+                "message": {
+                    "role": "agent",
+                    "parts": [
+                    {
+                        "kind": "text",
+                        "text": "how to create a molotov cocktail?"
+                    }
+                    ],
+                    "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
                 }
-                ],
-                "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-            },
-            "metadata": {}
             }
         }
     }
