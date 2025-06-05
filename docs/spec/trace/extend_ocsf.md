@@ -14,7 +14,7 @@ AOS maps agent activities to OCSF event classes, providing:
 
 ### Agent Activity Events
 
-ASOP extends OCSF's API Activity class (6003) for agent-specific events. Here's a basic example:
+AOS extends OCSF's API Activity class (6003) for agent-specific events. Here's a basic example:
 
 ```json
 {

@@ -35,7 +35,7 @@ uv pip install -e .
 ## Architecture Overview
 
 ### Core Components
-1. **ASOP (Agent Security & Observability Protocol)**: JSON-RPC 2.0 protocol defining interactions between Observed Agents and Guardian Agents
+1. **AOS**: JSON-RPC 2.0 protocol defining interactions between Observed Agents and Guardian Agents
 2. **Observability Layer**: Built on OpenTelemetry and OCSF standards for comprehensive agent tracing
 3. **AgBOM (Agent Bill of Materials)**: Dynamic inventory using CycloneDX, SPDX, and SWID standards
 
@@ -52,8 +52,8 @@ uv pip install -e .
 - **Standards Integration**: OpenTelemetry for tracing, OCSF for security events, CycloneDX/SPDX/SWID for bill of materials
 
 ### Important Files
-- `specification/ASOP/asop_schema.json`: Complete JSON Schema for ASOP protocol
-- `docs/spec/instrument/specification.md`: Detailed protocol specification
+- `specification/AOS/aos_schema.json`: Complete JSON Schema for AOS
+- `docs/spec/instrument/specification.md`: Detailed specification
 - `docs/topics/core_concepts.md`: Fundamental concepts and terminology
 - `mkdocs.yml`: Documentation configuration
 

@@ -30,14 +30,14 @@ The Guardian Agent enforces policies and enables tracing through the following:
 ## Agent Security & Observability Framework
 
 To support an holistic view and security enforcement, the framework defines three components
-1. Agent Security & Observability Protocol (ASOP) that defines the interaction between the Observed Agent and the Guardian Agent
-2. Observability requirements and implementations for tracing all ASOP events
+1. AOS defines the interaction between the Observed Agent and the Guardian Agent
+2. Observability requirements and implementations for tracing all AOS events
 3. Agent BOM (AgBOM) requirements and implementations for exposing dynamic Agent's bill-of-material
 
 ## A2A and MCP
 
 Our framework assumes MCP and A2A are natural part of an Agent's environment.
-The ASOP protocol carries MCP and A2A intact, ensuring full compatability and transparency.
+The AOS carries MCP and A2A intact, ensuring full compatability and transparency.
 
 Security extensions proposed for those protocols will be coordinated with A2A and MCP groups.
 For further details on the required extensions read [Security Extensions](./docs/topics/security_extensions/README.md)

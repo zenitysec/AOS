@@ -5,12 +5,12 @@ Please read [Core Concepts](./core_concepts.md) if you haven't already.
 ## Overall process
 
 The following sequence diagram describes an example of MCP tool call request by an Observed Agent.
-Instrumented with ASOP protocol the Observed Agent communicates with a Guardian Agent.
+Instrumented with AOS the Observed Agent communicates with a Guardian Agent.
 
 ![Sequence Diagram](/docs/assets/sequence_diagram.png "Sequence Diagram")
 
 The Guardian Agent has 3 roles:
-1. It should permit, deny or modify the request and send back its verdict by ASOP protocol
+1. It should permit, deny or modify the request and send back its verdict by AOS
 2. Sending a trace of the request for observability purpose using OpenTelemetry or OCSF
 3. Update it's bill-of-material with the new tool using CycloneDX, SWID or SPDX
 
@@ -20,9 +20,9 @@ The Guardian Agent has 3 roles:
 ```python
 # add here the MCP tool call format
 ```
-### Step 2: Agent ASOP Request sending
+### Step 2: Agent AOS Request sending
 ```python
-# add here the ASOP Request with the MCP tool call
+# add here the AOS Request with the MCP tool call
 ```
 ### Step 3: Guardian Agent sending a trace of the MCP Tool Call
 ```python
@@ -54,7 +54,7 @@ def restrict_to_mcp_servers():
 ```
 ### Step 5: Guardian Agent Sending a "Permitted" Response
 ```python
-# add here the ASOP Response
+# add here the AOS Response
 ```
 ### Step 6: Guardian Agent Sending an updated BOM
 
@@ -141,5 +141,5 @@ The Guardian Agent update its BOM and send an updated file in CycloneDx format
 ## Read Next
 
 - [AgBOM](./../topics/AgBOM/README.md)
-- [ASOP](./../topics/ASOP/README.md)
+- [AOS](./../topics/AOS/README.md)
 - [Observability](./../topics/Observability/README.md)

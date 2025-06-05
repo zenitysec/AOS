@@ -1,4 +1,4 @@
-# AOS Protocol Specification
+# AOS Specification
 
 **Version:** `1.0.0`
 
@@ -25,8 +25,8 @@ AOS uses **[JSON-RPC 2.0](https://www.jsonrpc.org/specification)** as the payloa
 - The `Content-Type` header for HTTP requests and responses containing JSON-RPC payloads **MUST** be `application/json`.
 
 
-## 3. Protocol Data Objects
-These objects define the structure of data exchanged within the JSON-RPC methods of the AOS protocol.
+## 3. Standard Data Objects
+These objects define the structure of data exchanged within the JSON-RPC methods of AOS.
 
 
 ### 3.1. `Agent` Object
