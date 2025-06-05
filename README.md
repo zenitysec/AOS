@@ -4,7 +4,7 @@
 
 ![AOS Banner](docs/assets/banner.png)
 
-**Making AI agents trustworthy by standardizing observabilityHolistic standard.**
+**Making AI agents trustworthy by standardizing observability.**
 
 ## Rational
 Agents must become trustworthy to enable widescale adoption.
