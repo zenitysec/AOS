@@ -11,7 +11,7 @@ AOS extension for MCP is used as a **transport** for MCP communications between 
 Securing MCP means securing outbound and inbound communications/messages from the agent (using MCP client) to the MCP server and vice versa.<br> 
 
 #### To extend MCP protocol:
-1. Agents using MCP ***must*** use AOS as a transport protocol to deliver MCP messages to the guardian agent.
+1. Agents using MCP ***must*** use AOS as a transport protocol to deliver MCP messages to the guardian agent using [MCP protocol hooks](hooks.md#mcp-protocol-hooks).
 2. Agents using MCP ***must*** understand and enforce AOS responses.
 
 #### The following flow explains how this should be done:
