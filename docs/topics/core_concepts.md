@@ -4,7 +4,7 @@
 
 An agent operates within an environment that includes interactions with several key entities and system components:
 
-| Components | Description | CaLocal | Remote | Protocols |
+| Components | Description | Can be Local | Can be Remote | Related Protocols |
 |--|--|--|--|--|
 | User | Interface with the user, either directly or indirectly | ✗ | ✓ | |
 | Other Agents | Communication and collaboration with peer agents | ✓ | ✓ | |
