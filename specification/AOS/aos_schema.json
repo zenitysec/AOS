@@ -1,7 +1,7 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "ASOP Schema",
-    "description": "JSON Schema Agent Security & Observability Protocol",
+    "title": "AOS Schema",
+    "description": "JSON Schema for Agent Observability Standard",
     "$defs": {
         "A2AMessage": {
             "properties": {

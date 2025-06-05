@@ -1,10 +1,10 @@
-# OCSF Integration and Support
+# AOS tracing with OCSF
 
 The Open Cybersecurity Schema Framework (OCSF) integration enables standardized security event logging for AI agent activities, making them compatible with existing SIEM and security monitoring tools.
 
 ## Overview
 
-ASOP maps agent activities to OCSF event classes, providing:
+AOS maps agent activities to OCSF event classes, providing:
 - Standardized security event format
 - MCP & A2A Support out of the box
 - Unified view of agent and traditional security events
@@ -14,7 +14,7 @@ ASOP maps agent activities to OCSF event classes, providing:
 
 ### Agent Activity Events
 
-ASOP extends OCSF's API Activity class (6003) for agent-specific events. 
+AOS extends OCSF's API Activity class (6003) for agent-specific events.
 
 Here's a basic example:
 
@@ -32,8 +32,8 @@ Here's a basic example:
   "metadata": {
     "version": "1.0.0",
     "product": {
-      "name": "ASOP Security Layer",
-      "vendor_name": "ASOP"
+      "name": "AOS Security Layer",
+      "vendor_name": "AOS"
     }
   },
   "actor": {
@@ -58,7 +58,7 @@ Here's a basic example:
   },
   "osint": [],
   "unmapped": {
-    "asop": {
+    "aos": {
       "tool_call": {
         "name": "database_query",
         "arguments": {
@@ -71,8 +71,8 @@ Here's a basic example:
           "name": "CustomerServiceAgent",
           "version": "1.0.0",
           "provider": {
-            "name": "ASOP",
-            "url": "https://example.asop"
+            "name": "AOS",
+            "url": "https://example.aos"
           }
         },
         "session": {
@@ -114,8 +114,8 @@ Here's a basic example:
   "metadata": {
     "version": "1.0.0",
     "product": {
-      "name": "ASOP Security Layer",
-      "vendor_name": "ASOP"
+      "name": "AOS Security Layer",
+      "vendor_name": "AOS"
     },
     "correlation_uid": "exec-123"
   },
@@ -155,7 +155,7 @@ Here's a basic example:
   },
   "osint": [],
   "unmapped": {
-    "asop": {
+    "aos": {
       "step": {
         "id": "step-abc",
         "type": "toolCall",
@@ -188,8 +188,8 @@ Here's a basic example:
           "name": "CustomerServiceAgent",
           "version": "1.0.0",
           "provider": {
-            "name": "ASOP",
-            "url": "https://example.asop"
+            "name": "AOS",
+            "url": "https://example.aos"
           }
         },
         "model": {
@@ -218,8 +218,8 @@ Here's a basic example:
   "metadata": {
     "version": "1.0.0",
     "product": {
-      "name": "ASOP Security Layer",
-      "vendor_name": "ASOP"
+      "name": "AOS Security Layer",
+      "vendor_name": "AOS"
     },
     "correlation_uid": "4bf92f3577b34da6a3ce929d0e0e4736"
   },
@@ -258,15 +258,15 @@ Here's a basic example:
     }
   },
   "unmapped": {
-    "asop": {
+    "aos": {
       "agent_context": {
         "agent": {
           "id": "planner-123",
           "name": "PlannerAgent",
           "version": "1.0.0",
           "provider": {
-            "name": "ASOP",
-            "url": "https://example.asop"
+            "name": "AOS",
+            "url": "https://example.aos"
           }
         },
         "session": {
@@ -315,6 +315,11 @@ Here's a basic example:
 - Distributed tracing support
 - Hierarchical event relationships
 
+## Read Next
+
+- [Core Concepts](../../topics/core_concepts.md)
+------------------
+
 ## Implementation
 
 For detailed implementation examples, including:
@@ -325,7 +330,7 @@ For detailed implementation examples, including:
 - Multi-agent workflows
 - Validation and error handling
 
-Please refer to the [Implementation Examples](implementation_examples.md) document.
+Please refer to the [Implementation Examples](./OCSF/implementation_examples.md) document.
 
 
 ## Resources
@@ -333,4 +338,3 @@ Please refer to the [Implementation Examples](implementation_examples.md) docume
 - [OCSF Schema Documentation](https://schema.ocsf.io/)
 - [py-ocsf-models Repository](https://github.com/prowler-cloud/py-ocsf-models)
 - [OCSF Examples](https://github.com/ocsf/examples)
-
