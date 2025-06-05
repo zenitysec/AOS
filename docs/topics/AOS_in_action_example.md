@@ -7,9 +7,10 @@ Please read [Core Concepts](./core_concepts.md) if you haven't already.
 The following sequence diagram describes an example of MCP tool call request by an Observed Agent.
 Instrumented with AOS the Observed Agent communicates with a Guardian Agent.
 
-![Sequence Diagram](/docs/assets/sequence_diagram.png "Sequence Diagram")
+![Sequence Diagram](../assets/sequence_diagram.png "Sequence Diagram")
 
 The Guardian Agent has 3 roles:
+
 1. It should permit, deny or modify the request and send back its verdict by AOS
 2. Sending a trace of the request for observability purpose using OpenTelemetry or OCSF
 3. Update it's bill-of-material with the new tool using CycloneDX, SWID or SPDX
@@ -140,6 +141,6 @@ The Guardian Agent update its BOM and send an updated file in CycloneDx format
 
 ## Read Next
 
-- [AgBOM](./../topics/AgBOM/README.md)
-- [AOS](./../topics/AOS/README.md)
-- [Observability](./../topics/Observability/README.md)
+- [Instrument](../spec/instrument/README.md)
+- [Trace](../spec/trace/README.md)
+- [Inspect](../spec/inspect/README.md)
