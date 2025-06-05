@@ -41,12 +41,12 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
       
-      - name: Read version from VERSION file
+      - name: Read version from version.txt file
         id: version
         run: |
-          VERSION=$(cat VERSION)
+          VERSION=$(cat version.txt)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "::set-output name=version::$VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "Using version: $VERSION"
       
       - name: Deploy documentation with mike
