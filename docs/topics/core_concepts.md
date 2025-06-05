@@ -3,6 +3,14 @@
 AOS specifies the in-line _Hooks_ and out-of-band _Events_ that an agent need to support to be considered trustworthy.
 Usings these events and hooks, _Observed Agents_ can be monitored and protected by a _Guardian Agent_.
 
+## Agent Observability Standard
+
+To support an holistic view and security enforcement, the framework defines three components
+
+1. **Instrument** - Observed agents provide standard hooks that can modify runtime execution via lightweight callouts
+2. **Trace** - Observed agents emit comprehensive events on every runtime decision and lifecycle change
+3. **Inspect** - Observed agents support requests for Agent Bill-Of-Material (AgBOM)
+
 ## Agent Environment Overview
 
 An agent operates within an environment that includes interactions with several key entities and system components:
@@ -39,21 +47,12 @@ The Guardian Agent enforces policies and enables tracing through the following:
 - Standardized Tracing: Maintain a consistent trace of all interactions to enhance observability, support a comprehensive view across agents, and enable detailed analysis of interaction history.
 - Provide comprehensive and dynamic AgBOM: Maintain and notify an up to date list of components and dependencies for the agent environment changes such as new or updated tools, models and other components
 
-## Agent Security & Observability Framework
-
-To support an holistic view and security enforcement, the framework defines three components
-
-1. AOS defines the interaction between the Observed Agent and the Guardian Agent
-2. Observability requirements and implementations for tracing all AOS events
-3. Agent BOM (AgBOM) requirements and implementations for exposing dynamic Agent's bill-of-material
-
 ## A2A and MCP
 
-Our framework assumes MCP and A2A are natural part of an Agent's environment.
-The AOS carries MCP and A2A intact, ensuring full compatability and transparency.
+AOS works even better when MCP and A2A are part of an Agent's environment.
+It carries MCP and A2A intact, ensuring full compatibility and transparency.
 
-Security extensions proposed for those protocols will be coordinated with A2A and MCP groups.
-For further details on the required extensions read [Security Extensions](./docs/topics/security_extensions/README.md)
+AOS also proposes security extensions for [MCP](../spec/instrument/extend_mcp.md) and [A2A](../spec/instrument/extend_a2a.md) for native observability support.
 
 ## Read Next
 
