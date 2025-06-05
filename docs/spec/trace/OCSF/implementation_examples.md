@@ -1,8 +1,6 @@
 # OCSF Implementation Examples
 
-![Status: Conceptual](https://img.shields.io/badge/Status-Conceptual-purple)
-
-This document provides detailed implementation examples and patterns for ASOP's OCSF integration.
+This document provides detailed implementation examples and patterns for AOS's OCSF implementation.
 
 ## Dependencies
 
@@ -214,117 +212,6 @@ class OCSFAgentLogger:
 
         except Exception as e:
             raise ValueError(f"Failed to create security finding: {str(e)}")
-```
-
-## Advanced Usage with Validation
-
-```python
-from py_ocsf_models.validators import EventValidator
-from py_ocsf_models.exceptions import ValidationError
-
-class ValidatedOCSFLogger:
-    """OCSF logger with strict validation."""
-    
-    def __init__(self):
-        self.validator = EventValidator()
-        self.logger = OCSFAgentLogger()
-    
-    async def create_validated_event(self, 
-                                   agent_data: Dict[str, Any]) -> Dict[str, Any]:
-        """Create and validate OCSF event with full schema validation."""
-        try:
-            # Create base event
-            raw_event = self.logger.create_api_activity_event(
-                agent_data, validate=False
-            )
-            
-            # Validate against OCSF schema
-            validated = await self.validator.validate_event(raw_event)
-            
-            # Additional custom validations
-            self._validate_agent_context(validated)
-            
-            return validated
-
-        except ValidationError as e:
-            raise ValueError(f"OCSF validation error: {str(e)}")
-        except Exception as e:
-            raise ValueError(f"Event creation failed: {str(e)}")
-    
-    def _validate_agent_context(self, event: Dict[str, Any]) -> None:
-        """Validate agent-specific context requirements."""
-        unmapped = event.get("unmapped", {})
-        asop = unmapped.get("asop", {})
-        context = asop.get("context", {})
-        step = asop.get("step", {})
-        
-        # Validate agent information
-        agent = context.get("agent", {})
-        agent_required = ["id", "name", "version"]
-        missing_agent = [f for f in agent_required if not agent.get(f)]
-        if missing_agent:
-            raise ValidationError(
-                f"Missing required agent fields: {', '.join(missing_agent)}"
-            )
-
-        # Validate provider information
-        provider = agent.get("provider", {})
-        if not provider.get("name"):
-            raise ValidationError("Missing required provider name")
-
-        # Validate session context
-        if not context.get("session", {}).get("id"):
-            raise ValidationError("Missing required session id")
-
-        # Validate step information
-        step_required = ["id", "type", "turn_id"]
-        missing_step = [f for f in step_required if not step.get(f)]
-        if missing_step:
-            raise ValidationError(
-                f"Missing required step fields: {', '.join(missing_step)}"
-            )
-
-        # Validate model information if present
-        model = context.get("model")
-        if model:
-            if not model.get("id"):
-                raise ValidationError("Missing required model id")
-            if not model.get("provider", {}).get("name"):
-                raise ValidationError("Missing required model provider name")
-
-        # Validate operation if present
-        operation = step.get("operation", {})
-        if operation:
-            op_type = operation.get("type")
-            if not op_type:
-                raise ValidationError("Missing required operation type")
-
-            # Validate based on operation type
-            if op_type == "tool_execution":
-                tool = operation.get("tool", {})
-                tool_required = ["id", "execution_id"]
-                missing_tool = [f for f in tool_required if not tool.get(f)]
-                if missing_tool:
-                    raise ValidationError(
-                        f"Missing required tool fields: {', '.join(missing_tool)}"
-                    )
-
-            elif op_type == "protocol_message":
-                protocol = operation.get("protocol", {})
-                if not protocol.get("type"):
-                    raise ValidationError("Missing required protocol type")
-                if not protocol.get("message"):
-                    raise ValidationError("Missing required protocol message")
-
-            elif op_type == "memory_operation":
-                if not operation.get("action"):
-                    raise ValidationError("Missing required memory operation action")
-                if not operation.get("content"):
-                    raise ValidationError("Missing required memory operation content")
-
-            elif op_type == "knowledge_operation":
-                if not operation.get("query"):
-                    raise ValidationError("Missing required knowledge query")
 ```
 
 ## SIEM Integration Examples
@@ -602,7 +489,7 @@ index=security sourcetype=ocsf
 - Sanitize all user inputs before event creation
 - Implement rate limiting for event generation
 - Use secure transport for SIEM communication
-- Regular audit of logged data for sensitive information
+- Regular trace of logged data for sensitive information
 
 ### 4. Schema Versioning
 Always specify OCSF schema version in metadata:

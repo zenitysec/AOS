@@ -1,8 +1,8 @@
-# Mapping Traces with Open Telemetry
+# AOS tracing with Open Telemetry
 
-To thoroughly audit an AI agent, it is crucial to connect traces and events in a manner that accurately reflects the agent's atomic actions and its broader units of logical operation. This provides a transparent, step-by-step visualization of how an agent processes information, arrives at decisions, and executes tasks. The Agent Security & Observability Protocol (ASOP) schema offers a structured framework for defining these interactions, which can then be effectively mapped to OpenTelemetry concepts.
+To thoroughly trace an AI agent, it is crucial to connect traces and events in a manner that accurately reflects the agent's atomic actions and its broader units of logical operation. This provides a transparent, step-by-step visualization of how an agent processes information, arrives at decisions, and executes tasks. The AOS schema offers a structured framework for defining these interactions, which can then be effectively mapped to OpenTelemetry concepts.
 
-- **Mapping ASOP Steps to OpenTelemetry Spans**: Each distinct step defined within a protocol such as ASOP can be directly correlated with an OpenTelemetry span. For instance:
+- **Mapping AOS Steps to OpenTelemetry Spans**: Each distinct step defined within AOS can be directly correlated with an OpenTelemetry span. For instance:
     
     - `steps/message`: A span can be initiated when a user message is processed or when an agent generates a message. Attributes for this span would ideally include the message role, its content (potentially summarized or hashed to protect Personally Identifiable Information (PII)), and relevant IDs.
         
@@ -22,9 +22,9 @@ To thoroughly audit an AI agent, it is crucial to connect traces and events in a
         
     - Within this primary span, child spans can represent major logical phases such as `agent.plan` or individual turns within a conversation.
         
-    - Each "turn" (which can be identified by a `turnId` as per ASOP ) can itself be a parent span.
+    - Each "turn" (which can be identified by a `turnId` as per AOS ) can itself be a parent span.
         
-    - Individual "steps" (identifiable by a `stepId` in ASOP ) occurring within a turn, such as an LLM call followed by a tool call, then become child spans under the respective turn span. This structure aligns well with the `RequestContext` defined in ASOP, which includes `agent`, `session`, `turnId`, and `stepId`.
+    - Individual "steps" (identifiable by a `stepId` in AOS ) occurring within a turn, such as an LLM call followed by a tool call, then become child spans under the respective turn span. This structure aligns well with the `RequestContext` defined in AOS, which includes `agent`, `session`, `turnId`, and `stepId`.
         
 - **Enriching Spans with Attributes from Agent Logic**:
     

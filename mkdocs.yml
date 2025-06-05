@@ -1,0 +1,102 @@
+site_name: Agent Observability Standard
+site_url: !ENV GITHUB_PAGES_URL
+site_description: >-
+  An industry standard for building trustworthy AI agents - inspectable, observable and instrumentable
+   to enable enterprise-wide adoption with confidence.
+
+# Repository
+repo_name: zenitysec/aos
+repo_url: https://github.com/zenitysec/aos
+
+# Copyright
+copyright: Copyright &copy; 2025 AOS
+
+docs_dir: docs
+
+theme:
+  name: material
+  features:
+    - search.suggest
+    # edit this page for each doc page
+    - content.action.edit
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: material/security
+  icon: 
+    logo: material/security
+
+plugins:
+  - search
+
+# Additional configuration
+extra:
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+  social:
+    - icon: /fontawesome/regular/envelope
+      name: Send us an email
+      link: mailto:aos@zenity.io
+
+nav:
+  - Trustworthy Agents: README.md
+  - Topics:
+    - Core concepts: topics/core_concepts.md
+    - AOS in Action: topics/AOS_in_action_example.md
+  - Specification:
+    - Instrument:
+      - Overview: spec/instrument/README.md
+      - Supported Hooks: spec/instrument/hooks.md
+      - AOS specification: spec/instrument/specification.md
+      - Instrument MCP: spec/instrument/extend_mcp.md
+      - Instrument A2A: spec/instrument/extend_a2a.md
+    - Trace:
+      - Overview: spec/trace/README.md
+      - Supported Events: spec/trace/events.md
+      - Trace with OpenTelemetry: spec/trace/extend_opentelemetry.md
+      - Trace with OCSF: spec/trace/extend_ocsf.md
+      - OCSF Implementation Examples: spec/trace/OCSF/implementation_examples.md
+    - Inspect:
+      - Overview: spec/inspect/README.md
+      - AgBOM with CycloneDX: spec/inspect/extend_cyclonedx.md
+      - AgBOM with SPDX: spec/inspect/extend_spdx.md
+      - AgBOM with SWID: spec/inspect/extend_swid.md
+  - About: about.md
+
+markdown_extensions:
+  # Emojis
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  # Syntax Highlighting
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  # Callouts
+  - admonition
+  - pymdownx.details

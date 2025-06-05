@@ -1,0 +1,33 @@
+{
+    "yaml.schemas": {
+        "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml"
+    },
+    "yaml.customTags": [
+        "!ENV scalar",
+        "!ENV sequence",
+        "!relative scalar",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
+        "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format"
+    ],
+    "cSpell.words": [
+        "cyclonedx",
+        "fontawesome",
+        "inlinehilite",
+        "inspectable",
+        "instrumentable",
+        "linenums",
+        "OCSF",
+        "pygments",
+        "pymdownx",
+        "pyproject",
+        "pythonrepl",
+        "Roboto",
+        "Sandboxed",
+        "superfences",
+        "SWID",
+        "twemoji",
+        "websearchapi",
+        "zenitysec"
+    ]
+}
