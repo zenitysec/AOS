@@ -1,1 +1,0 @@
-# Apply corporate policy

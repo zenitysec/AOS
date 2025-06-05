@@ -3,25 +3,25 @@
 ## MCP protocol
 The Model Context Protocol ([MCP](https://modelcontextprotocol.io/introduction)) is an open standard that simplifies how AI models, particularly Large Language Models (LLMs) and agents, interact with external data sources, tools, and APIs. It's designed to provide a standardized way for AI agents to connect with the real world, making it easier to build AI applications that can access and use external information.<br><br>
 MCP is gaining popularity world-wide and is being adopted and integrated almost everywhere, security and observability must be implemented to prevent unwanted bad consequences.<br>
-In the same manner as ASOP standardize security for non-standardize access and use of tools and data, it also extends MCP protocol to allow secure usage and implement security controls.
+In the same manner as AOS standardize security for non-standardize access and use of tools and data, it also extends MCP protocol to allow secure usage and implement security controls.
 
 ## MCP support
 
-ASOP extension for MCP is used as a **transport** for MCP communications between the agent and the guardian agent. Meaning ASOP understands and delivers MCP message as is.<br>
+AOS extension for MCP is used as a **transport** for MCP communications between the agent and the guardian agent. Meaning AOS understands and delivers MCP message as is.<br>
 Securing MCP means securing outbound and inbound communications/messages from the agent (using MCP client) to the MCP server and vice versa.<br> 
 
 #### To extend MCP protocol:
-1. Agents using MCP ***must*** use ASOP as a transport protocol to deliver MCP messages to the guardian agent.
-2. Agents using MCP ***must*** understand and enforce ASOP responses.
+1. Agents using MCP ***must*** use AOS as a transport protocol to deliver MCP messages to the guardian agent.
+2. Agents using MCP ***must*** understand and enforce AOS responses.
 
 #### The following flow explains how this should be done:
 1. Agent **A** prepares (using MCP client) MCP-compliant message.
-2. Agent **A** uses ASOP as a transport to send the message to the guardian agent.
+2. Agent **A** uses AOS as a transport to send the message to the guardian agent.
 3. The guardian agent understands and processes the MCP transported message and send the result back to agent **A**.
 4. Agent **A** interprets and enforces the response from guardian agent.
 5. In case response is `allow`, agent **A** sends the MCP message to MCP server.
 6. MCP server processes the message and sends back to agent **A** the response.
-7. Agent **A** uses ASOP as a transport to send the MCP response to the guardian agent.
+7. Agent **A** uses AOS as a transport to send the MCP response to the guardian agent.
 8. The guardian agent understands and processes the MCP transported response and send the result back to agent **A**.
 9. Agent **A** interprets and enforces the response from guardian agent.
 

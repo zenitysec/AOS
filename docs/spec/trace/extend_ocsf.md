@@ -14,7 +14,7 @@ AOS maps agent activities to OCSF event classes, providing:
 
 ### Agent Activity Events
 
-ASOP extends OCSF's API Activity class (6003) for agent-specific events. Here's a basic example:
+AOS extends OCSF's API Activity class (6003) for agent-specific events. Here's a basic example:
 
 ```json
 {
@@ -98,8 +98,7 @@ Security-relevant agent activities map to appropriate OCSF classes:
 
 ## Read Next
 
-- [Agent Observability Standard (AOS)](./aos.md)
-- [Core Concepts](./core_concepts.md)
+- [Core Concepts](../../topics/core_concepts.md)
 ------------------
 
 ## Implementation
@@ -112,7 +111,7 @@ For detailed implementation examples, including:
 - Multi-agent workflows
 - Validation and error handling
 
-Please refer to the [Implementation Examples](implementation_examples.md) document.
+Please refer to the [Implementation Examples](./OCSF/implementation_examples.md) document.
 
 ## Resources
 

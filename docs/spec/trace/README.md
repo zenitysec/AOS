@@ -1,4 +1,4 @@
-# Agent Observability
+# Agent Observability Standard - Trace
 
 AI agents make autonomous decisions that impact business outcomes. Without observability, enterprises can't understand, trust, or control these decisions.
 
@@ -29,7 +29,7 @@ Modern agents orchestrate complex workflows: reasoning chains, tool execution, k
 
 AOS provides specification for detailed tracing of agent behavior. Traces are implemented via extensions of proven industry standards:
 
-| Standard | AgBOM spec | Status |
+| Standard | AOS Spec | Status |
 |--|--|--|
 | [OpenTelemetry](https://opentelemetry.io/) | [AOS with OpenTelemetry](./extend_opentelemetry.md) | Working draft |
 | [OCSF](https://ocsf.io/) | [AOS with OCSF](./extend_ocsf.md) | Working draft |

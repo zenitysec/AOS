@@ -4,27 +4,27 @@
 [A2A](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/) is a communication protocol that enables AI agents or autonomous systems to exchange information, coordinate actions, or delegate tasks in a structured and secure way.<br><br>
 It defines how two or more agents exchange messages, requests, responses or task results and enables AI agents, built on diverse frameworks by different companies running on separate servers, to communicate and collaborate effectively.<br><br>
 In the landscape where the world is leaning towards multi-agent systems, where these agents can be autonomous or semi-autonomous, working together to solve problems or perform tasks that would be difficult or impossible for a single agent or monolithic system, A2A protocol is essential for standardizing inter-agent communication—making it easier to build, compose, and scale these systems.<br><br>
-Securing A2A protocol with ASOP extension is crucial for agent security and observability.
+Securing A2A protocol with AOS extension is crucial for agent security and observability.
 
 ## A2A support
 
-ASOP extension for A2A is used as a **transport** for A2A communications between the agent and the guardian agent. Meaning ASOP understands and delivers A2A message as is.<br>
+AOS extension for A2A is used as a **transport** for A2A communications between the agent and the guardian agent. Meaning AOS understands and delivers A2A message as is.<br>
 Securing A2A means securing outbound and inbound communications/messages.<br> 
 
 #### To extend A2A protocol:
-1. Agents using A2A ***must*** use ASOP as a transport protocol to deliver A2A messages to the guardian agent.
-2. Agents using A2A ***must*** understand and enforce ASOP responses.
+1. Agents using A2A ***must*** use AOS as a transport protocol to deliver A2A messages to the guardian agent.
+2. Agents using A2A ***must*** understand and enforce AOS responses.
 
 
 
 #### The following flow explains how this should be done:
 1. Agent **A** prepares A2A-compliant message.
-2. Agent **A** uses ASOP as a transport to send the message to the guardian agent.
+2. Agent **A** uses AOS as a transport to send the message to the guardian agent.
 3. The guardian agent understands and processes the A2A transported message and send the result back to agent **A**.
 4. Agent **A** interprets and enforces the response from guardian agent.
 5. In case response is `allow`, agent **A** sends the A2A message to agent **B**.
 6. Agent **B** processes the message and sends back to agent **A** the response.
-7. Agent **A** uses ASOP as a transport to send the A2A response to the guardian agent.
+7. Agent **A** uses AOS as a transport to send the A2A response to the guardian agent.
 8. The guardian agent understands and processes the A2A transported response and send the result back to agent **A**.
 9. Agent **A** interprets and enforces the response from guardian agent.
 

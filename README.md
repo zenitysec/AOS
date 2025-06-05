@@ -20,18 +20,18 @@ For agents to become trustworthy they must be **inspectable, traceable and instr
 ### Key Components
 
 The framework covers the following aspects
-1. Agent Security & Observability Protocol (ASOP) that defines the interaction between the Observed Agent and the Guardian Agent
-2. Observability requirements and implementations for tracing all ASOP events using OpenTelemetry and OCSF
+1. AOS that defines the interaction between the Observed Agent and the Guardian Agent
+2. Observability requirements and implementations for tracing all AOS events using OpenTelemetry and OCSF
 3. Agent BOM (AgBOM) requirements and implementations for exposing dynamic Agent's bill-of-material via CoycloneDX, SWID and SPDX
 
 ## Getting Started
 
-- 📚 **Explore the Documentation:** Visit the [Documentation Site](https://improved-adventure-3jj129k.pages.github.io/) for a complete overview, the full protocol specification, tutorials, and guides.
+- 📚 **Explore the Documentation:** Visit the [Documentation Site](https://improved-adventure-3jj129k.pages.github.io/) for a complete overview, the full specification, tutorials, and guides.
 - 📝 **View the Specification:** [Specification](https://github.com/zenitysec/AOS/tree/main/specification)
 
 ## Contributing
 
-We welcome community contributions to enhance and evolve the AOS protocol!
+We welcome community contributions to enhance and evolve AOS!
 
 - **Questions & Discussions:** Join our [GitHub Discussions](do we have github enterprise?).
 - **Issues & Feedback:** Report issues or suggest improvements via [GitHub Issues](https://github.com/zenitysec/AOS/issues).
@@ -41,22 +41,22 @@ We welcome community contributions to enhance and evolve the AOS protocol!
 
 #### v0.1 (Public Preview)
 - Overall documentation and requirements
-- ASOP protocol definitions and schema
+- AOS definitions and schema
 - Observability definitions for for OpenTelemetry and OCSF
 - AgBOM requirements
 
 #### v1
 - Implementation of Agent instrumentation
 - Implementation of Guardian Agent sample app with
-  - ASOP protocol Support
-  - ASOP to OpenTelemetry mapper
-  - ASOP to OCSF mapper
-- FastMCP client instrumentation for ASOP
-- A2A client instrumentation for ASOP
+  - AOS Support
+  - AOS to OpenTelemetry mapper
+  - AOS to OCSF mapper
+- FastMCP client instrumentation for AOS
+- A2A client instrumentation for AOS
 
 #### v2
 - Requirements for CycloneDX, SPDX, SWID
-- Implementation of ASOP to AgBOM mappers for CycloneDX, SPDX, SWID
+- Implementation of AOS to AgBOM mappers for CycloneDX, SPDX, SWID
 
 #### v3
 - Extending A2A and MCP to support deny and modify operations
@@ -64,4 +64,4 @@ We welcome community contributions to enhance and evolve the AOS protocol!
 
 ## About
 
-The AOS Protocol is an open-source project by Zenity, under the [Apache License 2.0](LICENSE), and is open to contributions from the community.
+The AOS is an open-source project by Zenity, under the [Apache License 2.0](LICENSE), and is open to contributions from the community.
