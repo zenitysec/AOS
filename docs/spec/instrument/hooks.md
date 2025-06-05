@@ -129,26 +129,26 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 }
    ```
 
-## 2. Tool Call Request
+## 3. Tool Call Result
 
-### 2.1. Description
-This hook is called when the agent decides on calling a tool.<br>
-This hook should be used **after** the inputs are extracted and **before** the tool is called.
+### 3.1. Description
+This hook when tool is completed.<br>
+This hook should be used **before** the tool result is processed.
 
-### 2.2. Method
+### 3.2. Method
 [`steps/toolCallResult`](specification.md#46-stepstoolcallresult)
 
-### 2.3. Reponse
+### 3.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
 
 | Decision | Behavior |
 | :--------- | :---------- |
-| `allow` | The tool should be called with extracted input parameters. |
-| `deny` | The tool should not be called. It should be blocked. |
-| `modify` | The tool should be called with the modified inputs found in `modifiedRequest` field. |
+| `allow` | The tool result should be processed by the agent. |
+| `deny` | The tool result should not be further processed or used by the agent. |
+| `modify` | The tool result should be processed with the modified inputs found in `modifiedRequest` field. |
 
 
-### 2.4. Example
+### 3.4. Example
    ```json
 {
     "jsonrpc": "2.0",
