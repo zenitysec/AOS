@@ -19,8 +19,14 @@ It create a standard way to insert middleware into agent execution.
 Embedding lightweight call-outs at each step of an agent’s reasoning and action cycle.
 AOS streams context-rich events to observability back-ends, and allows guardian agents to allow, veto or modify behavior.
 
+AOS works even better when MCP and A2A are used.
+It carries these protocols intact, allowing transparent adoption while providing observability value.
+
+| Standard | AOS Spec | Status |
+|--|--|--|
+| [MCP](https://modelcontextprotocol.io/introduction) | [AOS with MCP](./extend_mcp.md) | Working draft |
+| [A2A](https://google-a2a.github.io/A2A/) | [AOS with A2A](./extend_a2a.md) | Working draft |
+
 ### Read Next
 
 - [AOS Instrumentation Specification](./specification.md)
-- [AOS with MCP](./extend_mcp.md)
-- [AOS with A2A](./extend_a2a.md)

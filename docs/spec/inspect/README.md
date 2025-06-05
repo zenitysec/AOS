@@ -18,7 +18,7 @@ This visibility supports better security tracing, version tracking, and regulato
 The end result of generating an AgBOM is a standardized, machine-readable artifact that outlines the full software composition of the agent.
 To support industry-wide adoption and interoperability, AgBOM supports output in the following standard formats:
 
-| BOM standard | AgBOM spec | Status |
+| BOM standard | AgBOM Spec | Status |
 |--|--|--|
 | [CycloneDX](https://cyclonedx.org/) | [AgBOM with CycloneDX](./extend_cyclonedx.md) | Working draft |
 | [SPDX](https://spdx.dev/) | [AgBOM with SPDX](./extend_spdx.md) | [Help wanted](https://github.com/zenitysec/AOS/issues/20) |
