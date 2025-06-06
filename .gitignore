@@ -1,2 +1,4 @@
 .idea/
 .git/
+.venv
+aos.egg-info
