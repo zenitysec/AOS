@@ -101,3 +101,6 @@ markdown_extensions:
   # Callouts
   - admonition
   - pymdownx.details
+  # Tabs
+  - pymdownx.tabbed:
+      alternate_style: true
