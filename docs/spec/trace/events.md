@@ -5,33 +5,14 @@ Every agent action becomes observable. Every decision gets traced. Every communi
 Agent Observability Standard (AOS) transforms opaque AI systems into transparent, auditable processes through standardized event emission. This document defines the canonical events that enable trust through visibility.
 
 ## Event Categories
+AOS events capture the complete lifecycle of agent interactions across four fundamental categories:
 
-Agent Security & Observability Protocol (ASOP) events capture the complete lifecycle of agent interactions across four fundamental categories:
-
-### Agent Steps
-Execution flow events that track what agents do:
-- Message processing (user inputs, agent outputs)
-- Tool execution (requests and results)
-- Memory operations (storage and retrieval)
-- Knowledge queries (RAG and search)
-- Agent activation (triggers and initialization)
-
-### Decision Events
-Guardian agent decisions on every action:
-- **Allow**: Action proceeds unchanged
-- **Deny**: Action blocked with explanation
-- **Modify**: Action altered with new parameters
-
-### Protocol Events
-Inter-system communication traces:
-- **A2A Protocol**: Agent-to-agent messages
-- **MCP Protocol**: Model Context Protocol interactions
-
-### System Events
-Operational health and diagnostics:
-- Health checks and heartbeats
-- Error conditions and failures
-- Performance metrics
+| Category | Description | Events |
+|----------|-------------|---------|
+| Agent Steps | Execution flow events that track what agents do | • Message processing (user inputs, agent outputs)<br>• Tool execution (requests and results)<br>• Memory operations (storage and retrieval)<br>• Knowledge queries (RAG and search)<br>• Agent activation (triggers and initialization) |
+| Decision Events | Guardian agent decisions on every action | • **Allow**: Action proceeds unchanged<br>• **Deny**: Action blocked with explanation<br>• **Modify**: Action altered with new parameters |
+| Protocol Events | Inter-system communication traces | • **A2A Protocol**: Agent-to-agent messages<br>• **MCP Protocol**: Model Context Protocol interactions |
+| System Events | Operational health and diagnostics | • Health checks and heartbeats<br>• Error conditions and failures<br>• Performance metrics |
 
 ## Event Reference
 
@@ -314,4 +295,3 @@ ASOP uses standard JSON-RPC 2.0 error codes:
 3. **Build dashboards** for agent behavior visibility
 4. **Set up alerting** on critical event patterns
 5. **Create audit trails** for compliance requirements
-
