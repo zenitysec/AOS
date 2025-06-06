@@ -5,8 +5,8 @@ site_description: >-
    to enable enterprise-wide adoption with confidence.
 
 # Repository
-repo_name: zenitysec/aos
-repo_url: https://github.com/zenitysec/aos
+repo_name: trustworthyagents/aos
+repo_url: https://github.com/trustworthyagents/aos
 
 # Copyright
 copyright: Copyright &copy; 2025 AOS
@@ -46,14 +46,6 @@ theme:
 
 plugins:
   - search
-  # - mike:
-  #     alias_type: symlink
-  #     redirect_template: null
-  #     deploy_prefix: ''
-  #     canonical_version: null
-  #     version_selector: true
-  #     css_dir: css
-  #     javascript_dir: js
 
 # Additional configuration
 extra:
@@ -64,36 +56,25 @@ extra:
     - icon: /fontawesome/regular/envelope
       name: Send us an email
       link: mailto:aos@zenity.io
-  # version:
-  #   provider: mike
 
 nav:
   - Trustworthy Agents: README.md
-  - AOS: aos.md
   - Topics:
     - Core concepts: topics/core_concepts.md
     - AOS in Action: topics/AOS_in_action_example.md
-    - Extensions:
-      - Extend A2A: topics/extensions/extend_a2a.md
-      - Extend MCP: topics/extensions/extend_mcp.md
-  - Tools:
-    - Guardian Agent:
-      - Overview: tools/guardian_agent/README.md
-      - Apply Corporate Policy: tools/guardian_agent/apply_corporate_policy.md
-      - Block Data Leakage: tools/guardian_agent/block_data_leakage.md
-      - Generate Trace Log: tools/guardian_agent/generate_trace_log.md
-      - Generate SBOM: tools/guardian_agent/generate_sbom.md
-    - Native Support: tools/native_support/README.md
   - Specification:
     - Instrument:
       - Overview: spec/instrument/README.md
-      - ASOP specification: spec/instrument/specification.md
+      - Supported Hooks: spec/instrument/hooks.md
+      - AOS specification: spec/instrument/specification.md
+      - Instrument MCP: spec/instrument/extend_mcp.md
+      - Instrument A2A: spec/instrument/extend_a2a.md
     - Trace:
       - Overview: spec/trace/README.md
-      - OpenTelemetry: spec/trace/OpenTelemetry.md
-      - OCSF:
-        - Overview: spec/trace/OCSF/README.md
-        - Implementation Examples: spec/trace/OCSF/implementation_examples.md
+      - Supported Events: spec/trace/events.md
+      - Trace with OpenTelemetry: spec/trace/extend_opentelemetry.md
+      - Trace with OCSF: spec/trace/extend_ocsf.md
+      - OCSF Implementation Examples: spec/trace/OCSF/implementation_examples.md
     - Inspect:
       - Overview: spec/inspect/README.md
       - AgBOM with CycloneDX: spec/inspect/extend_cyclonedx.md

@@ -1,10 +1,10 @@
-# OCSF Integration and Support
+# AOS tracing with OCSF
 
 The Open Cybersecurity Schema Framework (OCSF) integration enables standardized security event logging for AI agent activities, making them compatible with existing SIEM and security monitoring tools.
 
 ## Overview
 
-ASOP maps agent activities to OCSF event classes, providing:
+AOS maps agent activities to OCSF event classes, providing:
 - Standardized security event format
 - SIEM compatibility out of the box
 - Unified view of agent and traditional security events
@@ -14,7 +14,7 @@ ASOP maps agent activities to OCSF event classes, providing:
 
 ### Agent Activity Events
 
-ASOP extends OCSF's API Activity class (6003) for agent-specific events. Here's a basic example:
+AOS extends OCSF's API Activity class (6003) for agent-specific events. Here's a basic example:
 
 ```json
 {
@@ -96,6 +96,11 @@ Security-relevant agent activities map to appropriate OCSF classes:
 - Distributed tracing support
 - Hierarchical event relationships
 
+## Read Next
+
+- [Core Concepts](../../topics/core_concepts.md)
+------------------
+
 ## Implementation
 
 For detailed implementation examples, including:
@@ -106,7 +111,7 @@ For detailed implementation examples, including:
 - Multi-agent workflows
 - Validation and error handling
 
-Please refer to the [Implementation Examples](implementation_examples.md) document.
+Please refer to the [Implementation Examples](./OCSF/implementation_examples.md) document.
 
 ## Resources
 
