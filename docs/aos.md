@@ -12,15 +12,13 @@ They have a dynamic bill-of-material, a clear audit trail and hard inline-contro
 Trustworthiness of agents builds upon the foundation of existing standards (MCP and A2A), but provides value regardless. 
 It build upon cybersecurity and observability standards including OpenTelemetry, OCSF, CycloneDX, SPDX and SWID.
 
-AOS provides three benefits for agents:
-
-<!-- Three sections with code examples for different frameworks -->
+AOS makes agents trustworthy.
 
 ## Trustworthy agents are
 
-??? example "Initialize an Agent with AOS - Click to expand"
+??? example "Init agent with AOS"
 
-    === "Python (LangChain)"
+    === "LangChain (Python)"
 
         ```python
         from langchain.agents import initialize_agent, Tool
@@ -54,7 +52,7 @@ AOS provides three benefits for agents:
         aos_agent = AOSInstrument(agent)
         ```
 
-    === "TypeScript (Vercel AI SDK)"
+    === "Vercel AI SDK (TypeScript)"
 
         ```typescript
         import { createAgent } from '@vercel/ai'
@@ -88,7 +86,7 @@ AOS provides three benefits for agents:
         const aosAgent = new AOSInstrument(agent)
         ```
 
-    === "MCP Protocol"
+    === "MCP"
 
         ```json
         {
@@ -115,7 +113,7 @@ AOS provides three benefits for agents:
         }
         ```
 
-    === "A2A Protocol"
+    === "A2A"
 
         ```yaml
         # Agent manifest with AOS capabilities
@@ -149,13 +147,15 @@ AOS provides three benefits for agents:
 
 ### Instrumentable
 
-| Value | Description | Standards |
-|--|--|--|
-| Hooks to agent run-time and lifecycle| Specifies run-time hooks that allow intervention at agent's lifecycle and run-time execution. | [AOS](./topics/aos.md) |
+???+ example "Runtime Hooks"
 
-???+ example "Runtime Hooks and Controls"
+    **Value**: Hooks to agent runtime and lifecycle events.
 
-    === "Python (LangChain)"
+    **Description**: Specifies hooks that allow intervention at agent's lifecycle and run-time execution.
+
+    **Standards**: [AOS Instrument](./spec/instrument/README.md).
+
+    === "LangChain (Python)"
 
         ```python
         from aos import GuardianAgent, PolicyResponse
@@ -190,7 +190,7 @@ AOS provides three benefits for agents:
             # > PermissionError: Tool call denied: Accessing PII data violates policy
         ```
 
-    === "TypeScript (Vercel AI SDK)"
+    === "Vercel AI (TypeScript)"
 
         ```typescript
         import { GuardianAgent, HookContext } from '@aos/guardian'
@@ -226,7 +226,7 @@ AOS provides three benefits for agents:
         // > Error: Denied: Request exceeds cost threshold ($50 limit)
         ```
 
-    === "MCP Protocol"
+    === "MCP"
 
         ```json
         {
@@ -268,7 +268,7 @@ AOS provides three benefits for agents:
         }
         ```
 
-    === "A2A Protocol"
+    === "A2A"
 
         ```yaml
         # Available AOS hooks for instrumentation
@@ -301,13 +301,15 @@ AOS provides three benefits for agents:
 
 ### Traceable
 
-| Value | Description | Standards |
-|--|--|--|
-| Comprehensive trace logs | Specifies events that capture AI agent lifecycle and run-time execution. Extends OpenTelemetry and OCSF specs with these properties. | Extends [OpenTelemetry](./../spec/trace/OpenTelemetry.md), [OCSF](./../spec/trace/OCSF/README.md) |
+???+ example "Comprehensive Audit Logs"
 
-???+ example "Comprehensive Trace Logs"
+    **Value**: Comprehensive audit logs.
 
-    === "Python (LangChain)"
+    **Description**: Specifies events that capture AI agent lifecycle and runtime execution. Extends OpenTelemetry and OCSF specs with these properties.
+
+    **Standards**: [AOS Trace](./spec/trace/README.md). Extends [OpenTelemetry](./spec/trace/extend_opentelemetry.md), [OCSF](./spec/trace/extend_ocsf.md).
+
+    === "LangChain (Python)"
 
         ```python
         from opentelemetry import trace
@@ -359,7 +361,7 @@ AOS provides three benefits for agents:
         }
         ```
 
-    === "TypeScript (Vercel AI SDK)"
+    === "Vercel AI (TypeScript)"
 
         ```typescript
         import { OpenTelemetryTracer } from '@aos/trace'
@@ -379,7 +381,7 @@ AOS provides three benefits for agents:
         // Trace includes same comprehensive data as Python example
         ```
 
-    === "MCP Protocol"
+    === "MCP"
 
         ```json
         {
@@ -402,7 +404,7 @@ AOS provides three benefits for agents:
         }
         ```
 
-    === "A2A Protocol"
+    === "A2A"
 
         ```yaml
         # A2A trace event
@@ -427,7 +429,7 @@ AOS provides three benefits for agents:
             endpoint: https://telemetry.example.com
         ```
 
-    === "OCSF Format"
+    === "OCSF"
 
         ```python
         from aos.trace import OCSFLogger
@@ -517,13 +519,15 @@ AOS provides three benefits for agents:
 
 ### Inspectable
 
-| Value | Description | Standards |
-|--|--|--|
-| Dynamic agent-aware bill-of-material | Specifies properties that capture tools, models and capabilities of an AI agent. Extends SBOM standard specs with these properties – AgBOM. Goes further to add dynamic updates to AgBOM to account for dynamic agent capability discovery. | Extends [CycloneDX](./../spec/inspect/extend_cyclonedx.md), [SPDX](./../spec/inspect/extend_spdx.md), [SWID](./../spec/inspect/extend_swid.md) |
-
 ???+ example "Agent Bill of Materials (AgBOM)"
 
-    === "Python (LangChain)"
+    **Value**: Dynamic agent-aware bill-of-material.
+
+    **Description**: Specifies properties that capture tools, models and capabilities of an AI agent. Extends SBOM standard specs with these properties – AgBOM. Goes further to add dynamic updates to AgBOM to account for dynamic agent capability discovery.
+
+    **Standards**: [AOS Inspect](./inspect/trace/README.md). Extends [CycloneDX](./spec/inspect/extend_cyclonedx.md), [SPDX](./spec/inspect/extend_spdx.md), [SWID](./spec/inspect/extend_swid.md).
+
+    === "LangChain (Python)"
 
         ```python
         from aos.inspect import generate_agbom
@@ -568,7 +572,7 @@ AOS provides three benefits for agents:
         }
         ```
 
-    === "TypeScript (Vercel AI SDK)"
+    === "Vercel AI (TypeScript)"
 
         ```typescript
         import { generateAgBOM } from '@aos/inspect'
@@ -621,7 +625,7 @@ AOS provides three benefits for agents:
         }
         ```
 
-    === "A2A Protocol"
+    === "A2A"
 
         ```yaml
         # Request AgBOM via A2A
@@ -655,7 +659,7 @@ AOS provides three benefits for agents:
                   version: "2.1.0"
         ```
 
-    === "SPDX Format"
+    === "SPDX"
 
         ```python
         from aos.inspect import generate_agbom
@@ -695,50 +699,6 @@ AOS provides three benefits for agents:
         SPDXID: SPDXRef-Tool-WebSearch
         PackageVersion: 2.1.0
         PackageDescription: Search the web for information
-        ```
-
-    === "SWID Format"
-
-        ```python
-        from aos.inspect import generate_agbom
-        
-        # Generate Agent Bill of Materials in SWID format
-        agbom = generate_agbom(aos_agent, format="swid")
-        
-        print(agbom.to_xml())
-        ```
-        
-        ```xml
-        <?xml version="1.0" encoding="UTF-8"?>
-        <SoftwareIdentity 
-          xmlns="http://standards.iso.org/iso/19770/-2/2015/schema.xsd"
-          name="research-assistant" 
-          tagId="example.com/agents/research-assistant-1.0.0"
-          version="1.0.0">
-          
-          <Meta aos:agent-type="research" 
-                aos:capabilities="search,calculate"/>
-          
-          <Component>
-            <Meta aos:component-type="ai-model"/>
-            <SoftwareIdentity
-              name="gpt-4"
-              tagId="openai.com/models/gpt-4-2024-01-01"
-              version="2024-01-01">
-              <Meta aos:parameters="175B" 
-                    aos:context-window="128000"/>
-            </SoftwareIdentity>
-          </Component>
-          
-          <Component>
-            <Meta aos:component-type="tool"/>
-            <SoftwareIdentity
-              name="web-search"
-              tagId="example.com/tools/web-search-2.1.0"
-              version="2.1.0"/>
-          </Component>
-          
-        </SoftwareIdentity>
         ```
 
     === "Dynamic Discovery"
@@ -801,40 +761,6 @@ AOS provides three benefits for agents:
         // Capability ADDED: claude-3-opus
         // Validating against policy...
         // Component approved and active
-        ```
-
-    === "WebSocket Stream"
-
-        ```python
-        import websockets
-        import json
-        
-        # Stream AgBOM updates via WebSocket
-        async def stream_agbom_updates():
-            uri = "wss://agent.example.com/agbom/stream"
-            
-            async with websockets.connect(uri) as websocket:
-                await websocket.send(json.dumps({
-                    "action": "subscribe",
-                    "agent_id": aos_agent.id,
-                    "format": "cyclonedx"
-                }))
-                
-                async for message in websocket:
-                    update = json.loads(message)
-                    
-                    if update["type"] == "agbom_update":
-                        print(f"AgBOM updated at {update['timestamp']}")
-                        print(f"Changes: {update['changes']}")
-                        print(f"Current components: {len(update['agbom']['components'])}")
-        
-        # Run the WebSocket client
-        await stream_agbom_updates()
-        
-        # Example output:
-        # AgBOM updated at 2024-01-15T10:35:22Z
-        # Changes: [{"type": "added", "component": "slack-integration"}]
-        # Current components: 8
         ```
 
 ## Read Next
