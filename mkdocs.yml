@@ -1,7 +1,7 @@
 site_name: Agent Observability Standard
 site_url: !ENV GITHUB_PAGES_URL
 site_description: >-
-  An industry standard for building trustworthy AI agents - inspectable, observable and instrumentable
+  An industry standard for building trustworthy AI agents - instrumentable, traceable and inspectable
    to enable enterprise-wide adoption with confidence.
 
 # Repository
