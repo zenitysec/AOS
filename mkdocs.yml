@@ -7,6 +7,7 @@ site_description: >-
 # Repository
 repo_name: trustworthyagents/aos
 repo_url: https://github.com/trustworthyagents/aos
+edit_uri: edit/dev/docs/
 
 # Copyright
 copyright: Copyright &copy; 2025 AOS
@@ -19,6 +20,8 @@ theme:
     - search.suggest
     # edit this page for each doc page
     - content.action.edit
+    # enable synchronized tabs
+    - content.tabs.link
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
