@@ -1,16 +1,16 @@
 # Agent Observability Standard
 
-The Agent Observability Standard (AOS) provides specification to buliding [trustworthy agents](./../introduction.md).
+The Agent Observability Standard (AOS) provides specification for building [trustworthy agents](./README.md).
 Agents that implement AOS can be deployed with higher trust.
-They are inspectable, auditable and instrumentable.
+They are instrumentable, traceable and inspectable.
 They are an open book 
 
 They have a dynamic bill-of-material, a clear audit trail and hard inline-controls.
 
 <!-- TODO: add diagram -->
 
-Trustworthiness of agents builds upon the foundation of MCP and A2A, but provides value regardless. 
-It is compatible with cybersecurity and obseravbility standards including OpenTelemetry, OCSF, CycloneDX, SPDX and SWID.
+Trustworthiness of agents builds upon the foundation of existing standards (MCP and A2A), but provides value regardless. 
+It build upon cybersecurity and observability standards including OpenTelemetry, OCSF, CycloneDX, SPDX and SWID.
 
 AOS provides three benefits for agents:
 
