@@ -20,11 +20,13 @@
         "OCSF",
         "pygments",
         "pymdownx",
+        "pyproject",
         "pythonrepl",
         "Roboto",
         "Sandboxed",
         "superfences",
         "SWID",
+        "trustworthyagents",
         "twemoji",
         "websearchapi",
         "zenitysec"
