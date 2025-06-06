@@ -5,8 +5,8 @@ site_description: >-
    to enable enterprise-wide adoption with confidence.
 
 # Repository
-repo_name: zenitysec/aos
-repo_url: https://github.com/zenitysec/aos
+repo_name: trustworthyagents/aos
+repo_url: https://github.com/trustworthyagents/aos
 
 # Copyright
 copyright: Copyright &copy; 2025 AOS
