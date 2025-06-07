@@ -14,6 +14,11 @@ It build upon cybersecurity and observability standards including OpenTelemetry,
 
 AOS makes agents trustworthy.
 
+!!! info "Work in progress"
+    This page is currently under development.
+    
+    **Want to contribute?** Check out the [GitHub issue](https://github.com/trustworthyagents/aos/issues/53) and join the discussion!
+
 ## Trustworthy agents are
 
 ??? example "Init agent with AOS"
