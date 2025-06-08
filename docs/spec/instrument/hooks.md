@@ -12,8 +12,12 @@ The supported hooks intervent the agent's workflow and interactions with the env
 | Memory | On memory store | [Details](#7-memory-store) | |
 | Knowledge | On knowledge retrieved | [Details](#6-knowledge-retrieval) | |
 | User | On agent response ready to send back to the user | [Details](#8-agent-response) | |
-| Other Agents | On context delegation to other agent | TBD | [A2A](#9-a2a-outbound)|
-| Other Agents | On response received from other agent | TBD | [A2A](#10-a2a-inbound)|
+| Other Agents | On task delegation to other agent | TBD | A2A([send](extend_a2a.md#1-send-message-request), [stream](extend_a2a.md#1-send-message-request))|
+| Other Agents | On task cancellation | TBD | [A2A](extend_a2a.md#3-cancel-task-request)|
+| Other Agents | On task details / status inquiry | TBD | [A2A](extend_a2a.md#4-get-task-request)|
+| Other Agents | On task notification config inquiry | TBD | [A2A](extend_a2a.md#5-get-task-push-notification-config-request)|
+| Other Agents | On task notification config update | TBD | [A2A](extend_a2a.md#6-set-task-push-notification-config-request)|
+| Other Agents | On task updates resubscribe | TBD | [A2A](extend_a2a.md#7-resubscribe-to-task-request)|
 
 
 ## 1. Agent Trigger
@@ -539,124 +543,6 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
         }
     }
 }
-   ```
-
-# A2A protocol hooks
-For detailed explanation on how to extend A2A please refer to [extend_a2a.md](extend_a2a.md)
-
-## 9. A2A Outbound
-### 9.1. Description
-This hook is called when the agent communicate with other agents using A2A protocol. <br>
-This hook should be used **before** the agent sends A2A-compliant message to the remote agent. <br>
-
-### 9.2. Method
-[`protocols/A2A`](specification.md#47-protocolsa2a)<br><br>
-
-
-### 9.3. Reponse
-The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
-
-| Decision | Behavior |
-| :--------- | :---------- |
-| `allow` | The A2A message should be sent to the remote agent as is. |
-| `deny` | The A2A communication should be blocked. The message should not be sent to the remote agent. |
-| `modify` | The A2A message should be sent to the remote agent with the modified content found in `modifiedRequest` field. |
-
-
-### 9.4. Example
-   ```json
-    {
-        "jsonrpc": "2.0",
-        "id": "c65f9305-c2d5-4644-a783-1bf82f1f3dc0",
-        "method": "protocols/A2A",
-        "params": {
-            "jsonrpc": "2.0",
-            "id": "4eee7a22-e6a7-43e7-b509-525f297c6ca8",
-            "method": "message/send",
-            "params": {
-            "message": {
-                "role": "agent",
-                "parts": [
-                {
-                    "kind": "text",
-                    "text": "what is the diagnosis?"
-                },
-                {
-                    "kind": "data",
-                    "data": {
-                        "patient_id": "P1234567",
-                        "name": "John Doe",
-                        "date_of_birth": "1982-04-12",
-                        "symptoms": [
-                            "chronic cough",
-                            "shortness of breath",
-                            "night sweats"
-                        ],
-                        "lab_results": {
-                            "CBC": {
-                            "WBC": 11.3,
-                            "RBC": 4.2
-                            },
-                            "Chest X-ray": "infiltrate in left upper lobe",
-                            "insurance_number": "ABX-9234-8821"
-                        }
-                    }
-                }
-                ],
-                "messageId": "9229e770-767c-417b-a0b0-f0741243c589"
-            },
-            "reasoning": "The user is asking for a diagnosis. I should pass this task to a specialist agent. "
-            }
-        }
-    }
-   ```
-
-
-## 10. A2A Inbound
-
-### 10.1. Description
-This hook is called when the agent communicate with other agents using A2A protocol. <br>
-This hook should be used when A2A response is received, and **before** the agent process it. <br>
-
-### 10.2. Method
-[`protocols/A2A`](specification.md#47-protocolsa2a)<br><br>
-
-
-### 10.3. Reponse
-The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
-
-| Decision | Behavior |
-| :--------- | :---------- |
-| `allow` | The A2A response should be processed by the agent as is. |
-| `deny` | The A2A response messaged should be blocked. ie it should not be processed by the agent. |
-| `modify` | The A2A response should be processed by the agent with the modified content found in `modifiedRequest` field. |
-
-
-### 10.4. Example
-   ```json
-    {
-        "jsonrpc": "2.0",
-        "id": "da1dc6a9-2866-4eb5-8cc4-05099bebbf6a",
-        "method": "protocols/A2A",
-        "params": {
-            "jsonrpc": "2.0",
-            "id": "4eee7a22-e6a7-43e7-b509-525f297c6ca8",
-            "method": "message/send",
-            "params": {
-            "message": {
-                "role": "agent",
-                "parts": [
-                {
-                    "kind": "text",
-                    "text": "it can be Pulmonary tuberculosis or Bacterial pneumonia "
-                },
-                ],
-                "messageId": "4fac508f-20de-4bf4-a115-6054c8cbc158"
-            },
-            "reasoning": "Seems like we have a diagnosis. I am going to use this to decide on next steps. "
-            }
-        }
-    }
    ```
 
 # MCP protocol hooks
