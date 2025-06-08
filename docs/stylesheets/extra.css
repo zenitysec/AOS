@@ -1,11 +1,10 @@
 .md-header__button.md-logo {
-  padding: 0.5rem;
-  margin: 0.2rem;
+  padding: 0.2rem;
+  margin: 0;
 }
 
 .md-header__button.md-logo img {
-  width: 64px !important;
-  height: 64px !important;
+  height: 2rem;
+  width: auto;
   max-width: none;
-  object-fit: contain;
 }
