@@ -1,5 +1,21 @@
 # Supported hooks
 
+The supported hooks intervent the agent's workflow and interactions with the environment (see [Agent Environment Overview](../topics/core_concepts.md#agent-environment-overview)), to seamlessly expose the interaction data through the AOS standard.
+
+| Components | When | Native support | Protocols
+|--|--|--|--|
+| Trigger | On trigger received | [Details](#1-agent-trigger) | |
+| API Tools, OS Tools | On tool call request | [Details](#2-tool-call-request) | [MCP](#10-mcp-outbound) |
+| API Tools, OS Tools | On tool call completed | [Details](#3-tool-call-result) | [MCP](#11-mcp-inbound) |
+| User | On user interaction received | [Details](#4-user-message) | |
+| Memory | On memory context retrieved | [Details](#5-memory-context-retrieval) | |
+| Memory | On memory store | [Details](#7-memory-store) | |
+| Knowledge | On knowledge retrieved | [Details](#6-knowledge-retrieval) | |
+| User | On agent response ready to send back to the user | [Details](#8-agent-response) | |
+| Other Agents | On context delegation to other agent | TBD | [A2A](#9-a2a-outbound)|
+| Other Agents | On response received from other agent | TBD | [A2A](#10-a2a-inbound)|
+
+
 ## 1. Agent Trigger
 
 ### 1.1. Description
@@ -132,7 +148,7 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 ## 3. Tool Call Result
 
 ### 3.1. Description
-This hook when tool is completed.<br>
+This hook is called when tool is completed.<br>
 This hook should be used **before** the tool result is processed.
 
 ### 3.2. Method
@@ -528,16 +544,16 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 # A2A protocol hooks
 For detailed explanation on how to extend A2A please refer to [extend_a2a.md](extend_a2a.md)
 
-## 8. A2A Outbound
-### 8.1. Description
+## 9. A2A Outbound
+### 9.1. Description
 This hook is called when the agent communicate with other agents using A2A protocol. <br>
 This hook should be used **before** the agent sends A2A-compliant message to the remote agent. <br>
 
-### 8.2. Method
+### 9.2. Method
 [`protocols/A2A`](specification.md#47-protocolsa2a)<br><br>
 
 
-### 8.3. Reponse
+### 9.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
 
 | Decision | Behavior |
@@ -547,7 +563,7 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 | `modify` | The A2A message should be sent to the remote agent with the modified content found in `modifiedRequest` field. |
 
 
-### 8.4. Example
+### 9.4. Example
    ```json
     {
         "jsonrpc": "2.0",
@@ -596,17 +612,17 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
    ```
 
 
-## 9. A2A Inbound
+## 10. A2A Inbound
 
-### 9.1. Description
+### 10.1. Description
 This hook is called when the agent communicate with other agents using A2A protocol. <br>
 This hook should be used when A2A response is received, and **before** the agent process it. <br>
 
-### 9.2. Method
+### 10.2. Method
 [`protocols/A2A`](specification.md#47-protocolsa2a)<br><br>
 
 
-### 9.3. Reponse
+### 10.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
 
 | Decision | Behavior |
@@ -616,7 +632,7 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 | `modify` | The A2A response should be processed by the agent with the modified content found in `modifiedRequest` field. |
 
 
-### 9.4. Example
+### 10.4. Example
    ```json
     {
         "jsonrpc": "2.0",
@@ -646,17 +662,17 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 # MCP protocol hooks
 For detailed explanation on how to extend MCP please refer to [extend_mcp.md](extend_mcp.md)
 
-## 10. A2A Onbound
+## 11. MCP Outbound
 
-### 10.1. Description
+### 11.1. Description
 This hook is called when the agent communicate with remote MCP servers via MCP protocol. <br>
 This hook should be used **before** the agent sends MCP-compliant message to the remote MCP server. <br>
 
-### 10.2. Method
+### 11.2. Method
 [`protocols/MCP`](specification.md#48-protocolsmcp)<br><br>
 
 
-### 10.3. Reponse
+### 11.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
 
 | Decision | Behavior |
@@ -666,7 +682,7 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 | `modify` | The MCP message should be sent to the remote server with the modified content found in `modifiedRequest` field. |
 
 
-### 10.4. Example
+### 11.4. Example
    ```json
     {
         "jsonrpc": "2.0",
@@ -688,17 +704,17 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
     }
    ```
 
-## 10. A2A Inbound
+## 12. MCP Inbound
 
-### 10.1. Description
+### 12.1. Description
 This hook is called when the agent received a message from MCP remote server. <br>
 This hook should be used **before** the agent processes the MCP received message from the remote MCP server. <br>
 
-### 10.2. Method
+### 12.2. Method
 [`protocols/MCP`](specification.md#48-protocolsmcp)<br><br>
 
 
-### 10.3. Reponse
+### 12.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
 
 | Decision | Behavior |
@@ -708,7 +724,7 @@ The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse
 | `modify` | The MCP message should be processed by the agent with the modified content found in `modifiedRequest` field. |
 
 
-### 10.4. Example
+### 12.4. Example
    ```json
     {
         "jsonrpc": "2.0",
