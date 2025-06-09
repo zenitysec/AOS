@@ -5,8 +5,9 @@ The Open Cybersecurity Schema Framework (OCSF) integration enables standardized 
 ## Overview
 
 AOS maps agent activities to OCSF event classes, providing:
+
 - Standardized security event format
-- SIEM compatibility out of the box
+- MCP & A2A Support out of the box
 - Unified view of agent and traditional security events
 - Compliance-ready trace trails
 
@@ -14,7 +15,9 @@ AOS maps agent activities to OCSF event classes, providing:
 
 ### Agent Activity Events
 
-AOS extends OCSF's API Activity class (6003) for agent-specific events. Here's a basic example:
+AOS extends OCSF's API Activity class (6003) for agent-specific events.
+
+Here's a basic example:
 
 ```json
 {
@@ -25,21 +28,20 @@ AOS extends OCSF's API Activity class (6003) for agent-specific events. Here's a
   "activity_id": 1,
   "activity_name": "Agent Tool Use",
   "time": 1706550000000,
+  "type_uid": 600301,
   "severity_id": 1,
   "metadata": {
     "version": "1.0.0",
     "product": {
-      "name": "ASOP Security Layer",
-      "vendor_name": "ASOP"
-    },
-    "ocsf": {
-      "version": "1.0.0"
+      "name": "AOS Security Layer",
+      "vendor_name": "AOS"
     }
   },
   "actor": {
     "user": {
       "uid": "agent-123",
       "name": "CustomerServiceAgent",
+      "type_id": 99,
       "type": "AI Agent"
     }
   },
@@ -48,12 +50,154 @@ AOS extends OCSF's API Activity class (6003) for agent-specific events. Here's a
       "name": "database_mcp_server",
       "version": "1.0.0"
     },
-    "operation": {
-      "method": "tools/call",
-      "params": {
+    "operation": "tools/call"
+  },
+  "src_endpoint": {
+    "type_id": 99,
+    "name": "AI Agent Endpoint",
+    "hostname": "agent-service.internal"
+  },
+  "osint": [],
+  "unmapped": {
+    "aos": {
+      "tool_call": {
         "name": "database_query",
         "arguments": {
           "query": "SELECT * FROM customers WHERE id = ?"
+        }
+      },
+      "context": {
+        "agent": {
+          "id": "agent-123",
+          "name": "CustomerServiceAgent",
+          "version": "1.0.0",
+          "provider": {
+            "name": "AOS",
+            "url": "https://example.aos"
+          }
+        },
+        "session": {
+          "id": "session-789"
+        },
+        "model": {
+          "id": "gpt-4",
+          "provider": {
+            "name": "OpenAI"
+          }
+        }
+      },
+      "step": {
+        "id": "step-abc",
+        "type": "toolCall",
+        "turn_id": "turn-456",
+        "reasoning": "User requested customer information"
+      }
+    }
+  }
+}
+```
+
+#### Agent with Tool Execution Example:
+
+```json
+{
+  "category_uid": 6,
+  "category_name": "Application Activity",
+  "class_uid": 6003,
+  "class_name": "API Activity",
+  "activity_id": 1,
+  "activity_name": "Tool Execution",
+  "time": 1706550000000,
+  "type_uid": 600301,
+  "severity_id": 1,
+  "status_id": 1,
+  "status": "Success",
+  "metadata": {
+    "version": "1.0.0",
+    "product": {
+      "name": "AOS Security Layer",
+      "vendor_name": "AOS"
+    },
+    "correlation_uid": "exec-123"
+  },
+  "actor": {
+    "user": {
+      "uid": "agent-123",
+      "name": "CustomerServiceAgent",
+      "type_id": 99,
+      "type": "AI Agent"
+    },
+    "session": {
+      "uid": "session-789"
+    }
+  },
+  "api": {
+    "service": {
+      "name": "database_mcp_server",
+      "version": "1.0.0"
+    },
+    "operation": "database_query",
+    "response": {
+      "code": 200,
+      "message": "Query executed successfully"
+    }
+  },
+  "src_endpoint": {
+    "type_id": 99,
+    "name": "AI Agent Endpoint",
+    "hostname": "agent-service.internal",
+    "ip": "10.0.1.50"
+  },
+  "dst_endpoint": {
+    "type_id": 1,
+    "name": "Database Server",
+    "hostname": "db.internal",
+    "port": 5432
+  },
+  "osint": [],
+  "unmapped": {
+    "aos": {
+      "step": {
+        "id": "step-abc",
+        "type": "toolCall",
+        "turn_id": "turn-456",
+        "reasoning": "User requested customer information",
+        "operation": {
+          "type": "tool_execution",
+          "tool": {
+            "id": "database_query",
+            "execution_id": "exec-123",
+            "inputs": [
+              {
+                "name": "query",
+                "value": "SELECT * FROM customers WHERE id = ?"
+              }
+            ],
+            "outputs": [
+              {
+                "kind": "text",
+                "text": "Query executed successfully"
+              }
+            ],
+            "is_error": false
+          }
+        }
+      },
+      "context": {
+        "agent": {
+          "id": "agent-123",
+          "name": "CustomerServiceAgent",
+          "version": "1.0.0",
+          "provider": {
+            "name": "AOS",
+            "url": "https://example.aos"
+          }
+        },
+        "model": {
+          "id": "gpt-4",
+          "provider": {
+            "name": "OpenAI"
+          }
         }
       }
     }
@@ -61,18 +205,94 @@ AOS extends OCSF's API Activity class (6003) for agent-specific events. Here's a
 }
 ```
 
-### Security Events
+#### Multi-Agent Workflow Example
 
-Security-relevant agent activities map to appropriate OCSF classes:
+```json
+{
+  "category_uid": 6,
+  "class_uid": 6003,
+  "activity_id": 1,
+  "activity_name": "Agent Request",
+  "time": 1706550000000,
+  "type_uid": 600301,
+  "severity_id": 1,
+  "metadata": {
+    "version": "1.0.0",
+    "product": {
+      "name": "AOS Security Layer",
+      "vendor_name": "AOS"
+    },
+    "correlation_uid": "4bf92f3577b34da6a3ce929d0e0e4736"
+  },
+  "actor": {
+    "user": {
+      "uid": "planner-123",
+      "name": "PlannerAgent",
+      "type_id": 99,
+      "type": "AI Agent"
+    }
+  },
+  "api": {
+    "operation": "task_delegation",
+    "service": {
+      "name": "agent_orchestrator",
+      "version": "1.0.0"
+    }
+  },
+  "src_endpoint": {
+    "type_id": 99,
+    "name": "PlannerAgent",
+    "hostname": "planner.agents.internal"
+  },
+  "dst_endpoint": {
+    "type_id": 99,
+    "name": "ExecutorAgent",
+    "hostname": "executor.agents.internal"
+  },
+  "osint": [],
+  "trace": {
+    "uid": "4bf92f3577b34da6a3ce929d0e0e4736",
+    "span": {
+      "uid": "00f067aa0ba902b7",
+      "start_time": 1706550000000,
+      "end_time": 1706550001000
+    }
+  },
+  "unmapped": {
+    "aos": {
+      "agent_context": {
+        "agent": {
+          "id": "planner-123",
+          "name": "PlannerAgent",
+          "version": "1.0.0",
+          "provider": {
+            "name": "AOS",
+            "url": "https://example.aos"
+          }
+        },
+        "session": {
+          "id": "collab-789"
+        },
+        "turn": {
+          "id": "turn-456"
+        },
+        "step": {
+          "id": "step-abc",
+          "type": "protocolMessage"
+        },
+        "model": {
+          "id": "gpt-4",
+          "provider": {
+            "name": "OpenAI"
+          }
+        },
+        "reasoning": "Task requires specialized database access"
+      }
+    }
+  }
+}
+```
 
-| Agent Activity | OCSF Class | Class UID | Status |
-|---------------|------------|-----------|---------|
-| Authentication | Authentication | 3002 | Standard OCSF class |
-| Authorization Check | Authorization | 3003 | Standard OCSF class |
-| Data Access | File Activity | 1001 | Standard OCSF class |
-| Network Request | Network Activity | 4001 | Standard OCSF class |
-| API Tool Usage | API Activity | 6003 | Standard OCSF class |
-| Policy Violation | Security Finding | 2001 | Standard OCSF class |
 
 ## Key Features
 
@@ -81,10 +301,10 @@ Security-relevant agent activities map to appropriate OCSF classes:
 - Compatible with existing security tools
 - Extensible for custom agent attributes
 
-### 2. SIEM Integration
-- Ready for Splunk, Elasticsearch, and other SIEM platforms
-- Built-in support for common security use cases
-- Customizable dashboards and alerts
+### 2. Agent Tool Use Support
+- Enables AI agent tool use monitoring
+- Extends tool use trace and explainability
+- Support MCP tool and resource access tracing
 
 ### 3. Compliance Support
 - Trace-ready event logging
@@ -98,11 +318,6 @@ Security-relevant agent activities map to appropriate OCSF classes:
 
 ## Read Next
 
-- [Core Concepts](../../topics/core_concepts.md)
-------------------
-
-## Implementation
-
 For detailed implementation examples, including:
 - Code samples
 - Advanced usage patterns
@@ -113,12 +328,6 @@ For detailed implementation examples, including:
 
 Please refer to the [Implementation Examples](./OCSF/implementation_examples.md) document.
 
-## Resources
-
 - [OCSF Schema Documentation](https://schema.ocsf.io/)
 - [py-ocsf-models Repository](https://github.com/prowler-cloud/py-ocsf-models)
 - [OCSF Examples](https://github.com/ocsf/examples)
-
----
-
-**Note**: This integration uses the `py-ocsf-models` package for OCSF compliance. Always verify class availability and field mappings against your specific OCSF implementation.
