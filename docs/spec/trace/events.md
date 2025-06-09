@@ -4,14 +4,15 @@ Every agent action becomes observable. Every decision gets traced. Every communi
 
 Agent Observability Standard (AOS) transforms opaque AI systems into transparent, auditable processes through standardized event emission. This document defines the canonical events that enable trust through visibility.
 
-## Event Categories
-AOS events capture the complete lifecycle of agent interactions across four fundamental categories:
+## Event Classification
+All observable actions in AOS are considered **Agent Steps**. Each step represents a single, traceable action taken by the agent or the system. To enhance explainability and provide a clear structure for analysis, these steps are classified into the following groups based on their purpose. This classification is for semantic grouping and does not imply a technical difference in the underlying event structure.
 
 | Category | Description | Events |
 |----------|-------------|---------|
-| Agent Steps | Execution flow events that track what agents do | • Message processing (user inputs, agent outputs)<br>• Tool execution (requests and results)<br>• Memory operations (storage and retrieval)<br>• Knowledge queries (RAG and search)<br>• Agent activation (triggers and initialization) |
+| Execution Steps | Core execution flow events that track what agents do | • Message processing (user inputs, agent outputs)<br>• Tool execution (requests and results)<br>• Memory operations (storage and retrieval)<br>• Knowledge queries (RAG and search)<br>• Agent activation (triggers and initialization) |
 | Decision Events | Guardian agent decisions on every action | • **Allow**: Action proceeds unchanged<br>• **Deny**: Action blocked with explanation<br>• **Modify**: Action altered with new parameters |
 | Protocol Events | Inter-system communication traces | • **A2A Protocol**: Agent-to-agent messages<br>• **MCP Protocol**: Model Context Protocol interactions |
+| Agent Composition (Bill of Materials) | Dynamic updates to the agent's components and capabilities. | • Agent capabilities changed<br>• MCP server connection changed<br>• Knowledge source changed<br>• Tool changed<br>• Memory configuration changed<br>• Model changed |
 | System Events | Operational health and diagnostics | • Health checks and heartbeats<br>• Error conditions and failures<br>• Performance metrics |
 
 ## Event Reference
@@ -184,7 +185,49 @@ AOS events capture the complete lifecycle of agent interactions across four fund
 
 **Monitoring Value**: Map agent collaboration networks, audit cross-agent flows, ensure protocol compliance.
 
-**See**: [protocols/A2A method](../instrument/specification.md#47-protocolsa2a) and [A2A extension guide](../../topics/extensions/extend_a2a.md) in specification.
+#### Message Structure
+The `message` attribute contains the full, A2A-compliant JSON-RPC 2.0 payload. This allows for complete visibility into the inter-agent communication.
+
+**Example `protocols/A2A` Event:**
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 70,
+  "method": "protocols/A2A",
+  "params": {
+    "message": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "message/send",
+      "params": {
+        "message": {
+          "role": "agent",
+          "parts": [
+            {
+              "kind": "text",
+              "text": "High-value customer complaint. Please review and advise on retention strategy."
+            },
+            {
+              "kind": "data",
+              "data": {
+                "customerId": "CUST-001",
+                "caseId": "CASE-987",
+                "history": {
+                  "purchaseValue": 50000,
+                  "satisfactionScore": 2.5
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "reasoning": "Escalating high-value customer complaint to retention agent."
+  }
+}
+```
+
+**See**: For more detailed examples, including handling of sensitive data, see the [A2A Extension Guide](../instrument/extend_a2a.md).
 
 ---
 
@@ -206,7 +249,33 @@ AOS events capture the complete lifecycle of agent interactions across four fund
 
 **Monitoring Value**: Monitor external integrations, track MCP tool usage, audit data access.
 
-**See**: [protocols/MCP method](../instrument/specification.md#48-protocolsmcp) and [MCP extension guide](../../topics/extensions/extend_mcp.md) in specification.
+#### Message Structure
+The `message` attribute contains the full, MCP-compliant JSON-RPC 2.0 payload. This provides a complete record of interactions with external tools and data sources via MCP.
+
+**Example `protocols/MCP` Event:**
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 70,
+  "method": "protocols/MCP",
+  "params": {
+    "message": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "tools/call",
+      "params": {
+        "name": "crm/getCustomerProfile",
+        "arguments": {
+          "customerId": "CUST-001"
+        }
+      }
+    },
+    "reasoning": "Retrieving full customer profile from CRM to address support query."
+  }
+}
+```
+
+**See**: For more detailed examples, including data masking and policy enforcement, see the [MCP Extension Guide](../instrument/extend_mcp.md).
 
 ---
 
@@ -259,6 +328,7 @@ Every ASOP request receives a decision response from the guardian agent:
 - `modifiedRequest`: Altered request (only for modify decisions)
 
 **Example Flow**:
+
 1. Support agent requests customer database write access for address update
 2. Guardian evaluates against data access policy and customer consent
 3. Returns "modify" decision limiting update to shipping address only

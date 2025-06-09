@@ -5,6 +5,7 @@ The Open Cybersecurity Schema Framework (OCSF) integration enables standardized 
 ## Overview
 
 AOS maps agent activities to OCSF event classes, providing:
+
 - Standardized security event format
 - MCP & A2A Support out of the box
 - Unified view of agent and traditional security events
@@ -317,11 +318,6 @@ Here's a basic example:
 
 ## Read Next
 
-- [Core Concepts](../../topics/core_concepts.md)
-------------------
-
-## Implementation
-
 For detailed implementation examples, including:
 - Code samples
 - Advanced usage patterns
@@ -331,9 +327,6 @@ For detailed implementation examples, including:
 - Validation and error handling
 
 Please refer to the [Implementation Examples](./OCSF/implementation_examples.md) document.
-
-
-## Resources
 
 - [OCSF Schema Documentation](https://schema.ocsf.io/)
 - [py-ocsf-models Repository](https://github.com/prowler-cloud/py-ocsf-models)
