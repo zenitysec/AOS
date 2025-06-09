@@ -12,12 +12,12 @@ The supported hooks intervent the agent's workflow and interactions with the env
 | Memory | On memory store | [Details](#7-memory-store) | |
 | Knowledge | On knowledge retrieved | [Details](#6-knowledge-retrieval) | |
 | User | On agent response ready to send back to the user | [Details](#8-agent-response) | |
-| Other Agents | On task delegation to other agent | TBD | A2A([send](extend_a2a.md#1-send-message-request), [stream](extend_a2a.md#1-send-message-request))|
-| Other Agents | On task cancellation | TBD | [A2A](extend_a2a.md#3-cancel-task-request)|
-| Other Agents | On task details / status inquiry | TBD | [A2A](extend_a2a.md#4-get-task-request)|
-| Other Agents | On task notification config inquiry | TBD | [A2A](extend_a2a.md#5-get-task-push-notification-config-request)|
-| Other Agents | On task notification config update | TBD | [A2A](extend_a2a.md#6-set-task-push-notification-config-request)|
-| Other Agents | On task updates resubscribe | TBD | [A2A](extend_a2a.md#7-resubscribe-to-task-request)|
+| Other Agents | On task delegation to other agent |  | A2A([send](extend_a2a.md#1-send-message-request), [stream](extend_a2a.md#1-send-message-request))|
+| Other Agents | On task cancellation |  | [A2A](extend_a2a.md#3-cancel-task-request)|
+| Other Agents | On task details / status inquiry |  | [A2A](extend_a2a.md#4-get-task-request)|
+| Other Agents | On task notification config inquiry |  | [A2A](extend_a2a.md#5-get-task-push-notification-config-request)|
+| Other Agents | On task notification config update |  | [A2A](extend_a2a.md#6-set-task-push-notification-config-request)|
+| Other Agents | On task updates subscribe |  | [A2A](extend_a2a.md#7-resubscribe-to-task-request)|
 
 
 ## 1. Agent Trigger

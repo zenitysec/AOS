@@ -24,7 +24,7 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
 4. Agent **A** interprets and enforces the response from guardian agent.
 5. In case response is `allow`, agent **A** sends the A2A message to agent **B**.
 6. Agent **B** processes the message and sends back to agent **A** the response.
-7. Agent **A** uses AOS as a transport to send the A2A response to the guardian agent.
+7. Agent **A** uses AOS as a transport to send the A2A response to the guardian agent, using protocol's `method` field as the request `method` name.
 8. The guardian agent understands and processes the A2A transported response and send the result back to agent **A**.
 9. Agent **A** interprets and enforces the response from guardian agent.
 
@@ -32,13 +32,15 @@ Securing A2A means securing outbound and inbound communications/messages.<br>
 ## Supported A2A hooks
 | A2A Event | Description | A2A docs |
 |--|--|--|
-| [Send Message Request](#1-send-message-request) | Sends a message to an agent to initiate a new interaction or to continue an existing one. | [Docs](https://google-a2a.github.io/A2A/specification/#71-messagesend) |
-| [Stream Message Request](#2-stream-message-request) | Sends a message to an agent to initiate/continue a task AND subscribes the client to real-time updates for that task via Server-Sent Events (SSE). | [Docs](https://google-a2a.github.io/A2A/specification/#72-messagestream) |
-| [Cancel Task Request](#3-cancel-task-request) | Requests the cancellation of an ongoing task. | [Docs](https://google-a2a.github.io/A2A/specification/#74-taskscancel) |
-| [Get Task Request](#4-get-task-request) | Retrieves the current state (including status, artifacts, and optionally history) of a previously initiated task. | [Docs](https://google-a2a.github.io/A2A/specification/#73-tasksget) |
-| [Get Task Push Notification Config Request](#5-get-task-push-notification-config-request) | Retrieves the current push notification configuration for a specified task. | [Docs](https://google-a2a.github.io/A2A/specification/#76-taskspushnotificationconfigget) |
-| [Set Task Push Notification Config Request](#6-set-task-push-notification-config-request) | Sets or updates the push notification configuration for a specified task. | [Docs](https://google-a2a.github.io/A2A/specification/#75-taskspushnotificationconfigset) |
-| [Resubscribe To Task Request](#7-resubscribe-to-task-request) | Allows a client to reconnect to an SSE stream for an ongoing task after a previous connection (from `message/stream` or an earlier `tasks/resubscribe`) was interrupted. | [Docs](https://google-a2a.github.io/A2A/specification/#77-tasksresubscribe) |
+| [Send Message Request](#1-send-message-request) | On message send to an agent to initiate a new interaction or to continue an existing one. | [Docs](https://google-a2a.github.io/A2A/specification/#71-messagesend) |
+| [Stream Message Request](#2-stream-message-request) | On message send to an agent to initiate/continue a task AND subscribe the client to real-time updates for that task via Server-Sent Events (SSE). | [Docs](https://google-a2a.github.io/A2A/specification/#72-messagestream) |
+| [Cancel Task Request](#3-cancel-task-request) | On task cancel request. | [Docs](https://google-a2a.github.io/A2A/specification/#74-taskscancel) |
+| [Get Task Request](#4-get-task-request) | On current state (including status, artifacts, and optionally history) retrieval of a previously initiated task. | [Docs](https://google-a2a.github.io/A2A/specification/#73-tasksget) |
+| [Get Task Push Notification Config Request](#5-get-task-push-notification-config-request) | On retrieval of push notification configuration for a specified task. | [Docs](https://google-a2a.github.io/A2A/specification/#76-taskspushnotificationconfigget) |
+| [Set Task Push Notification Config Request](#6-set-task-push-notification-config-request) | On push notification configuration update for a specified task. | [Docs](https://google-a2a.github.io/A2A/specification/#75-taskspushnotificationconfigset) |
+| [Resubscribe To Task Request](#7-resubscribe-to-task-request) | On client to reconnect to an SSE stream for an ongoing task after a previous connection (from `message/stream` or an earlier `tasks/resubscribe`) was interrupted. | [Docs](https://google-a2a.github.io/A2A/specification/#77-tasksresubscribe) |
+
+
 
 ### 1. Send Message Request
 #### 1.1. Description
@@ -46,7 +48,7 @@ This hook is called when the observed agent sends a message to remote agent to i
 This hook **must** be used before the observed agent sends the A2A-compliant message to remote agent.
 
 #### 1.2. Method
-TBD after added to specification.md
+[`message/send`](specification.md#48-a2a-protocol-methods)
 
 #### 1.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
@@ -116,7 +118,8 @@ This hook is called when the observed agent sends a message to remote agent to i
 This hook **must** be used before the observed agent sends the A2A-compliant message to remote agent.
 
 #### 2.2. Method
-TBD after added to specification.md
+[`message/stream`](specification.md#48-a2a-protocol-methods)
+
 
 #### 2.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
@@ -211,7 +214,7 @@ This hook is called when the observed agent sends task cancellation message thro
 This hook **must** be used before the observed agent sends the A2A-compliant message to remote agent.
 
 #### 3.2. Method
-TBD after added to specification.md
+[`tasks/cancel`](specification.md#48-a2a-protocol-methods)
 
 #### 3.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
@@ -260,7 +263,7 @@ This hook is called when the observed agent incquiry about a delegated task thro
 This hook **must** be used before the observed agent sends the A2A-compliant message to remote agent.
 
 #### 4.2. Method
-TBD after added to specification.md
+[`tasks/get`](specification.md#48-a2a-protocol-methods)
 
 #### 4.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
@@ -314,7 +317,7 @@ This hook is called when the observed agent incquiry about a delegated task's pu
 This hook **must** be used before the observed agent sends the A2A-compliant message to remote agent.
 
 #### 5.2. Method
-TBD after added to specification.md
+[`tasks/pushNotificationConfig/get`](specification.md#48-a2a-protocol-methods)
 
 #### 5.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
@@ -363,7 +366,7 @@ This hook is called when the observed agent sets or updates notification configu
 This hook **must** be used before the observed agent sends the A2A-compliant message to remote agent.
 
 #### 6.2. Method
-TBD after added to specification.md
+[`tasks/pushNotificationConfig/get`](specification.md#48-a2a-protocol-methods)
 
 #### 6.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
@@ -418,7 +421,7 @@ This hook is called when the observed agent resubscirbes to remote agent's notif
 This hook **must** be used before the observed agent sends the A2A-compliant message to remote agent.
 
 #### 7.2. Method
-TBD after added to specification.md
+[`tasks/resubscribe`](specification.md#48-a2a-protocol-methods)
 
 #### 7.3. Reponse
 The response is an [`AOSSuccessResponse`](specification.md#51-aossuccessresponse-object) object.
