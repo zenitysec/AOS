@@ -27,14 +27,14 @@ The standard covers the following aspects
 ## Getting Started
 
 - 📚 **Explore the Documentation:** Visit the [Documentation Site](https://aos.owasp.org) for a complete overview, the full specification, tutorials, and guides.
-- 📝 **View the Specification:** [Specification](https://github.com/trustworthyagents/AOS/tree/main/specification)
+- 📝 **View the Specification:** [Specification](https://github.com/OWASP/www-project-agent-observability-standard/tree/main/specification)
 
 ## Contributing
 
 We welcome community contributions to enhance and evolve AOS!
 
 - **Questions & Discussions:** Join our [GitHub Discussions](do we have github enterprise?).
-- **Issues & Feedback:** Report issues or suggest improvements via [GitHub Issues](https://github.com/trustworthyagents/AOS/issues).
+- **Issues & Feedback:** Report issues or suggest improvements via [GitHub Issues](https://github.com/OWASP/www-project-agent-observability-standard/issues).
 - **Contribution Guide:** See our [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute.
 
 ## What's next
