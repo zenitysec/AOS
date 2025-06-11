@@ -26,7 +26,7 @@ The standard covers the following aspects
 
 ## Getting Started
 
-- 📚 **Explore the Documentation:** Visit the [Documentation Site](https://trustworthyagents.github.io/AOS/) for a complete overview, the full specification, tutorials, and guides.
+- 📚 **Explore the Documentation:** Visit the [Documentation Site](https://aos.owasp.org) for a complete overview, the full specification, tutorials, and guides.
 - 📝 **View the Specification:** [Specification](https://github.com/trustworthyagents/AOS/tree/main/specification)
 
 ## Contributing
