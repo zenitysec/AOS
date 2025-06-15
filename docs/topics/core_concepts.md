@@ -32,20 +32,33 @@ A trustworthy agent is an Observed Agent that transparently exposes its interact
 
 ## Agent Instrumentation
 
-### Observed Agent Responsibilities:
-An Observed Agent should ensure inspectability, traceability, and observability by:
+### Observed Agent Responsibilities
 
-- Emitting Standard Events: Every interaction with the environment must be exposed through standardized event formats.
-- Standardized Tracing: Maintain a standardized trace of all interactions to support improved observability, enable a holistic multi-agent view, and facilitate historical interaction analysis.
-- Instrumentation: Events should trigger hooks that allow the Guardian Agent to enforce policies. Example policies may include restricting external communication, redacting sensitive data, or enforcing compliance constraints. Based on these policies, the Guardian Agent can permit, deny, or modify the content of the interaction.
-- Reactive Capabilities: The agent must be capable of responding to Guardian Agent directives, including action denials or content mutations.
+An **Observed Agent** is responsible for ensuring environmental visibility and policy responsiveness through the following capabilities:
 
-### Guardian Agent Responsibilities:
-The Guardian Agent enforces policies and enables tracing through the following:
+- **Support BOM Requests**  
+  Provide up-to-date information about components and dependencies relevant to the agent’s operational context.
+- **Emit Events**  
+  Generate standardized events that reflect all interactions with the environment to ensure traceability and observability.
+- **Support Hooks**  
+  Integrate with lifecycle hooks that allow external entities (e.g., Guardian Agent) to inspect or control operations.
+- **Comply with Hook Responses**  
+  React appropriately to directives from hooks, such as permitting, denying, or modifying actions based on policy enforcement.
 
-- Event Instrumentation Utilization: Leverage standard event hooks to evaluate and enforce policies, responding with permit, deny, or modify instructions.
-- Standardized Tracing: Maintain a consistent trace of all interactions to enhance observability, support a comprehensive view across agents, and enable detailed analysis of interaction history.
-- Provide comprehensive and dynamic AgBOM: Maintain and notify an up to date list of components and dependencies for the agent environment changes such as new or updated tools, models and other components
+---
+
+### Guardian Agent Responsibilities
+
+The **Guardian Agent** enhances control, compliance, and dynamic environment awareness via the following responsibilities:
+
+- **Observe and Emit Events in Multiple Standards**  
+  Capture and emit observed interactions using various standardized formats to support interoperability and broader system integration.
+- **Subscribe to Hooks**  
+  Register for and listen to hooks emitted by Observed Agents to enable active intervention in agent behavior.
+- **Apply Policy**  
+  Enforce operational policies by evaluating hook-triggered events and issuing corresponding decisions (permit, deny, modify).
+- **Dynamically Maintain AgBOM**  
+  Monitor agent lifecycle events to update and maintain the Agent BOM (Bill of Materials) in real-time, reflecting current tools, models, and components.
 
 ## A2A and MCP
 
