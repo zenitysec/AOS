@@ -17,7 +17,7 @@ AOS makes agents trustworthy.
 !!! info "Work in progress"
     This page is currently under development.
     
-    **Want to contribute?** Check out the [GitHub issue](https://github.com/trustworthyagents/aos/issues/53) and join the discussion!
+    **Want to contribute?** Check out the [GitHub issue](https://github.com/OWASP/www-project-agent-observability-standard/issues/53) and join the discussion!
 
 ## Trustworthy agents are
 
