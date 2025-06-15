@@ -17,12 +17,13 @@ An agent operates within an environment that includes interactions with several 
 
 | Components | Description | Can be Local | Can be Remote | Related Protocols |
 |--|--|--|--|--|
-| User | Interface with the user, either directly or indirectly | ✗ | ✓ | |
-| Other Agents | Communication and collaboration with peer agents | ✓ | ✓ | |
-| Memory | Access short-term or long-ter, memory resources | ✓ | ✓ | A2A |
+| User | Interface with the user, either directly or indirectly | ✓ | ✓ | |
+| Trigger | Any system event that triggers the agent including notifications, recurrent triggers etc. | ✓ | ✓ | |
+| Other Agents | Communication and collaboration with peer agents | ✓ | ✓ | A2A |
+| Memory | Access short-term or long-term, memory resources | ✓ | ✓ | |
 | Knowledge | Files, resources, RAG, and other sources | ✓ | ✓ | MCP |
 | Prompts | Saved prompts used by the agent as templates for sub-tasks | ✓ | ✗ | MCP |
-| API Tools | Tool calls that operate over REST API calls | ✓ | ✓ | MCP |
+| API Tools | Tool calls that operate over REST API calls or function calls | ✓ | ✓ | MCP |
 | OS Tools | Tool calls that operate via Operating System calls or direct keyboard and mouse manipulation (CUA agents) | ✓ | ✗ | |
 | LLM | Direct access to LLMs either for sub-tasks or reasoning | ✓ | ✓ | |
 
